@@ -341,7 +341,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                     LimparCampos();
                 } else {
                     if (!isCPF(txtCpf.getText())) {
-                        JOptionPane.showMessageDialog(rootPane, "CPF Invalido!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(rootPane, "CPF Invalido!", "Atenção!", JOptionPane.WARNING_MESSAGE);
                     }
                     
                     if(!funcionarioBll.verificarCpfsIguais(txtCpf.getText())){
