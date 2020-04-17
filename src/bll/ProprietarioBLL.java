@@ -40,5 +40,13 @@ public class ProprietarioBLL {
         return dal.consultarPorId(cod);
     }
     
+    public boolean verificarCpfsIguais(String cpf){
+        return dal.vericarCpfIgual(cpf);
+    }
+    
+    public boolean verificarCnhsIguais(String cnh){
+        return dal.vericarCnhIgual(cnh);
+    }
+    
     
 }

@@ -107,5 +107,35 @@ public class ProprietarioDAL {
 
         return proprietario;
     }
+    
+    public boolean vericarCpfIgual(String cpf) {
+        boolean resultado = false;
+        try {
+            PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * FROM proprietario WHERE cpf = ?");
+            preparedStatement.setString(1, cpf);
+            ResultSet rs = preparedStatement.executeQuery();            
+            
+            resultado = rs.next();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return resultado;
+    }
+    
+    public boolean vericarCnhIgual(String cnh) {
+        boolean resultado = false;
+        try {
+            PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * FROM proprietario WHERE cnh = ?");
+            preparedStatement.setString(1, cnh);
+            ResultSet rs = preparedStatement.executeQuery();            
+            
+            resultado = rs.next();
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+
+        return resultado;
+    }
 
 }

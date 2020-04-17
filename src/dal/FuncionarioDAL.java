@@ -132,7 +132,8 @@ public class FuncionarioDAL {
             PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * FROM funcionario WHERE cpf = ?");
             preparedStatement.setString(1, cpf);
             ResultSet rs = preparedStatement.executeQuery();            
-
+            
+            resultado = rs.next();
         } catch (SQLException erro) {
             erro.printStackTrace();
         }

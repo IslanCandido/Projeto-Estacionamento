@@ -79,7 +79,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         funcionario = new Funcionario();
 
         txtNome.setText("");
-        txtCpf.setText(new String());
+        txtCpf.setText("");
         txtTelefone.setText(new String());
         txtSenha.setText("");
     }
@@ -335,7 +335,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             if (txtNome.getText().isEmpty() || txtCpf.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtSenha.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (isCPF(txtCpf.getText()) && funcionarioBll.verificarCpfsIguais(txtCpf.getText())) {
+                if (isCPF(txtCpf.getText()) && funcionarioBll.verificarCpfsIguais(txtCpf.getText()) == false) {
                     funcionarioBll.Adicionar(funcionario);
                     Consultar();
                     LimparCampos();
@@ -344,7 +344,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(rootPane, "CPF Invalido!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
                     }
                     
-                    if(!funcionarioBll.verificarCpfsIguais(txtCpf.getText())){
+                    if(funcionarioBll.verificarCpfsIguais(txtCpf.getText())){
                         JOptionPane.showMessageDialog(rootPane, "CPF JÁ CADASTRADO!", "Cuidado!", JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -406,12 +406,18 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             if (txtNome.getText().isEmpty() || txtCpf.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtSenha.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (isCPF(txtCpf.getText()) == true) {
+                if (isCPF(txtCpf.getText()) && funcionarioBll.verificarCpfsIguais(txtCpf.getText()) == false) {
                     funcionarioBll.Alterar(funcionario);
                     Consultar();
                     LimparCampos();
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "CPF Invalido!");
+                    if (!isCPF(txtCpf.getText())) {
+                        JOptionPane.showMessageDialog(rootPane, "CPF Invalido!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
+                    }
+                    
+                    if(funcionarioBll.verificarCpfsIguais(txtCpf.getText())){
+                        JOptionPane.showMessageDialog(rootPane, "CPF JÁ CADASTRADO!", "Cuidado!", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
 
