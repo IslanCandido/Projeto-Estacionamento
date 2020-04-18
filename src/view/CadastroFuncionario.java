@@ -79,8 +79,8 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         funcionario = new Funcionario();
 
         txtNome.setText("");
-        txtCpf.setText("");
-        txtTelefone.setText(new String());
+        txtCpf.setValue("");
+        txtTelefone.setValue("");
         txtSenha.setText("");
     }
 

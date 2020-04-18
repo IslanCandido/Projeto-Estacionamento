@@ -78,9 +78,9 @@ public class CadastroProprietario extends javax.swing.JFrame {
         proprietario = new Proprietario();
 
         txtNome.setText("");
-        txtCpf.setText(new String());
-        txtTelefone.setText(new String());
-        txtCnh.setText(new String());
+        txtCpf.setValue("");
+        txtTelefone.setValue("");
+        txtCnh.setValue("");
     }
 
     private void PreencheCampos(int id) {
