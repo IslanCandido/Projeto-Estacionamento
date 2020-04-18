@@ -13,16 +13,13 @@ public class Menu extends javax.swing.JFrame {
 
     CadastroProprietario telaProprietario;
     CadastroFuncionario telaFuncionario;
+    CadastroPreco telaPreco;
     
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
-    }
-    
-    public void mostrarTela(){
-        
     }
 
     /**
@@ -39,7 +36,10 @@ public class Menu extends javax.swing.JFrame {
         jMenuCadastros = new javax.swing.JMenu();
         jMenuItemCadastroProprietarios = new javax.swing.JMenuItem();
         jMenuItemCadastroFuncionarios = new javax.swing.JMenuItem();
+        jMenuItemCadastroVeiculos = new javax.swing.JMenuItem();
+        jMenuItemCadastroPrecos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menu principal");
@@ -68,8 +68,22 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuItemCadastroFuncionarios);
 
+        jMenuItemCadastroVeiculos.setText("Veículos");
+        jMenuCadastros.add(jMenuItemCadastroVeiculos);
+
+        jMenuItemCadastroPrecos.setText("Preços");
+        jMenuItemCadastroPrecos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastroPrecosActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItemCadastroPrecos);
+
         jMenuBar1.add(jMenuCadastros);
         jMenuBar1.add(jMenu2);
+
+        jMenu1.setText("Estadia");
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -98,6 +112,15 @@ public class Menu extends javax.swing.JFrame {
             telaFuncionario.setResizable(false);
         }
     }//GEN-LAST:event_jMenuItemCadastroFuncionariosActionPerformed
+
+    private void jMenuItemCadastroPrecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroPrecosActionPerformed
+        if(telaPreco == null){
+            telaPreco = new CadastroPreco();
+            telaPreco.setVisible(true);
+        } else{
+            telaPreco.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItemCadastroPrecosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,10 +162,13 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelImagemdeFundo;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuItemCadastroFuncionarios;
+    private javax.swing.JMenuItem jMenuItemCadastroPrecos;
     private javax.swing.JMenuItem jMenuItemCadastroProprietarios;
+    private javax.swing.JMenuItem jMenuItemCadastroVeiculos;
     // End of variables declaration//GEN-END:variables
 }
