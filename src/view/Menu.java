@@ -14,6 +14,7 @@ public class Menu extends javax.swing.JFrame {
     CadastroProprietario telaProprietario;
     CadastroFuncionario telaFuncionario;
     CadastroPreco telaPreco;
+    CadastroVeiculo telaVeiculo;
     
     /**
      * Creates new form Menu
@@ -69,6 +70,11 @@ public class Menu extends javax.swing.JFrame {
         jMenuCadastros.add(jMenuItemCadastroFuncionarios);
 
         jMenuItemCadastroVeiculos.setText("Veículos");
+        jMenuItemCadastroVeiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastroVeiculosActionPerformed(evt);
+            }
+        });
         jMenuCadastros.add(jMenuItemCadastroVeiculos);
 
         jMenuItemCadastroPrecos.setText("Preços");
@@ -99,8 +105,6 @@ public class Menu extends javax.swing.JFrame {
             telaProprietario.setVisible(true);
             telaProprietario.setResizable(false);
         }
-        
-        
     }//GEN-LAST:event_jMenuItemCadastroProprietariosActionPerformed
 
     private void jMenuItemCadastroFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroFuncionariosActionPerformed
@@ -121,6 +125,16 @@ public class Menu extends javax.swing.JFrame {
             telaPreco.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItemCadastroPrecosActionPerformed
+
+    private void jMenuItemCadastroVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroVeiculosActionPerformed
+        if(telaVeiculo == null){
+            telaVeiculo = new CadastroVeiculo();
+            telaVeiculo.setVisible(true);
+        } else{
+            telaVeiculo.setVisible(true);
+            telaVeiculo.setResizable(false);
+        }
+    }//GEN-LAST:event_jMenuItemCadastroVeiculosActionPerformed
 
     /**
      * @param args the command line arguments
