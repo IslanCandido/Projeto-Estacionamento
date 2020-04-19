@@ -29,7 +29,7 @@ public class Preco {
     
     @Override
     public String toString() {
-        return getCodigo()+" - "+getPlano() + " - " + getTipoVeiculo() + " - " + getPreco()+" R$";
+        return getPlano() + " - " + getTipoVeiculo() + " - " + getPreco()+" R$";
     }
 
     public int getCodigo() {

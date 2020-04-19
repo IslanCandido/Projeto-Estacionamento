@@ -6,12 +6,11 @@
 package view;
 
 import bll.VeiculoBLL;
-import dal.PrecoDAL;
-import dal.ProprietarioDAL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -96,23 +95,12 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     }
     
     
-    public void preencherCbx() {
-        /*DefaultComboBoxModel defaultComboBoxPlano = new DefaultComboBoxModel(veiculoBll.PreencherCbxPlanos().toArray());
+    private void preencherCbx() {
+        DefaultComboBoxModel defaultComboBoxPlano = new DefaultComboBoxModel( veiculoBll.PreencherCbxPlanos().toArray());
         cbxIdPlano.setModel(defaultComboBoxPlano);
         
         DefaultComboBoxModel defaultComboBoxProp = new DefaultComboBoxModel(veiculoBll.PreencherCbxProprietario().toArray());
-        cbxIdProprietario.setModel(defaultComboBoxProp);*/
-        
-        PrecoDAL precoDal = new PrecoDAL();
-        
-        for(Preco preco : precoDal.mostrarTodos()){
-            cbxIdPlano.addItem(preco);
-        }
-        
-        ProprietarioDAL propDal = new ProprietarioDAL();
-        for(Proprietario prop : propDal.mostrarTodos()){
-            cbxIdProprietario.addItem(prop);
-        }
+        cbxIdProprietario.setModel(defaultComboBoxProp);
     }    
 
     public int pegarIdPreco(){
@@ -122,7 +110,6 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     
     public int pegarIdProprietario(){
         Proprietario prop = (Proprietario) cbxIdProprietario.getSelectedItem();
-        
         return prop.getCodigo();
     }
 
@@ -146,7 +133,6 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
-        btnAtualizar = new javax.swing.JButton();
         jLabelTelaFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -158,7 +144,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Placa");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 14, 30, 20);
+        jLabel1.setBounds(20, 10, 30, 30);
 
         try {
             txtPlaca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("???-####")));
@@ -166,41 +152,41 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         getContentPane().add(txtPlaca);
-        txtPlaca.setBounds(50, 11, 81, 28);
+        txtPlaca.setBounds(60, 10, 70, 28);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Modelo");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(160, 14, 41, 20);
+        jLabel2.setBounds(160, 10, 50, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cor");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(422, 14, 19, 20);
+        jLabel3.setBounds(380, 10, 19, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Proprietário");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 50, 68, 30);
+        jLabel4.setBounds(20, 50, 68, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Plano");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(370, 50, 31, 30);
+        jLabel5.setBounds(330, 50, 31, 30);
         getContentPane().add(txtModelo);
-        txtModelo.setBounds(211, 11, 185, 28);
+        txtModelo.setBounds(210, 10, 150, 28);
         getContentPane().add(txtCor);
-        txtCor.setBounds(451, 11, 160, 28);
+        txtCor.setBounds(410, 10, 130, 28);
 
         getContentPane().add(cbxIdProprietario);
-        cbxIdProprietario.setBounds(88, 49, 270, 28);
+        cbxIdProprietario.setBounds(100, 50, 210, 28);
 
         getContentPane().add(cbxIdPlano);
-        cbxIdPlano.setBounds(410, 50, 200, 28);
+        cbxIdPlano.setBounds(370, 50, 170, 28);
 
         tblVeiculos.setModel(modelo);
         tblVeiculos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -211,7 +197,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblVeiculos);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 130, 610, 218);
+        jScrollPane2.setBounds(10, 90, 540, 218);
 
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -222,7 +208,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(200, 360, 80, 30);
+        btnSalvar.setBounds(180, 320, 80, 30);
 
         btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -233,7 +219,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnExcluir);
-        btnExcluir.setBounds(300, 360, 80, 30);
+        btnExcluir.setBounds(270, 320, 80, 30);
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAlterar.setText("Alterar");
@@ -243,7 +229,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAlterar);
-        btnAlterar.setBounds(400, 360, 80, 30);
+        btnAlterar.setBounds(360, 320, 80, 30);
 
         btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -254,24 +240,14 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpar);
-        btnLimpar.setBounds(500, 360, 80, 30);
-
-        btnAtualizar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnAtualizar.setText("Atualizar");
-        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtualizarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAtualizar);
-        btnAtualizar.setBounds(510, 90, 90, 30);
+        btnLimpar.setBounds(450, 320, 80, 30);
 
         jLabelTelaFundo.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTelaFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro.jpg"))); // NOI18N
         getContentPane().add(jLabelTelaFundo);
-        jLabelTelaFundo.setBounds(0, 0, 670, 410);
+        jLabelTelaFundo.setBounds(0, -10, 600, 390);
 
-        setSize(new java.awt.Dimension(632, 433));
+        setSize(new java.awt.Dimension(568, 393));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -286,10 +262,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             veiculo.setPlaca(txtPlaca.getText());
             veiculo.setModelo(txtModelo.getText());
             veiculo.setCor(txtCor.getText());
-            veiculo.setIdPropietario(Integer.parseInt(cbxIdProprietario.getSelectedItem().toString().split(" - ")[0]));
-            veiculo.setIdPreco(Integer.parseInt(cbxIdPlano.getSelectedItem().toString().split(" - ")[0]));
-            //veiculo.setIdPreco(pegarIdPreco());
-            //veiculo.setIdPropietario(pegarIdProprietario());
+            veiculo.setIdPreco(pegarIdPreco());
+            veiculo.setIdPropietario(pegarIdProprietario());
             
             if (txtPlaca.getText().isEmpty() || txtModelo.getText().isEmpty() || txtCor.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
@@ -321,8 +295,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             veiculo.setPlaca(txtPlaca.getText());
             veiculo.setModelo(txtModelo.getText());
             veiculo.setCor(txtCor.getText());
-            veiculo.setIdPropietario(Integer.parseInt(cbxIdProprietario.getSelectedItem().toString().split(" - ")[0]));
-            veiculo.setIdPreco(Integer.parseInt(cbxIdPlano.getSelectedItem().toString().split(" - ")[0]));
+            veiculo.setIdPreco(pegarIdPreco());
+            veiculo.setIdPropietario(pegarIdProprietario());
             
             if (txtPlaca.getText().isEmpty() || txtModelo.getText().isEmpty() || txtCor.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
@@ -339,12 +313,6 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         LimparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
-
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        cbxIdPlano.removeAllItems();
-        cbxIdProprietario.removeAllItems();
-        preencherCbx();
-    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     
     /**
@@ -385,7 +353,6 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
-    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;

@@ -182,7 +182,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nome");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 20, 32, 30);
+        jLabel2.setBounds(20, 10, 32, 30);
 
         txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -190,13 +190,13 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtNome);
-        txtNome.setBounds(80, 20, 180, 28);
+        txtNome.setBounds(60, 10, 180, 28);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("  CPF");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 60, 40, 30);
+        jLabel3.setBounds(20, 50, 40, 30);
 
         try {
             txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
@@ -209,19 +209,19 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtTelefone);
-        txtTelefone.setBounds(370, 20, 170, 28);
+        txtTelefone.setBounds(330, 10, 160, 28);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Telefone");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(300, 20, 50, 30);
+        jLabel5.setBounds(270, 10, 50, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Senha");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(310, 60, 40, 30);
+        jLabel6.setBounds(280, 50, 40, 30);
 
         txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -229,7 +229,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtSenha);
-        txtSenha.setBounds(370, 60, 170, 25);
+        txtSenha.setBounds(330, 50, 160, 25);
 
         tblFuncionarios.setModel(modelo);
         tblFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -240,7 +240,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblFuncionarios);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(20, 110, 540, 220);
+        jScrollPane2.setBounds(10, 90, 490, 220);
 
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -251,7 +251,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(170, 350, 69, 30);
+        btnSalvar.setBounds(150, 320, 69, 30);
 
         btnDeletar.setBackground(new java.awt.Color(255, 255, 255));
         btnDeletar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -262,7 +262,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDeletar);
-        btnDeletar.setBounds(260, 350, 75, 30);
+        btnDeletar.setBounds(230, 320, 75, 30);
 
         btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -273,7 +273,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpar);
-        btnLimpar.setBounds(460, 350, 71, 30);
+        btnLimpar.setBounds(410, 320, 71, 30);
 
         try {
             txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
@@ -286,7 +286,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtCpf);
-        txtCpf.setBounds(80, 60, 180, 25);
+        txtCpf.setBounds(60, 50, 180, 25);
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAlterar.setText("Alterar");
@@ -296,13 +296,13 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAlterar);
-        btnAlterar.setBounds(360, 350, 80, 30);
+        btnAlterar.setBounds(320, 320, 80, 30);
 
         jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro.jpg"))); // NOI18N
         getContentPane().add(jLabelImagemdeFundo);
-        jLabelImagemdeFundo.setBounds(0, -7, 600, 430);
+        jLabelImagemdeFundo.setBounds(0, 0, 530, 390);
 
-        setSize(new java.awt.Dimension(596, 441));
+        setSize(new java.awt.Dimension(518, 392));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

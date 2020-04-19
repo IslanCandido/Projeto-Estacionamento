@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.Preco;
+import model.Proprietario;
 import model.Veiculo;
 import util.Conexao;
 
@@ -100,33 +102,35 @@ public class VeiculoDAL {
         return veiculo;
     }
 
-    /*public List<String> mostrarDadosPreco() {
-        List<String> strList = new ArrayList<String>();
+    public List<Preco> mostrarDadosPreco() {
+        List<Preco> listPreco = new ArrayList<Preco>();
+        PrecoDAL precoDal = new PrecoDAL();
         try {
-            PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * FROM preco");            
+            PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * FROM preco");
             ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                strList.add(rs.getString("plano")+" - "+rs.getString("tipoVeiculo")+" - "+rs.getString("preco")+" R$");
+            for (Preco preco : precoDal.mostrarTodos()) {
+                listPreco.add(preco);
             }
+
             preparedStatement.close();
 
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
-        return strList;
+        return listPreco;
 
     }
 
-    public List<String> mostrarDadosProprietario() {
-        List<String> strList = new ArrayList<String>();
-
+    public List<Proprietario> mostrarDadosProprietario() {
+        List<Proprietario> listProp = new ArrayList<Proprietario>();
+        ProprietarioDAL propDal = new ProprietarioDAL();
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * FROM proprietario");
             ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                strList.add(rs.getString("nome")+" - "+rs.getString("cpf")+" - "+rs.getString("telefone"));
+            for (Proprietario preco : propDal.mostrarTodos()) {
+                listProp.add(preco);
             }
 
             preparedStatement.close();
@@ -134,21 +138,6 @@ public class VeiculoDAL {
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
-        return strList;
+        return listProp;
     }
-    
-    public int pegarId(String comboBox){
-        int resultado =0;
-        try {
-            PreparedStatement preparedStatement = conexao.prepareStatement("select ID from preco where COLUNA = ?");
-            preparedStatement.setInt(0, Integer.parseInt(comboBox));
-            ResultSet rs = preparedStatement.executeQuery();
-            
-            resultado = rs.findColumn(comboBox);
-        } catch (SQLException erro) {
-            erro.printStackTrace();
-        }
-        return resultado;
-    }*/
-
 }

@@ -30,10 +30,8 @@ public class Proprietario {
 
     @Override
     public String toString() {
-        return getCodigo() + " - " + getNome() + " - " + getTelefone();
+        return getNome() + " - " + getTelefone();
     }
-    
-    
 
     public int getCodigo() {
         return codigo;

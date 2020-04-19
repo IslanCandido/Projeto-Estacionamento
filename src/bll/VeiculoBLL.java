@@ -2,6 +2,8 @@ package bll;
 
 import dal.VeiculoDAL;
 import java.util.List;
+import model.Preco;
+import model.Proprietario;
 import model.Veiculo;
 
 public class VeiculoBLL {
@@ -31,15 +33,11 @@ public class VeiculoBLL {
         return dal.consultarPorId(cod);
     }
     
-    /*public List<String> PreencherCbxProprietario(){
+    public List<Proprietario> PreencherCbxProprietario(){
         return dal.mostrarDadosProprietario();
     }
     
-    public List<String> PreencherCbxPlanos(){
+    public List<Preco> PreencherCbxPlanos(){
         return dal.mostrarDadosPreco();
     }
-
-    public int pegarId(String comboBox){
-        return dal.pegarId(comboBox);
-    }*/
 }

@@ -117,33 +117,33 @@ public class CadastroPreco extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Plano");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 20, 32, 28);
+        jLabel1.setBounds(10, 10, 32, 28);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Tipo");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 60, 32, 28);
+        jLabel2.setBounds(10, 50, 32, 28);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Preço");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 100, 40, 28);
+        jLabel3.setBounds(10, 90, 40, 28);
 
         cbxPlano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Livre", "Diário", "Mensal", "Anual" }));
         getContentPane().add(cbxPlano);
-        cbxPlano.setBounds(50, 20, 110, 30);
+        cbxPlano.setBounds(50, 10, 110, 30);
 
         cbxTipoVeiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Carro", "Moto" }));
         getContentPane().add(cbxTipoVeiculo);
-        cbxTipoVeiculo.setBounds(50, 60, 110, 30);
+        cbxTipoVeiculo.setBounds(50, 50, 110, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("R$");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(140, 100, 15, 30);
+        jLabel4.setBounds(140, 90, 15, 30);
 
         jTable1.setModel(modelo);
         getContentPane().add(jTable1);
@@ -158,7 +158,7 @@ public class CadastroPreco extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(10, 150, 80, 30);
+        btnSalvar.setBounds(10, 140, 80, 30);
 
         btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -169,7 +169,7 @@ public class CadastroPreco extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnExcluir);
-        btnExcluir.setBounds(100, 150, 80, 30);
+        btnExcluir.setBounds(100, 140, 80, 30);
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAlterar.setText("Alterar");
@@ -179,7 +179,7 @@ public class CadastroPreco extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAlterar);
-        btnAlterar.setBounds(10, 190, 80, 30);
+        btnAlterar.setBounds(10, 180, 80, 30);
 
         btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -190,7 +190,7 @@ public class CadastroPreco extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpar);
-        btnLimpar.setBounds(100, 190, 80, 30);
+        btnLimpar.setBounds(100, 180, 80, 30);
 
         tblPrecos.setModel(modelo);
         tblPrecos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -201,7 +201,7 @@ public class CadastroPreco extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblPrecos);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(190, 20, 330, 200);
+        jScrollPane2.setBounds(190, 10, 310, 200);
 
         txtPreco.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -209,13 +209,13 @@ public class CadastroPreco extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtPreco);
-        txtPreco.setBounds(50, 100, 90, 28);
+        txtPreco.setBounds(50, 90, 90, 28);
 
         jLabelTelaFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro.jpg"))); // NOI18N
         getContentPane().add(jLabelTelaFundo);
-        jLabelTelaFundo.setBounds(-10, -20, 670, 460);
+        jLabelTelaFundo.setBounds(0, -10, 530, 440);
 
-        setSize(new java.awt.Dimension(539, 270));
+        setSize(new java.awt.Dimension(519, 250));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

@@ -47,24 +47,24 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Login 02.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(70, 0, 256, 180);
+        jLabel1.setBounds(30, 0, 256, 180);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("              USUÁRIO (CPF)");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(100, 200, 200, 15);
+        jLabel3.setBounds(60, 200, 200, 15);
 
         jLabelSenha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelSenha.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSenha.setText("                    SENHA");
         jLabelSenha.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLabelSenha);
-        jLabelSenha.setBounds(100, 250, 200, 15);
+        jLabelSenha.setBounds(60, 250, 200, 15);
 
         txtSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(txtSenha);
-        txtSenha.setBounds(100, 270, 200, 25);
+        txtSenha.setBounds(60, 270, 200, 25);
 
         btnLogin.setBackground(new java.awt.Color(153, 255, 153));
         btnLogin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -75,7 +75,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLogin);
-        btnLogin.setBounds(100, 320, 200, 30);
+        btnLogin.setBounds(60, 310, 200, 30);
 
         btnCadastrar.setBackground(new java.awt.Color(153, 153, 255));
         btnCadastrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -86,7 +86,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCadastrar);
-        btnCadastrar.setBounds(100, 360, 200, 30);
+        btnCadastrar.setBounds(60, 350, 200, 30);
 
         try {
             txtUsuario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
@@ -100,13 +100,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtUsuario);
-        txtUsuario.setBounds(100, 220, 200, 25);
+        txtUsuario.setBounds(60, 220, 200, 25);
 
         jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro 02.jpg"))); // NOI18N
         getContentPane().add(jLabelImagemdeFundo);
-        jLabelImagemdeFundo.setBounds(-3, -49, 400, 500);
+        jLabelImagemdeFundo.setBounds(0, -10, 350, 440);
 
-        setSize(new java.awt.Dimension(397, 451));
+        setSize(new java.awt.Dimension(322, 427));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
