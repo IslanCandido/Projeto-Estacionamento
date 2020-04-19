@@ -383,10 +383,10 @@ public class CadastroProprietario extends javax.swing.JFrame {
                     LimparCampos();
                 } else {
                     if (isCPF(txtCpf.getText()) == false) {
-                        JOptionPane.showMessageDialog(rootPane, "CPF INVALIDO!", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(rootPane, "CPF Invalido!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
                     }
                     if (validaCNH(txtCnh.getText()) == false) {
-                        JOptionPane.showMessageDialog(rootPane, "CNH INVALIDO!", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(rootPane, "CNH Invalido!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
                     }
                     if(proprietarioBll.verificarCpfsIguais(txtCpf.getText())){
                         JOptionPane.showMessageDialog(rootPane, "CPF JÁ CADASTRADO!", "Cuidado!", JOptionPane.ERROR_MESSAGE);
@@ -468,25 +468,17 @@ public class CadastroProprietario extends javax.swing.JFrame {
             if (txtNome.getText().isEmpty() || txtCpf.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtCnh.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (isCPF(txtCpf.getText()) && validaCNH(txtCnh.getText()) && 
-                proprietarioBll.verificarCpfsIguais(txtCpf.getText()) == false &&
-                proprietarioBll.verificarCnhsIguais(txtCnh.getText()) == false) {
+                if (isCPF(txtCpf.getText()) && validaCNH(txtCnh.getText())) {
                     
                     proprietarioBll.Alterar(proprietario);
                     Consultar();
                     LimparCampos();
                 } else {
                     if (isCPF(txtCpf.getText()) == false) {
-                        JOptionPane.showMessageDialog(rootPane, "CPF Invalido!");
+                        JOptionPane.showMessageDialog(rootPane, "CPF Invalido!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
                     }
                     if (validaCNH(txtCnh.getText()) == false) {
-                        JOptionPane.showMessageDialog(rootPane, "CNH Invalido!");
-                    }
-                    if(proprietarioBll.verificarCpfsIguais(txtCpf.getText())){
-                        JOptionPane.showMessageDialog(rootPane, "CPF JÁ CADASTRADO!", "Cuidado!", JOptionPane.ERROR_MESSAGE);
-                    }
-                    if(proprietarioBll.verificarCnhsIguais(txtCnh.getText())){
-                        JOptionPane.showMessageDialog(rootPane, "CNH JÁ CADASTRADO!", "Cuidado!", JOptionPane.ERROR_MESSAGE);                        
+                        JOptionPane.showMessageDialog(rootPane, "CNH Invalido!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
                     }
                 }
             }

@@ -406,18 +406,12 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             if (txtNome.getText().isEmpty() || txtCpf.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtSenha.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (isCPF(txtCpf.getText()) && funcionarioBll.verificarCpfsIguais(txtCpf.getText()) == false) {
+                if (isCPF(txtCpf.getText())) {
                     funcionarioBll.Alterar(funcionario);
                     Consultar();
                     LimparCampos();
                 } else {
-                    if (!isCPF(txtCpf.getText())) {
-                        JOptionPane.showMessageDialog(rootPane, "CPF Invalido!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
-                    }
-                    
-                    if(funcionarioBll.verificarCpfsIguais(txtCpf.getText())){
-                        JOptionPane.showMessageDialog(rootPane, "CPF JÁ CADASTRADO!", "Cuidado!", JOptionPane.ERROR_MESSAGE);
-                    }
+                    JOptionPane.showMessageDialog(rootPane, "CPF Invalido!", "Cuidado!", JOptionPane.WARNING_MESSAGE);   
                 }
             }
 
@@ -432,7 +426,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         int comprimentoDeCampo = txtSenha.getText().length();
         if (comprimentoDeCampo >= 12) {
             evt.consume();
-            JOptionPane.showMessageDialog(rootPane, " Senha está muito longa!\n(Maximo de 12 caracteres)", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, " SENHA LONGA!\n(Maximo de 12 caracteres)", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_txtSenhaKeyTyped
 
