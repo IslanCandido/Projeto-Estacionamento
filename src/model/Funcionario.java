@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author SaoJoseNote-02
- */
 public class Funcionario {
     private int codigo;
     private String nome;
@@ -28,6 +19,10 @@ public class Funcionario {
         this.senha = senha;
     }
 
+    public String toString() {
+        return getNome() + " - " + getCpf();
+    }
+        
     public int getCodigo() {
         return codigo;
     }

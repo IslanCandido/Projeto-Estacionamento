@@ -14,15 +14,15 @@ public class VeiculoBLL {
         this.dal = new VeiculoDAL();
     }
 
-    public void Adicionar(Veiculo veiculo) throws Exception {
+    public void adicionar(Veiculo veiculo) throws Exception {
         dal.salvar(veiculo);
     }
 
-    public void Alterar(Veiculo veiculo) throws Exception {
+    public void alterar(Veiculo veiculo) throws Exception {
         dal.alterar(veiculo);
     }
 
-    public void Remover(Veiculo veiculo) throws Exception {
+    public void remover(Veiculo veiculo) throws Exception {
         dal.excluir(veiculo.getCodigo());
     }
 

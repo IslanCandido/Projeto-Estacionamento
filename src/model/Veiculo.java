@@ -23,6 +23,10 @@ public class Veiculo {
         this.idPreco = idPreco;
     }
 
+    public String toString() {
+        return getPlaca() + " - " + getModelo();
+    }
+
     public int getCodigo() {
         return codigo;
     }

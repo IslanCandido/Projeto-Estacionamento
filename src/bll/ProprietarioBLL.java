@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bll;
 
 import dal.ProprietarioDAL;
 import java.util.List;
 import model.Proprietario;
 
-/**
- *
- * @author PC
- */
 public class ProprietarioBLL {
     private ProprietarioDAL dal;
 
@@ -20,15 +11,15 @@ public class ProprietarioBLL {
         dal = new ProprietarioDAL();
     }
 
-    public void Adicionar(Proprietario proprietario) throws Exception {
+    public void adicionar(Proprietario proprietario) throws Exception {
         dal.salvar(proprietario);
     }
 
-    public void Alterar(Proprietario proprietario) throws Exception {
+    public void alterar(Proprietario proprietario) throws Exception {
         dal.alterar(proprietario);
     }
 
-    public void Remover(Proprietario proprietario) throws Exception {
+    public void remover(Proprietario proprietario) throws Exception {
         dal.excluir(proprietario.getCodigo());
     }
 

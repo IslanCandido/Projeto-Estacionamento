@@ -1,17 +1,11 @@
-/*
- */
 package view;
 
 import bll.VeiculoBLL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Preco;
 import model.Proprietario;
@@ -52,14 +46,14 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         listaVeiculos.add("Cor");
         listaVeiculos.add("Plano");
         listaVeiculos.add("Proprietario");
-        Consultar();
+        consultar();
     }
     
-    private void Consultar(){
+    private void consultar(){
         tblVeiculos.setModel(new DefaultTableModel(veiculoBll.getConsulta(), listaVeiculos));
     }
 
-    private void LimparCampos() {
+    private void limparCampos() {
         veiculo = new Veiculo();
 
         txtPlaca.setValue("");
@@ -90,7 +84,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         }
     }
 
-    private void PreencheCampos(int id) {
+    private void preencheCampos(int id) {
 
         veiculo = veiculoBll.getConsultaPorId(id);
         txtPlaca.setText(veiculo.getPlaca());
@@ -169,6 +163,14 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         getContentPane().add(txtCor);
         txtCor.setBounds(410, 10, 130, 28);
 
+        tblVeiculos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         tblVeiculos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblVeiculosMouseClicked(evt);
@@ -237,12 +239,12 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     private void tblVeiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVeiculosMouseClicked
         int linha = tblVeiculos.getSelectedRow();
         Integer codigo = (Integer) tblVeiculos.getValueAt(linha, 0);
-        PreencheCampos((int) codigo);
+        preencheCampos((int) codigo);
         btnSalvar.setEnabled(false);
     }//GEN-LAST:event_tblVeiculosMouseClicked
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        LimparCampos();
+        limparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -256,9 +258,9 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             if (txtPlaca.getText().isEmpty() || txtModelo.getText().isEmpty() || txtCor.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
-                veiculoBll.Adicionar(veiculo);
-                Consultar();
-                LimparCampos();
+                veiculoBll.adicionar(veiculo);
+                consultar();
+                limparCampos();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Atenção!!!", JOptionPane.WARNING_MESSAGE);
@@ -276,9 +278,9 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             if (txtPlaca.getText().isEmpty() || txtModelo.getText().isEmpty() || txtCor.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
-                veiculoBll.Alterar(veiculo);
-                Consultar();
-                LimparCampos();
+                veiculoBll.alterar(veiculo);
+                consultar();
+                limparCampos();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Atenção!!!", JOptionPane.WARNING_MESSAGE);
@@ -291,12 +293,12 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             if (txtPlaca.getText().isEmpty() || txtModelo.getText().isEmpty() || txtCor.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             }
-            veiculoBll.Remover(veiculoBll.getConsultaPorId(veiculo.getCodigo()));
+            veiculoBll.remover(veiculoBll.getConsultaPorId(veiculo.getCodigo()));
         } catch (Exception ex) {
             Logger.getLogger(CadastroProprietario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Consultar();
-        LimparCampos();
+        consultar();
+        limparCampos();
     
     }//GEN-LAST:event_btnDeletarActionPerformed
 
