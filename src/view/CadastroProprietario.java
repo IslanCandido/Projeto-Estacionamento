@@ -81,6 +81,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
         txtCpf.setValue("");
         txtTelefone.setValue("");
         txtCnh.setValue("");
+        btnSalvar.setEnabled(true);
     }
 
     private void PreencheCampos(int id) {
@@ -408,6 +409,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
         int linha = tblProprietarios.getSelectedRow();
         Integer codigo = (Integer) tblProprietarios.getValueAt(linha, 0);
         PreencheCampos((int) codigo);
+        btnSalvar.setEnabled(false);
     }//GEN-LAST:event_tblProprietariosMouseClicked
 
     private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped

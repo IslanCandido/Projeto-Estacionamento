@@ -74,6 +74,7 @@ public class CadastroPreco extends javax.swing.JFrame {
         txtPreco.setText("");
         cbxPlano.setSelectedIndex(0);
         cbxTipoVeiculo.setSelectedIndex(0);
+        btnSalvar.setEnabled(true);
     }
 
     private void PreencheCampos(int id) {
@@ -278,6 +279,7 @@ public class CadastroPreco extends javax.swing.JFrame {
 
     private void tblPrecosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPrecosMouseClicked
         // TODO add your handling code here:
+        btnSalvar.setEnabled(false);
         int linha = tblPrecos.getSelectedRow();
         Integer codigo = (Integer) tblPrecos.getValueAt(linha, 0);
         PreencheCampos((int) codigo);

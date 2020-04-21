@@ -27,9 +27,8 @@ public class Preco {
         this.preco = preco;
     }
     
-    @Override
     public String toString() {
-        return getPlano() + " - " + getTipoVeiculo() + " - " + getPreco()+" R$";
+        return getPlano() + " - " + getTipoVeiculo();
     }
 
     public int getCodigo() {

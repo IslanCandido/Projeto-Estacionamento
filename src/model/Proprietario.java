@@ -28,9 +28,8 @@ public class Proprietario {
         this.cnh = cnh;
     }
 
-    @Override
     public String toString() {
-        return getNome() + " - " + getTelefone();
+        return getNome() + " - " + getTelefone()+"\n";
     }
 
     public int getCodigo() {

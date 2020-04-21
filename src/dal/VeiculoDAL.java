@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Preco;
 import model.Proprietario;
 import model.Veiculo;
@@ -26,8 +26,10 @@ public class VeiculoDAL {
             preparedStatement.setString(1, veiculo.getPlaca());
             preparedStatement.setString(2, veiculo.getModelo());
             preparedStatement.setString(3, veiculo.getCor());
-            preparedStatement.setInt(4, veiculo.getIdPropietario());
-            preparedStatement.setInt(5, veiculo.getIdPreco());
+            preparedStatement.setInt(4, veiculo.getIdPropietario().getCodigo());
+            preparedStatement.setInt(5, veiculo.getIdPreco().getCodigo());
+            preparedStatement.executeUpdate();
+
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
@@ -49,51 +51,71 @@ public class VeiculoDAL {
             preparedStatement.setString(1, veiculo.getPlaca());
             preparedStatement.setString(2, veiculo.getModelo());
             preparedStatement.setString(3, veiculo.getCor());
-            preparedStatement.setInt(4, veiculo.getIdPropietario());
-            preparedStatement.setInt(5, veiculo.getIdPreco());
+            preparedStatement.setInt(4, veiculo.getIdPropietario().getCodigo());
+            preparedStatement.setInt(5, veiculo.getIdPreco().getCodigo());
             preparedStatement.executeUpdate();
 
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
     }
-
-    public List<Veiculo> mostrarTodos() {
-        List<Veiculo> veiculos = new ArrayList<Veiculo>();
+    
+    public Vector mostrarTodos(){
+        Vector tabelaVeiculos = new Vector();
         try {
-            Statement statement = conexao.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM veiculo");
-            while (rs.next()) {
-                Veiculo veiculo = new Veiculo();
-                veiculo.setCodigo(rs.getInt("vei_id"));
-                veiculo.setPlaca(rs.getString("placa"));
-                veiculo.setModelo(rs.getString("modelo"));
-                veiculo.setCor(rs.getString("cor"));
-                veiculo.setIdPropietario(rs.getInt("pro_fk"));
-                veiculo.setIdPreco(rs.getInt("pre_fk"));
-                veiculos.add(veiculo);
+            PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * FROM veiculo");
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            while (rs.next()){
+                Vector veiculos = new Vector();
+                veiculos.add(rs.getInt("vei_id"));
+                veiculos.add(rs.getString("placa"));
+                veiculos.add(rs.getString("modelo"));
+                veiculos.add(rs.getString("cor"));
+                veiculos.add(rs.getString("plano"));
+                veiculos.add(rs.getString("nome"));
+                
+                tabelaVeiculos.add(veiculos);
             }
-        } catch (SQLException erro) {
-            erro.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(VeiculoDAL.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return veiculos;
+        return tabelaVeiculos;
     }
 
     public Veiculo consultarPorId(int id) {
         Veiculo veiculo = new Veiculo();
+
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * FROM veiculo WHERE vei_id = ?");
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                veiculo.setCodigo(rs.getInt("vei_id"));
+                
+                
+                
+                /*veiculo.setCodigo(rs.getInt("vei_id"));
                 veiculo.setPlaca(rs.getString("placa"));
                 veiculo.setModelo(rs.getString("modelo"));
                 veiculo.setCor(rs.getString("cor"));
-                veiculo.setIdPropietario(rs.getInt("pro_fk"));
-                veiculo.setIdPreco(rs.getInt("pre_fk"));
+
+                Preco preco = new Preco();
+                preco.setCodigo(rs.getInt("pre_id"));
+                preco.setPlano(rs.getString("plano"));
+                preco.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                preco.setPreco(rs.getDouble("preco"));
+
+                
+
+                Proprietario prop = new Proprietario();
+                prop.setCodigo(rs.getInt("pro_id"));
+                prop.setNome(rs.getString("nome"));
+                prop.setCpf(rs.getString("cpf"));
+                prop.setTelefone(rs.getString("telefone"));
+                prop.setCnh(rs.getString("cnh"));
+                veiculo.setIdPreco(preco);
+                veiculo.setIdPropietario(prop);*/
             }
         } catch (SQLException erro) {
             erro.printStackTrace();
@@ -102,42 +124,48 @@ public class VeiculoDAL {
         return veiculo;
     }
 
-    public List<Preco> mostrarDadosPreco() {
-        List<Preco> listPreco = new ArrayList<Preco>();
-        PrecoDAL precoDal = new PrecoDAL();
+    public Vector<Preco> listarPlanos() {
+        Vector<Preco> precos = new Vector<Preco>();
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * FROM preco");
             ResultSet rs = preparedStatement.executeQuery();
 
-            for (Preco preco : precoDal.mostrarTodos()) {
-                listPreco.add(preco);
-            }
+            while (rs.next()) {
+                Preco preco = new Preco();
+                preco.setCodigo(rs.getInt("pre_id"));
+                preco.setPlano(rs.getString("plano"));
+                preco.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                preco.setPreco(rs.getDouble("preco"));
 
-            preparedStatement.close();
+                precos.add(preco);
+            }
 
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
-        return listPreco;
-
+        return precos;
     }
 
-    public List<Proprietario> mostrarDadosProprietario() {
-        List<Proprietario> listProp = new ArrayList<Proprietario>();
-        ProprietarioDAL propDal = new ProprietarioDAL();
+    public Vector<Proprietario> listarProprietarios() {
+        Vector<Proprietario> proprietarios = new Vector<Proprietario>();
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * FROM proprietario");
             ResultSet rs = preparedStatement.executeQuery();
 
-            for (Proprietario preco : propDal.mostrarTodos()) {
-                listProp.add(preco);
-            }
+            while (rs.next()) {
+                Proprietario prop = new Proprietario();
+                prop.setCodigo(rs.getInt("pro_id"));
+                prop.setNome(rs.getString("nome"));
+                prop.setCpf(rs.getString("cpf"));
+                prop.setTelefone(rs.getString("telefone"));
+                prop.setCnh(rs.getString("cnh"));
 
-            preparedStatement.close();
+                proprietarios.add(prop);
+            }
 
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
-        return listProp;
+        return proprietarios;
     }
 }

@@ -82,6 +82,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         txtCpf.setValue("");
         txtTelefone.setValue("");
         txtSenha.setText("");
+        btnSalvar.setEnabled(true);
     }
 
     private void PreencheCampos(int id) {
@@ -323,6 +324,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         int linha = tblFuncionarios.getSelectedRow();
         Integer codigo = (Integer) tblFuncionarios.getValueAt(linha, 0);
         PreencheCampos((int) codigo);
+        btnSalvar.setEnabled(false);
     }//GEN-LAST:event_tblFuncionariosMouseClicked
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
