@@ -1,6 +1,7 @@
 package bll;
 
 import dal.VeiculoDAL;
+import java.util.List;
 import java.util.Vector;
 import model.Preco;
 import model.Proprietario;
@@ -26,7 +27,7 @@ public class VeiculoBLL {
         dal.excluir(veiculo.getCodigo());
     }
 
-    public Vector getConsulta() {
+    public List<Veiculo> getConsulta() {
         return dal.mostrarTodos();
     }
 
