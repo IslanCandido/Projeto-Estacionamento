@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Preco;
+import model.Plano;
 import model.Proprietario;
 import model.Veiculo;
 import util.Conexao;
@@ -80,7 +80,7 @@ public class VeiculoDAL {
                 veiculo.setModelo(rs.getString("modelo"));
                 veiculo.setCor(rs.getString("cor"));
                 
-                Preco preco = new Preco();
+                Plano preco = new Plano();
                 preco.setCodigo(rs.getInt("pre_id"));
                 preco.setPlano(rs.getString("plano"));
                 preco.setTipoVeiculo(rs.getString("tipoVeiculo"));
@@ -123,7 +123,7 @@ public class VeiculoDAL {
                 veiculo.setModelo(rs.getString("modelo"));
                 veiculo.setCor(rs.getString("cor"));
 
-                Preco preco = new Preco();
+                Plano preco = new Plano();
                 preco.setCodigo(rs.getInt("pre_id"));
                 preco.setPlano(rs.getString("plano"));
                 preco.setTipoVeiculo(rs.getString("tipoVeiculo"));
@@ -146,14 +146,14 @@ public class VeiculoDAL {
         return veiculo;
     }
 
-    public Vector<Preco> listarPlanos() {
-        Vector<Preco> precos = new Vector<Preco>();
+    public Vector<Plano> listarPlanos() {
+        Vector<Plano> precos = new Vector<Plano>();
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement("SELECT * FROM preco");
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                Preco preco = new Preco();
+                Plano preco = new Plano();
                 preco.setCodigo(rs.getInt("pre_id"));
                 preco.setPlano(rs.getString("plano"));
                 preco.setTipoVeiculo(rs.getString("tipoVeiculo"));

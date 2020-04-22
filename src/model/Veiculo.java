@@ -7,14 +7,14 @@ public class Veiculo {
     private String cor;
     private String modelo;
     private Proprietario idPropietario;
-    private Preco idPreco;
+    private Plano idPreco;
 
     public Veiculo() {
-        idPreco =  new Preco();
+        idPreco =  new Plano();
         idPropietario = new Proprietario();
     }
 
-    public Veiculo(int codigo, String placa, String modelo, String cor, Proprietario idPropietario, Preco idPreco) {
+    public Veiculo(int codigo, String placa, String modelo, String cor, Proprietario idPropietario, Plano idPreco) {
         this.codigo = codigo;
         this.placa = placa;
         this.modelo = modelo;
@@ -67,11 +67,11 @@ public class Veiculo {
         this.idPropietario = idPropietario;
     }
 
-    public Preco getIdPreco() {
+    public Plano getIdPreco() {
         return idPreco;
     }
 
-    public void setIdPreco(Preco idPreco) {
+    public void setIdPreco(Plano idPreco) {
         this.idPreco = idPreco;
     }
 

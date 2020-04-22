@@ -3,7 +3,7 @@ package bll;
 import dal.VeiculoDAL;
 import java.util.List;
 import java.util.Vector;
-import model.Preco;
+import model.Plano;
 import model.Proprietario;
 import model.Veiculo;
 
@@ -35,7 +35,7 @@ public class VeiculoBLL {
         return dal.consultarPorId(cod);
     }
 
-    public Vector<Preco> listarPlanos() {
+    public Vector<Plano> listarPlanos() {
         return dal.listarPlanos();
     }
 

@@ -3,7 +3,7 @@ package view;
 public class Menu extends javax.swing.JFrame {
     CadastroProprietario telaProprietario;
     CadastroFuncionario telaFuncionario;
-    CadastroPreco telaPreco;
+    CadastroPlano telaPlano;
     CadastroVeiculo telaVeiculo;
 
     public Menu() {
@@ -20,7 +20,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItemCadastroProprietarios = new javax.swing.JMenuItem();
         jMenuItemCadastroFuncionarios = new javax.swing.JMenuItem();
         jMenuItemCadastroVeiculos = new javax.swing.JMenuItem();
-        jMenuItemCadastroPrecos = new javax.swing.JMenuItem();
+        jMenuItemCadastroPlanos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
 
@@ -59,13 +59,13 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuItemCadastroVeiculos);
 
-        jMenuItemCadastroPrecos.setText("Preços");
-        jMenuItemCadastroPrecos.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCadastroPlanos.setText("Planos");
+        jMenuItemCadastroPlanos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCadastroPrecosActionPerformed(evt);
+                jMenuItemCadastroPlanosActionPerformed(evt);
             }
         });
-        jMenuCadastros.add(jMenuItemCadastroPrecos);
+        jMenuCadastros.add(jMenuItemCadastroPlanos);
 
         jMenuBar1.add(jMenuCadastros);
         jMenuBar1.add(jMenu2);
@@ -99,14 +99,14 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemCadastroFuncionariosActionPerformed
 
-    private void jMenuItemCadastroPrecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroPrecosActionPerformed
-        if(telaPreco == null){
-            telaPreco = new CadastroPreco();
-            telaPreco.setVisible(true);
+    private void jMenuItemCadastroPlanosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroPlanosActionPerformed
+        if(telaPlano == null){
+            telaPlano = new CadastroPlano();
+            telaPlano.setVisible(true);
         } else{
-            telaPreco.setVisible(true);
+            telaPlano.setVisible(true);
         }
-    }//GEN-LAST:event_jMenuItemCadastroPrecosActionPerformed
+    }//GEN-LAST:event_jMenuItemCadastroPlanosActionPerformed
 
     private void jMenuItemCadastroVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroVeiculosActionPerformed
         if(telaVeiculo == null){
@@ -160,7 +160,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuItemCadastroFuncionarios;
-    private javax.swing.JMenuItem jMenuItemCadastroPrecos;
+    private javax.swing.JMenuItem jMenuItemCadastroPlanos;
     private javax.swing.JMenuItem jMenuItemCadastroProprietarios;
     private javax.swing.JMenuItem jMenuItemCadastroVeiculos;
     // End of variables declaration//GEN-END:variables

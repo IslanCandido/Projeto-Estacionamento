@@ -10,7 +10,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import model.Preco;
+import model.Plano;
 import model.Proprietario;
 import model.Veiculo;
 
@@ -19,7 +19,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     VeiculoBLL veiculoBll = new VeiculoBLL();
     Veiculo veiculo = new Veiculo();
     
-    Vector<Preco> vetorPrecos;
+    Vector<Plano> vetorPrecos;
     Vector<Proprietario> vetorProprietarios;
 
     public CadastroVeiculo() {        
@@ -28,7 +28,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         //Instancias de Objetos
         veiculo = new Veiculo();
         Proprietario objProprietario = new Proprietario();
-        Preco objPreco = new Preco();
+        Plano objPreco = new Plano();
         veiculoBll = new VeiculoBLL();
 
         //Preencher comboBox de proprietario e planos
@@ -167,13 +167,13 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Modelo");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(390, 10, 50, 30);
+        jLabel2.setBounds(180, 10, 50, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cor");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(180, 10, 19, 30);
+        jLabel3.setBounds(400, 10, 19, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -187,9 +187,9 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(350, 50, 40, 30);
         getContentPane().add(txtModelo);
-        txtModelo.setBounds(440, 10, 140, 28);
+        txtModelo.setBounds(230, 10, 140, 28);
         getContentPane().add(txtCor);
-        txtCor.setBounds(210, 10, 140, 28);
+        txtCor.setBounds(430, 10, 150, 28);
 
         tblVeiculos.setModel(modelo);
         tblVeiculos.addMouseListener(new java.awt.event.MouseAdapter() {

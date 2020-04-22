@@ -1,6 +1,6 @@
 package view;
 
-import bll.PrecoBLL;
+import bll.PlanoBLL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -8,40 +8,40 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import model.Preco;
+import model.Plano;
 
-public class CadastroPreco extends javax.swing.JFrame {
+public class CadastroPlano extends javax.swing.JFrame {
     
     DefaultTableModel modelo = new DefaultTableModel();
-    PrecoBLL precoBll = new PrecoBLL();
-    Preco preco = new Preco();
+    PlanoBLL planoBll = new PlanoBLL();
+    Plano plano = new Plano();
 
-    public CadastroPreco() {
+    public CadastroPlano() {
         criarTabela();
         consultar();
         initComponents();
     }
     
     private void criarTabela() {
-        tblPrecos = new JTable(modelo);
+        tblPlanos = new JTable(modelo);
         modelo.addColumn("Código");
         modelo.addColumn("Plano");
         modelo.addColumn("Tipo Veículo");
         modelo.addColumn("Preço");
 
-        tblPrecos.getColumnModel().getColumn(0).setPreferredWidth(10);
-        tblPrecos.getColumnModel().getColumn(1).setPreferredWidth(100);
-        tblPrecos.getColumnModel().getColumn(2).setPreferredWidth(100);
-        tblPrecos.getColumnModel().getColumn(3).setPreferredWidth(30);
+        tblPlanos.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tblPlanos.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tblPlanos.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tblPlanos.getColumnModel().getColumn(3).setPreferredWidth(30);
 
     }
 
     private void consultar() {
 
         modelo.setNumRows(0);
-        List<Preco> lista = new ArrayList<Preco>();
+        List<Plano> lista = new ArrayList<Plano>();
 
-        lista = precoBll.getConsulta();
+        lista = planoBll.getConsulta();
 
         if (lista.size() > 0) {
 
@@ -58,7 +58,7 @@ public class CadastroPreco extends javax.swing.JFrame {
     }
 
     private void limparCampos() {
-        preco = new Preco();
+        plano = new Plano();
         txtPreco.setText("");
         cbxPlano.setSelectedIndex(0);
         cbxTipoVeiculo.setSelectedIndex(0);
@@ -66,10 +66,10 @@ public class CadastroPreco extends javax.swing.JFrame {
     }
 
     private void preencheCampos(int id) {
-        preco = precoBll.getConsultaPorId(id);
-        cbxPlano.setSelectedItem(preco.getPlano());
-        cbxTipoVeiculo.setSelectedItem(preco.getTipoVeiculo());
-        txtPreco.setText(String.valueOf(preco.getPreco()));        
+        plano = planoBll.getConsultaPorId(id);
+        cbxPlano.setSelectedItem(plano.getPlano());
+        cbxTipoVeiculo.setSelectedItem(plano.getTipoVeiculo());
+        txtPreco.setText(String.valueOf(plano.getPreco()));        
     }
 
     @SuppressWarnings("unchecked")
@@ -88,12 +88,12 @@ public class CadastroPreco extends javax.swing.JFrame {
         btnAlterar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblPrecos = new javax.swing.JTable();
+        tblPlanos = new javax.swing.JTable();
         txtPreco = new javax.swing.JTextField();
         jLabelTelaFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de preços");
+        setTitle("Cadastro de planos");
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -176,13 +176,13 @@ public class CadastroPreco extends javax.swing.JFrame {
         getContentPane().add(btnLimpar);
         btnLimpar.setBounds(100, 180, 80, 30);
 
-        tblPrecos.setModel(modelo);
-        tblPrecos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPlanos.setModel(modelo);
+        tblPlanos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblPrecosMouseClicked(evt);
+                tblPlanosMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tblPrecos);
+        jScrollPane2.setViewportView(tblPlanos);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(190, 10, 310, 200);
@@ -205,18 +205,18 @@ public class CadastroPreco extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            preco.setPlano(cbxPlano.getSelectedItem().toString());
-            preco.setTipoVeiculo(cbxTipoVeiculo.getSelectedItem().toString());
-            preco.setPreco(Double.parseDouble(txtPreco.getText()));
+            plano.setPlano(cbxPlano.getSelectedItem().toString());
+            plano.setTipoVeiculo(cbxTipoVeiculo.getSelectedItem().toString());
+            plano.setPreco(Double.parseDouble(txtPreco.getText()));
 
             if (txtPreco.getText().isEmpty() || cbxPlano.getSelectedItem().equals("Selecione") || cbxTipoVeiculo.getSelectedItem().equals("Selecione")) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             }
-            else if(preco.getPreco() <= 0 || preco.getPreco()>5000){
+            else if(plano.getPreco() <= 0 || plano.getPreco()>5000){
                 JOptionPane.showMessageDialog(rootPane, "PREÇO INVALIDO!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
             }
             else {
-                    precoBll.adicionar(preco);
+                    planoBll.adicionar(plano);
                     consultar();
                     limparCampos();
                 }
@@ -230,7 +230,7 @@ public class CadastroPreco extends javax.swing.JFrame {
             if (txtPreco.getText().isEmpty() || cbxPlano.getSelectedItem().equals("Selecione") || cbxTipoVeiculo.getSelectedItem().equals("Selecione")) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             }
-            precoBll.remover(precoBll.getConsultaPorId(preco.getCodigo()));
+            planoBll.remover(planoBll.getConsultaPorId(plano.getCodigo()));
         } catch (Exception ex) {
             Logger.getLogger(CadastroProprietario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -240,14 +240,14 @@ public class CadastroPreco extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         try {
-            preco.setPlano(cbxPlano.getSelectedItem().toString());
-            preco.setTipoVeiculo(cbxTipoVeiculo.getSelectedItem().toString());
-            preco.setPreco(Double.parseDouble(txtPreco.getText()));
+            plano.setPlano(cbxPlano.getSelectedItem().toString());
+            plano.setTipoVeiculo(cbxTipoVeiculo.getSelectedItem().toString());
+            plano.setPreco(Double.parseDouble(txtPreco.getText()));
 
             if (txtPreco.getText().isEmpty() || cbxPlano.getSelectedItem().equals("Selecione") || cbxTipoVeiculo.getSelectedItem().equals("Selecione")) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
-                    precoBll.alterar(preco);
+                    planoBll.alterar(plano);
                     consultar();
                     limparCampos();
                 }
@@ -260,12 +260,12 @@ public class CadastroPreco extends javax.swing.JFrame {
         limparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
 
-    private void tblPrecosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPrecosMouseClicked
+    private void tblPlanosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPlanosMouseClicked
         btnSalvar.setEnabled(false);
-        int linha = tblPrecos.getSelectedRow();
-        Integer codigo = (Integer) tblPrecos.getValueAt(linha, 0);
+        int linha = tblPlanos.getSelectedRow();
+        Integer codigo = (Integer) tblPlanos.getValueAt(linha, 0);
         preencheCampos((int) codigo);
-    }//GEN-LAST:event_tblPrecosMouseClicked
+    }//GEN-LAST:event_tblPlanosMouseClicked
 
     private void txtPrecoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecoKeyTyped
         Character ch = evt.getKeyChar();
@@ -293,14 +293,18 @@ public class CadastroPreco extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroPreco.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroPlano.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroPreco.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroPlano.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroPreco.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroPlano.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroPreco.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroPlano.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -309,7 +313,7 @@ public class CadastroPreco extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroPreco().setVisible(true);
+                new CadastroPlano().setVisible(true);
             }
         });
     }
@@ -328,7 +332,7 @@ public class CadastroPreco extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTelaFundo;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable tblPrecos;
+    private javax.swing.JTable tblPlanos;
     private javax.swing.JTextField txtPreco;
     // End of variables declaration//GEN-END:variables
 }
