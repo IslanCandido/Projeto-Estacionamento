@@ -194,12 +194,14 @@ public class CadastroProprietario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de proprietários");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         getContentPane().setLayout(null);
 
         btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setText("Limpar");
+        btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparActionPerformed(evt);
@@ -211,6 +213,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
         btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnExcluir.setText("Deletar");
+        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
@@ -222,6 +225,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalvar.setText("Salvar");
+        btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
@@ -231,6 +235,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
         btnSalvar.setBounds(160, 320, 69, 30);
 
         tblProprietarios.setModel(modelo);
+        tblProprietarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblProprietarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblProprietariosMouseClicked(evt);
@@ -314,6 +319,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarActionPerformed(evt);

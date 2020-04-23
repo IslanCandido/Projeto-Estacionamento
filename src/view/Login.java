@@ -25,6 +25,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login de funcionário");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -52,6 +53,7 @@ public class Login extends javax.swing.JFrame {
         btnLogin.setBackground(new java.awt.Color(153, 255, 153));
         btnLogin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnLogin.setText("LOGIN");
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -63,6 +65,7 @@ public class Login extends javax.swing.JFrame {
         btnCadastrar.setBackground(new java.awt.Color(153, 153, 255));
         btnCadastrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCadastrar.setText("ADMINISTRADOR");
+        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);

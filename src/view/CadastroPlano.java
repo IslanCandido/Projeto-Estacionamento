@@ -115,7 +115,7 @@ public class CadastroPlano extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(10, 90, 40, 28);
 
-        cbxPlano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Livre", "Diário", "Mensal", "Anual" }));
+        cbxPlano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Livre", "Diário", "Mensal" }));
         getContentPane().add(cbxPlano);
         cbxPlano.setBounds(50, 10, 110, 30);
 
@@ -136,6 +136,7 @@ public class CadastroPlano extends javax.swing.JFrame {
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalvar.setText("Salvar");
+        btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
@@ -147,6 +148,7 @@ public class CadastroPlano extends javax.swing.JFrame {
         btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnExcluir.setText("Deletar");
+        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
@@ -157,6 +159,7 @@ public class CadastroPlano extends javax.swing.JFrame {
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarActionPerformed(evt);
@@ -168,6 +171,7 @@ public class CadastroPlano extends javax.swing.JFrame {
         btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setText("Limpar");
+        btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparActionPerformed(evt);
@@ -177,6 +181,7 @@ public class CadastroPlano extends javax.swing.JFrame {
         btnLimpar.setBounds(100, 180, 80, 30);
 
         tblPlanos.setModel(modelo);
+        tblPlanos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblPlanos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPlanosMouseClicked(evt);

@@ -31,7 +31,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         Plano objPreco = new Plano();
         veiculoBll = new VeiculoBLL();
 
-        //Preencher comboBox de proprietario e planos
+        //Preencher comboBox de proprietario e plano
         vetorPrecos = veiculoBll.listarPlanos();
         vetorProprietarios = veiculoBll.listarProprietarios();
 
@@ -118,14 +118,15 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         txtPlaca.setText(veiculo.getPlaca());
         txtModelo.setText(veiculo.getModelo());
         txtCor.setText(veiculo.getCor());
-        cbxIdPlano.setSelectedItem(veiculo.getIdPreco().getPlano());
-        cbxIdProprietario.setSelectedItem(veiculo.getIdPropietario().getNome());
+        cbxIdPlano.setSelectedItem(veiculo.getIdPreco());
+        cbxIdProprietario.setSelectedItem(veiculo.getIdPropietario());
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         jLabel1 = new javax.swing.JLabel();
         txtPlaca = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -134,14 +135,14 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtModelo = new javax.swing.JTextField();
         txtCor = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblVeiculos = new javax.swing.JTable();
         cbxIdProprietario = new javax.swing.JComboBox<>();
         cbxIdPlano = new javax.swing.JComboBox<>();
         btnLimpar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnDeletar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblVeiculos = new javax.swing.JTable();
         jLabelTelaFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -153,7 +154,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Placa");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(30, 10, 30, 30);
+        jLabel1.setBounds(20, 10, 30, 30);
 
         try {
             txtPlaca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("???-####")));
@@ -161,25 +162,25 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         getContentPane().add(txtPlaca);
-        txtPlaca.setBounds(70, 10, 70, 28);
+        txtPlaca.setBounds(60, 10, 80, 28);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Modelo");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(180, 10, 50, 30);
+        jLabel2.setBounds(170, 10, 50, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cor");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(400, 10, 19, 30);
+        jLabel3.setBounds(410, 10, 19, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Proprietário");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(30, 50, 68, 30);
+        jLabel4.setBounds(20, 50, 68, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -187,29 +188,19 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(350, 50, 40, 30);
         getContentPane().add(txtModelo);
-        txtModelo.setBounds(230, 10, 140, 28);
+        txtModelo.setBounds(220, 10, 160, 28);
         getContentPane().add(txtCor);
-        txtCor.setBounds(430, 10, 150, 28);
-
-        tblVeiculos.setModel(modelo);
-        tblVeiculos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblVeiculosMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tblVeiculos);
-
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 90, 580, 210);
+        txtCor.setBounds(440, 10, 150, 28);
 
         getContentPane().add(cbxIdProprietario);
-        cbxIdProprietario.setBounds(110, 50, 200, 28);
+        cbxIdProprietario.setBounds(100, 50, 220, 28);
 
         getContentPane().add(cbxIdPlano);
-        cbxIdPlano.setBounds(400, 50, 180, 28);
+        cbxIdPlano.setBounds(390, 50, 200, 28);
 
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setText("Limpar");
+        btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparActionPerformed(evt);
@@ -220,6 +211,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalvar.setText("Salvar");
+        btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
@@ -230,6 +222,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
         btnDeletar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnDeletar.setText("Deletar");
+        btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeletarActionPerformed(evt);
@@ -240,6 +233,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarActionPerformed(evt);
@@ -248,22 +242,27 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         getContentPane().add(btnAlterar);
         btnAlterar.setBounds(410, 310, 73, 28);
 
+        tblVeiculos.setModel(modelo);
+        tblVeiculos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblVeiculos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVeiculosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblVeiculos);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 90, 590, 210);
+
         jLabelTelaFundo.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTelaFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro.jpg"))); // NOI18N
         getContentPane().add(jLabelTelaFundo);
-        jLabelTelaFundo.setBounds(0, -10, 610, 390);
+        jLabelTelaFundo.setBounds(0, -10, 650, 390);
 
-        setSize(new java.awt.Dimension(610, 377));
+        setSize(new java.awt.Dimension(618, 377));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tblVeiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVeiculosMouseClicked
-        int linha = tblVeiculos.getSelectedRow();
-        Integer codigo = (Integer) tblVeiculos.getValueAt(linha, 0);
-        preencheCampos((int) codigo);
-        btnSalvar.setEnabled(false);
-    }//GEN-LAST:event_tblVeiculosMouseClicked
-
+    
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         limparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
@@ -314,8 +313,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             if (txtPlaca.getText().isEmpty() || txtModelo.getText().isEmpty() || txtCor.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             }
-            //veiculoBll.remover(veiculoBll.getConsultaPorId(veiculo.getCodigo()));
-            veiculoBll.remover(veiculo);
+            veiculoBll.remover(veiculoBll.getConsultaPorId(veiculo.getCodigo()));
         } catch (Exception ex) {
             Logger.getLogger(CadastroProprietario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -323,6 +321,13 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         limparCampos();
     
     }//GEN-LAST:event_btnDeletarActionPerformed
+
+    private void tblVeiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVeiculosMouseClicked
+        btnSalvar.setEnabled(false);
+        int linha = tblVeiculos.getSelectedRow();
+        Integer codigo = (Integer) tblVeiculos.getValueAt(linha, 0);
+        preencheCampos((int)codigo);
+    }//GEN-LAST:event_tblVeiculosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -373,7 +378,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelTelaFundo;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblVeiculos;
     private javax.swing.JTextField txtCor;
     private javax.swing.JTextField txtModelo;

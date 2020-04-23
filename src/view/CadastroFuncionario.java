@@ -216,6 +216,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         txtSenha.setBounds(330, 50, 160, 25);
 
         tblFuncionarios.setModel(modelo);
+        tblFuncionarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblFuncionariosMouseClicked(evt);
@@ -229,6 +230,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalvar.setText("Salvar");
+        btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
@@ -240,6 +242,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         btnDeletar.setBackground(new java.awt.Color(255, 255, 255));
         btnDeletar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnDeletar.setText("Deletar");
+        btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeletarActionPerformed(evt);
@@ -251,6 +254,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setText("Limpar");
+        btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparActionPerformed(evt);
@@ -274,6 +278,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarActionPerformed(evt);

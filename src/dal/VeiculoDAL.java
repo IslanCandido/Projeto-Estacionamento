@@ -80,11 +80,11 @@ public class VeiculoDAL {
                 veiculo.setModelo(rs.getString("modelo"));
                 veiculo.setCor(rs.getString("cor"));
                 
-                Plano preco = new Plano();
-                preco.setCodigo(rs.getInt("pre_id"));
-                preco.setPlano(rs.getString("plano"));
-                preco.setTipoVeiculo(rs.getString("tipoVeiculo"));
-                preco.setPreco(rs.getDouble("preco"));
+                Plano plano = new Plano();
+                plano.setCodigo(rs.getInt("pre_id"));
+                plano.setPlano(rs.getString("plano"));
+                plano.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                plano.setPreco(rs.getDouble("preco"));
                 
                 Proprietario prop = new Proprietario();
                 prop.setCodigo(rs.getInt("pro_id"));
@@ -93,7 +93,7 @@ public class VeiculoDAL {
                 prop.setTelefone(rs.getString("telefone"));
                 prop.setCnh(rs.getString("cnh"));
                 
-                veiculo.setIdPreco(preco);
+                veiculo.setIdPreco(plano);
                 veiculo.setIdPropietario(prop);
                 
                 veiculos.add(veiculo);
@@ -110,8 +110,7 @@ public class VeiculoDAL {
 
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement
-            ("SELECT v.vei_id, v.placa, v.modelo, v.cor, v.pre_fk, v.pro_fk\n" +
-            "FROM veiculo v WHERE vei_id = ?");
+            ("SELECT * FROM veiculo WHERE vei_id = ?");
             
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
@@ -123,11 +122,11 @@ public class VeiculoDAL {
                 veiculo.setModelo(rs.getString("modelo"));
                 veiculo.setCor(rs.getString("cor"));
 
-                Plano preco = new Plano();
-                preco.setCodigo(rs.getInt("pre_id"));
-                preco.setPlano(rs.getString("plano"));
-                preco.setTipoVeiculo(rs.getString("tipoVeiculo"));
-                preco.setPreco(rs.getDouble("preco"));
+                Plano plano = new Plano();
+                plano.setCodigo(rs.getInt("pre_id"));
+                plano.setPlano(rs.getString("plano"));
+                plano.setTipoVeiculo(rs.getString("tipoVeiculo"));
+                plano.setPreco(rs.getDouble("preco"));
                 
                 Proprietario prop = new Proprietario();
                 prop.setCodigo(rs.getInt("pro_id"));
@@ -136,8 +135,10 @@ public class VeiculoDAL {
                 prop.setTelefone(rs.getString("telefone"));
                 prop.setCnh(rs.getString("cnh"));
                 
-                veiculo.setIdPreco(preco);
-                veiculo.setIdPropietario(prop);
+                veiculo.setIdPreco(new Plano());
+                veiculo.setIdPropietario(new Proprietario());
+                //veiculo.setIdPreco(plano);
+                //veiculo.setIdPropietario(prop);
             }
         } catch (SQLException erro) {
             erro.printStackTrace();
