@@ -135,10 +135,8 @@ public class VeiculoDAL {
                 prop.setTelefone(rs.getString("telefone"));
                 prop.setCnh(rs.getString("cnh"));
                 
-                veiculo.setIdPreco(new Plano());
-                veiculo.setIdPropietario(new Proprietario());
-                //veiculo.setIdPreco(plano);
-                //veiculo.setIdPropietario(prop);
+                veiculo.setIdPreco(plano);
+                veiculo.setIdPropietario(prop);
             }
         } catch (SQLException erro) {
             erro.printStackTrace();
