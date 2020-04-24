@@ -279,6 +279,17 @@ public class CadastroPlano extends javax.swing.JFrame {
             evt.consume();
             JOptionPane.showMessageDialog(rootPane, "LIMITE DE 4 DIGITOS!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
         }
+        
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "DIGITE SOMENTE NUMEROS!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+        }
+        
     }//GEN-LAST:event_txtPrecoKeyTyped
 
     /**

@@ -29,6 +29,29 @@ public class frmEstadia extends javax.swing.JFrame {
     Vector<Veiculo> vetorVeiculos;
     Vector<Funcionario> vetorFuncionarios;
 
+    public static Date StringParaDate(String data){
+        if(data == null){
+            return null;
+        }
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        java.sql.Date a = null;
+        try {
+            a = new java.sql.Date(format.parse(data).getTime());
+        } catch (ParseException e) {
+        }
+        return a;
+    }
+
+    public static String convertDate(Date dtConsulta) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt", "BR"));
+            return formatter.format(dtConsulta);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public frmEstadia() {
         initComponents();
 
@@ -65,28 +88,9 @@ public class frmEstadia extends javax.swing.JFrame {
         tblEstadias.getColumnModel().getColumn(8).setPreferredWidth(30);
     }
 
-    private static Date criarData(String data) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            return formatter.parse(data);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static String ConverterDateParaString(Date dtConsulta) {
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt", "BR"));
-            return formatter.format(dtConsulta);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
     private void limparCampos() {
         estadia = new Estadia();
-        
+
         txtCodigo.setText("");
         txtData.setText("");
         cbxDesconto.setSelectedIndex(0);
@@ -351,6 +355,11 @@ public class frmEstadia extends javax.swing.JFrame {
                 txtDataActionPerformed(evt);
             }
         });
+        txtData.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDataKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtData);
         txtData.setBounds(100, 30, 90, 28);
 
@@ -359,6 +368,12 @@ public class frmEstadia extends javax.swing.JFrame {
         jLabel10.setText("ID");
         getContentPane().add(jLabel10);
         jLabel10.setBounds(10, 10, 20, 14);
+
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtCodigo);
         txtCodigo.setBounds(10, 30, 60, 28);
 
@@ -376,7 +391,7 @@ public class frmEstadia extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            estadia.setData(criarData(txtData.getText()));
+            estadia.setData(StringParaDate(txtData.getText()));
             estadia.setHoraEntrada(Time.valueOf(jTimeHoraEntrada.getFormatedDate()));
             estadia.setHoraSaida(Time.valueOf(jTimeHoraSaida.getFormatedDate()));
             estadia.setDesconto(cbxDesconto.getSelectedItem().toString());
@@ -389,11 +404,9 @@ public class frmEstadia extends javax.swing.JFrame {
                     || jTimeHoraSaida.getTimeField().equals("") || cbxDesconto.getSelectedItem().equals("Selecione")
                     || txtPreco.getText().equals("") || buttonGroup1.getSelection().equals(false)) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
-            }
-            else if(!txtCodigo.getText().isEmpty()){
+            } else if (!txtCodigo.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "ID GERADO AUTOMATICAMENTE!", "Atenção!", JOptionPane.WARNING_MESSAGE);
-            }
-            else {
+            } else {
                 estadiaBll.adicionar(estadia);
                 limparCampos();
                 consultar();
@@ -404,7 +417,7 @@ public class frmEstadia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
-        
+
     }//GEN-LAST:event_txtDataActionPerformed
 
     private void cbxDescontoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxDescontoItemStateChanged
@@ -432,7 +445,7 @@ public class frmEstadia extends javax.swing.JFrame {
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         try {
             estadia.setCodigo(Integer.parseInt(txtCodigo.getText()));
-            estadia.setData(criarData(txtData.getText()));
+            estadia.setData(StringParaDate(txtData.getText()));
             estadia.setHoraEntrada(Time.valueOf(jTimeHoraEntrada.getFormatedDate()));
             estadia.setHoraSaida(Time.valueOf(jTimeHoraSaida.getFormatedDate()));
             estadia.setDesconto(cbxDesconto.getSelectedItem().toString());
@@ -442,8 +455,9 @@ public class frmEstadia extends javax.swing.JFrame {
             estadia.setSituacaoPagamento(buttonGroup1.getSelection().toString());
 
             if (txtData.getText().equals("") || jTimeHoraEntrada.getTimeField().equals("")
-                    || jTimeHoraSaida.getTimeField().equals("") || cbxDesconto.getSelectedItem().equals("Selecione")
-                    || txtPreco.getText().equals("") || buttonGroup1.getSelection().equals(false)) {
+            || jTimeHoraSaida.getTimeField().equals("") || cbxDesconto.getSelectedItem().equals("Selecione")
+            || txtPreco.getText().equals("") || buttonGroup1.getSelection().equals(false)) {
+                
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
                 estadiaBll.alterar(estadia);
@@ -457,19 +471,50 @@ public class frmEstadia extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         try {
-            if(txtCodigo.getText().isEmpty()){
-            JOptionPane.showMessageDialog(rootPane, "CAMPO ID É OBRIGATORIO!", "Atenção!", JOptionPane.WARNING_MESSAGE);
-            } else{
+            if (txtCodigo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "CAMPO ID É OBRIGATORIO!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+            } else {
                 estadia.setCodigo(Integer.parseInt(txtCodigo.getText()));
                 estadiaBll.remover(estadia.getCodigo());
             }
-            
+
         } catch (Exception ex) {
             Logger.getLogger(CadastroProprietario.class.getName()).log(Level.SEVERE, null, ex);
         }
         consultar();
         limparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
+        Character ch = evt.getKeyChar();
+        int comprimentoDeCampo = txtCodigo.getText().length();
+        if (comprimentoDeCampo >= 3) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "LIMITE DE 3 DIGITOS!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "DIGITE SOMENTE NUMEROS!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtCodigoKeyTyped
+
+    private void txtDataKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataKeyTyped
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "DIGITE SOMENTE NUMEROS!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtDataKeyTyped
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

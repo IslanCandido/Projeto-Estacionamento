@@ -237,6 +237,12 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabel6.setText("ID");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(10, 10, 13, 28);
+
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtCodigo);
         txtCodigo.setBounds(30, 10, 50, 28);
 
@@ -361,6 +367,25 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     private void cbxCorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCorItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxCorItemStateChanged
+
+    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
+        Character ch = evt.getKeyChar();
+        int comprimentoDeCampo = txtCodigo.getText().length();
+        if (comprimentoDeCampo >= 3) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "LIMITE DE 3 DIGITOS!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "DIGITE SOMENTE NUMEROS!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtCodigoKeyTyped
 
     /**
      * @param args the command line arguments
