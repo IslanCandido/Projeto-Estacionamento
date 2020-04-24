@@ -22,8 +22,8 @@ public class EstadiaBLL {
         dal.alterar(estadia);
     }
 
-    public void remover(Estadia estadia) throws Exception {
-        dal.excluir(estadia.getCodigo());
+    public void remover(int id) throws Exception {
+        dal.excluir(id);
     }
     
     public List<Estadia> getConsulta(){

@@ -24,7 +24,7 @@ public class Veiculo {
     }
 
     public String toString() {
-        return getPlaca() + " - " + getModelo();
+        return getModelo() + " - " + getPlaca();
     }
 
     public int getCodigo() {
