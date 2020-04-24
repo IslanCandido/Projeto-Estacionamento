@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import model.Plano;
 
 public class CadastroPlano extends javax.swing.JFrame {
-    
+
     DefaultTableModel modelo = new DefaultTableModel();
     PlanoBLL planoBll = new PlanoBLL();
     Plano plano = new Plano();
@@ -21,7 +21,7 @@ public class CadastroPlano extends javax.swing.JFrame {
         consultar();
         initComponents();
     }
-    
+
     private void criarTabela() {
         tblPlanos = new JTable(modelo);
         modelo.addColumn("Código");
@@ -69,7 +69,7 @@ public class CadastroPlano extends javax.swing.JFrame {
         plano = planoBll.getConsultaPorId(id);
         cbxPlano.setSelectedItem(plano.getPlano());
         cbxTipoVeiculo.setSelectedItem(plano.getTipoVeiculo());
-        txtPreco.setText(String.valueOf(plano.getPreco()));        
+        txtPreco.setText(String.valueOf(plano.getPreco()));
     }
 
     @SuppressWarnings("unchecked")
@@ -216,15 +216,13 @@ public class CadastroPlano extends javax.swing.JFrame {
 
             if (txtPreco.getText().isEmpty() || cbxPlano.getSelectedItem().equals("Selecione") || cbxTipoVeiculo.getSelectedItem().equals("Selecione")) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
-            }
-            else if(plano.getPreco() <= 0 || plano.getPreco()>5000){
+            } else if (plano.getPreco() <= 0 || plano.getPreco() > 5000) {
                 JOptionPane.showMessageDialog(rootPane, "PREÇO INVALIDO!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+            } else {
+                planoBll.adicionar(plano);
+                consultar();
+                limparCampos();
             }
-            else {
-                    planoBll.adicionar(plano);
-                    consultar();
-                    limparCampos();
-                }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Atenção!!!", JOptionPane.WARNING_MESSAGE);
         }
@@ -234,8 +232,10 @@ public class CadastroPlano extends javax.swing.JFrame {
         try {
             if (txtPreco.getText().isEmpty() || cbxPlano.getSelectedItem().equals("Selecione") || cbxTipoVeiculo.getSelectedItem().equals("Selecione")) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+            } else {
+                planoBll.remover(planoBll.getConsultaPorId(plano.getCodigo()));
             }
-            planoBll.remover(planoBll.getConsultaPorId(plano.getCodigo()));
+
         } catch (Exception ex) {
             Logger.getLogger(CadastroProprietario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -252,10 +252,10 @@ public class CadastroPlano extends javax.swing.JFrame {
             if (txtPreco.getText().isEmpty() || cbxPlano.getSelectedItem().equals("Selecione") || cbxTipoVeiculo.getSelectedItem().equals("Selecione")) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
-                    planoBll.alterar(plano);
-                    consultar();
-                    limparCampos();
-                }
+                planoBll.alterar(plano);
+                consultar();
+                limparCampos();
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Atenção!!!", JOptionPane.WARNING_MESSAGE);
         }
@@ -278,7 +278,7 @@ public class CadastroPlano extends javax.swing.JFrame {
         if (comprimentoDeCampo >= 4) {
             evt.consume();
             JOptionPane.showMessageDialog(rootPane, "LIMITE DE 4 DIGITOS!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
-        }  
+        }
     }//GEN-LAST:event_txtPrecoKeyTyped
 
     /**

@@ -344,8 +344,9 @@ public class CadastroProprietario extends javax.swing.JFrame {
         try {
             if (txtNome.getText().isEmpty() || txtCpf.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtCnh.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "NENHUM PROPRIETÁRIO FOI SELECIONADO!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            } else{
+                proprietarioBll.remover(proprietarioBll.getConsultaPorId(proprietario.getCodigo()));
             }
-            proprietarioBll.remover(proprietarioBll.getConsultaPorId(proprietario.getCodigo()));
         } catch (Exception ex) {
             Logger.getLogger(CadastroProprietario.class.getName()).log(Level.SEVERE, null, ex);
         }

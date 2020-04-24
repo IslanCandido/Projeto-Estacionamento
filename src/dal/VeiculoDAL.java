@@ -55,6 +55,7 @@ public class VeiculoDAL {
             preparedStatement.setString(3, veiculo.getCor());
             preparedStatement.setInt(4, veiculo.getIdPropietario().getCodigo());
             preparedStatement.setInt(5, veiculo.getIdPreco().getCodigo());
+            preparedStatement.setInt(6, veiculo.getCodigo());
             preparedStatement.executeUpdate();
 
         } catch (SQLException erro) {
@@ -105,12 +106,12 @@ public class VeiculoDAL {
         return veiculos;
     }
 
-    public Veiculo consultarPorId(int id) {
+    /*public Veiculo consultarPorId(int id) {
         Veiculo veiculo = new Veiculo();
 
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement
-            ("SELECT * FROM veiculo WHERE vei_id = ?");
+            ("SELECT * veiculo WHERE vei_id = ?");
             
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
@@ -143,7 +144,7 @@ public class VeiculoDAL {
         }
 
         return veiculo;
-    }
+    }*/
 
     public Vector<Plano> listarPlanos() {
         Vector<Plano> precos = new Vector<Plano>();

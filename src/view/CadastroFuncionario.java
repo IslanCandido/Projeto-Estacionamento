@@ -349,8 +349,9 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         try {
             if (txtNome.getText().isEmpty() || txtCpf.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtSenha.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "NENHUM FUNCIONÁRIO FOI SELECIONADO!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            } else{
+                funcionarioBll.remover(funcionarioBll.getConsultaPorId(funcionario.getCodigo()));
             }
-            funcionarioBll.remover(funcionarioBll.getConsultaPorId(funcionario.getCodigo()));
         } catch (Exception ex) {
             Logger.getLogger(CadastroFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -1,10 +1,16 @@
 package view;
 
 import bll.EstadiaBLL;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Estadia;
@@ -29,7 +35,7 @@ public class frmEstadia extends javax.swing.JFrame {
         
         criarTabela();
         verificarVeiculos();
-        verificarVeiculos();
+        verificarFuncionarios();
         consultar();
     }
     
@@ -56,18 +62,34 @@ public class frmEstadia extends javax.swing.JFrame {
         tblEstadias.getColumnModel().getColumn(8).setPreferredWidth(30);
     }
     
+    private static Date criarData(String data) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return formatter.parse(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String converterData(Date dtConsulta) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt", "BR"));
+            return formatter.format(dtConsulta);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
     private void limparCampos() {
         estadia = new Estadia();
 
-        jDateData.setDateFormatString("");
-        jTimeHoraEntrada.getFormatedDate("");
-        jTimeHoraSaida.getFormatedDate("");
+        txtData.setText("");
         cbxDesconto.setSelectedIndex(0);
         cbxIdVeiculo.setSelectedIndex(0);
         cbxIdFuncionario.setSelectedIndex(0);
         txtPreco.setText("");
-        rbDevendo.setSelected(false);
-        rbPago.setSelected(false);
+        buttonGroup1.clearSelection();  
         btnSalvar.setEnabled(true);
     }
     
@@ -121,7 +143,6 @@ public class frmEstadia extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jDateData = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTimeHoraEntrada = new lu.tudor.santec.jtimechooser.JTimeChooser();
@@ -147,149 +168,204 @@ public class frmEstadia extends javax.swing.JFrame {
         btnLimpar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEstadias = new javax.swing.JTable();
+        txtData = new javax.swing.JFormattedTextField();
         jLabelTelaDeFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar estadia");
         setResizable(false);
         getContentPane().setLayout(null);
-        getContentPane().add(jDateData);
-        jDateData.setBounds(20, 40, 140, 28);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Data");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 20, 40, 14);
+        jLabel1.setBounds(10, 10, 40, 14);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Horário de Entrada");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(190, 20, 106, 14);
+        jLabel2.setBounds(150, 10, 106, 14);
         getContentPane().add(jTimeHoraEntrada);
-        jTimeHoraEntrada.setBounds(190, 40, 106, 28);
+        jTimeHoraEntrada.setBounds(150, 30, 106, 28);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Horário de Saída");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(330, 20, 93, 14);
+        jLabel3.setBounds(290, 10, 93, 14);
         getContentPane().add(jTimeHoraSaida);
-        jTimeHoraSaida.setBounds(330, 40, 106, 28);
+        jTimeHoraSaida.setBounds(290, 30, 106, 28);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Funcionário");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 80, 65, 14);
+        jLabel4.setBounds(10, 70, 65, 14);
 
         cbxIdFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cbxIdFuncionario);
-        cbxIdFuncionario.setBounds(20, 100, 210, 28);
+        cbxIdFuncionario.setBounds(10, 90, 190, 28);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Veículo");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(260, 80, 40, 14);
+        jLabel5.setBounds(230, 70, 40, 14);
 
         cbxIdVeiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cbxIdVeiculo);
-        cbxIdVeiculo.setBounds(260, 100, 180, 28);
+        cbxIdVeiculo.setBounds(230, 90, 160, 28);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Desconto");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(470, 20, 53, 14);
+        jLabel6.setBounds(430, 10, 53, 14);
 
         cbxDesconto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Nenhum", "10%", "20%", "30%" }));
         getContentPane().add(cbxDesconto);
-        cbxDesconto.setBounds(470, 40, 90, 28);
+        cbxDesconto.setBounds(430, 30, 90, 28);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Preço");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(470, 80, 32, 14);
+        jLabel7.setBounds(420, 70, 32, 14);
         getContentPane().add(txtPreco);
-        txtPreco.setBounds(470, 100, 80, 28);
+        txtPreco.setBounds(420, 90, 80, 28);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText(" R$");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(550, 100, 20, 30);
+        jLabel8.setBounds(500, 90, 20, 30);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Situação pagamento");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(610, 20, 140, 14);
+        jLabel9.setBounds(540, 10, 140, 14);
 
         buttonGroup1.add(rbDevendo);
         rbDevendo.setForeground(new java.awt.Color(255, 255, 255));
         rbDevendo.setText("DEVENDO");
         rbDevendo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(rbDevendo);
-        rbDevendo.setBounds(610, 80, 110, 23);
+        rbDevendo.setBounds(540, 70, 110, 23);
 
         buttonGroup1.add(rbPago);
         rbPago.setForeground(new java.awt.Color(255, 255, 255));
         rbPago.setText("PAGO");
         rbPago.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(rbPago);
-        rbPago.setBounds(610, 50, 110, 23);
+        rbPago.setBounds(540, 40, 110, 23);
 
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(450, 440, 80, 28);
+        btnSalvar.setBounds(440, 410, 80, 28);
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAlterar.setText("Alterar");
         btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(btnAlterar);
-        btnAlterar.setBounds(660, 440, 90, 28);
+        btnAlterar.setBounds(650, 410, 90, 28);
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(btnCancelar);
-        btnCancelar.setBounds(550, 440, 90, 28);
+        btnCancelar.setBounds(540, 410, 90, 28);
 
         btnFinalizarEstadia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnFinalizarEstadia.setText("Finalizar Estadia");
         btnFinalizarEstadia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(btnFinalizarEstadia);
-        btnFinalizarEstadia.setBounds(300, 440, 130, 28);
+        btnFinalizarEstadia.setBounds(140, 410, 130, 28);
 
         btnEmitirCupom.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnEmitirCupom.setText("Emitir Cupom");
         getContentPane().add(btnEmitirCupom);
-        btnEmitirCupom.setBounds(20, 440, 110, 28);
+        btnEmitirCupom.setBounds(10, 410, 110, 28);
 
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setText("Limpar");
         btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnLimpar);
-        btnLimpar.setBounds(660, 140, 71, 28);
+        btnLimpar.setBounds(660, 90, 71, 28);
 
         tblEstadias.setModel(modelo);
         jScrollPane1.setViewportView(tblEstadias);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 170, 740, 260);
+        jScrollPane1.setBounds(10, 140, 740, 260);
+
+        try {
+            txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtData);
+        txtData.setBounds(10, 30, 110, 28);
 
         jLabelTelaDeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro 02.jpg"))); // NOI18N
         getContentPane().add(jLabelTelaDeFundo);
-        jLabelTelaDeFundo.setBounds(0, -20, 800, 520);
+        jLabelTelaDeFundo.setBounds(-10, -10, 800, 490);
 
-        setSize(new java.awt.Dimension(788, 513));
+        setSize(new java.awt.Dimension(771, 479));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        try {
+            estadia.setData(criarData(txtData.getText()));
+            estadia.setHoraEntrada(Time.valueOf(jTimeHoraEntrada.getFormatedDate()));
+            estadia.setHoraSaida(Time.valueOf(jTimeHoraSaida.getFormatedDate()));
+            estadia.setDesconto(cbxDesconto.getSelectedItem().toString());
+            estadia.setIdVeiculo(vetorVeiculos.get(cbxIdVeiculo.getSelectedIndex()));
+            estadia.setIdFuncionario(vetorFuncionarios.get(cbxIdFuncionario.getSelectedIndex()));
+            estadia.setValor(Double.parseDouble(txtPreco.getText()));
+            estadia.setSituacaoPagamento(buttonGroup1.getSelection().toString());
+            
+            if(txtData.getText().equals("") || jTimeHoraEntrada.getTimeField().equals("")
+            || jTimeHoraSaida.getTimeField().equals("") || cbxDesconto.getSelectedItem().equals("Selecione") 
+            || txtPreco.getText().equals("") || buttonGroup1.getSelection().equals(false)){
+                JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+            } else{
+                estadiaBll.adicionar(estadia);
+                limparCampos();
+                consultar();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -337,7 +413,6 @@ public class frmEstadia extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxDesconto;
     private javax.swing.JComboBox<String> cbxIdFuncionario;
     private javax.swing.JComboBox<String> cbxIdVeiculo;
-    private com.toedter.calendar.JDateChooser jDateData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -354,6 +429,7 @@ public class frmEstadia extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbDevendo;
     private javax.swing.JRadioButton rbPago;
     private javax.swing.JTable tblEstadias;
+    private javax.swing.JFormattedTextField txtData;
     private javax.swing.JTextField txtPreco;
     // End of variables declaration//GEN-END:variables
 }

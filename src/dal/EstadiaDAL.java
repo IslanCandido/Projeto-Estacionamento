@@ -69,32 +69,21 @@ public class EstadiaDAL {
     
     public List<Estadia> mostrarTodos(){
         List<Estadia> estadias = new ArrayList<>();
+        
         try{
             PreparedStatement preparedStatement = conexao.prepareStatement
-            ("SELECT e.est_id, e.dt, e.horaEntrada, e.horaSaida, e.desconto, \n" +
-            "v.vei_id, v.placa, v.modelo, v.cor \n" +
-            "f.fun_id, f.nome, f.cpf, f.telefone, f.senha\n" +
-            "FROM estadia e INNER JOIN veiculo v ON e.vei_fk = v.vei_id\n" +
+            ("SELECT * FROM estadia e INNER JOIN veiculo v ON e.vei_fk = v.vei_id\n" +
             "JOIN funcionario f ON e.fun_fk = f.fun_id");
             
             ResultSet rs = preparedStatement.executeQuery();
             
             while (rs.next()){
-                Estadia estadia = new Estadia();
-                estadia.setCodigo(rs.getInt("est_id"));
-                estadia.setData(rs.getDate("dt"));
-                estadia.setHoraEntrada(rs.getTime("horaEntrada"));
-                estadia.setHoraEntrada(rs.getTime("horaSaida"));
-                estadia.setDesconto(rs.getString("desconto"));
-                
                 //pegando os dados de veiculo
                 Veiculo veiculo = new Veiculo();
                 veiculo.setCodigo(rs.getInt("vei_id"));
                 veiculo.setPlaca(rs.getString("placa"));
                 veiculo.setModelo(rs.getString("modelo"));
                 veiculo.setCor(rs.getString("cor"));
-                
-                estadia.setIdVeiculo(veiculo);
                 
                 //pegando dados de funcionario
                 Funcionario funcionario = new Funcionario();
@@ -104,7 +93,16 @@ public class EstadiaDAL {
                 funcionario.setTelefone(rs.getString("telefone"));
                 funcionario.setSenha(rs.getString("senha"));
                 
+                Estadia estadia = new Estadia();
+                estadia.setCodigo(rs.getInt("est_id"));
+                estadia.setData(rs.getDate("dt"));
+                estadia.setHoraEntrada(rs.getTime("horaEntrada"));
+                estadia.setHoraSaida(rs.getTime("horaSaida"));
+                estadia.setDesconto(rs.getString("desconto"));
+                estadia.setIdVeiculo(veiculo);
                 estadia.setIdFuncionario(funcionario);
+                estadia.setValor(rs.getDouble("valor"));
+                estadia.setSituacaoPagamento(rs.getString("situacaoPagamento"));
                 
                 estadias.add(estadia);
             }
@@ -129,22 +127,8 @@ public class EstadiaDAL {
                 veiculo.setPlaca(rs.getString("placa"));
                 veiculo.setModelo(rs.getString("modelo"));
                 veiculo.setCor(rs.getString("cor"));
-                
-                Plano plano = new Plano();
-                plano.setCodigo(rs.getInt("pre_id"));
-                plano.setPlano(rs.getString("plano"));
-                plano.setTipoVeiculo(rs.getString("tipoVeiculo"));
-                plano.setPreco(rs.getDouble("preco"));
-                
-                Proprietario prop = new Proprietario();
-                prop.setCodigo(rs.getInt("pro_id"));
-                prop.setNome(rs.getString("nome"));
-                prop.setCpf(rs.getString("cpf"));
-                prop.setTelefone(rs.getString("telefone"));
-                prop.setCnh(rs.getString("cnh"));
-                
-                veiculo.setIdPreco(plano);
-                veiculo.setIdPropietario(prop);
+                veiculo.getIdPreco();
+                veiculo.getIdPropietario();
                 
                 veiculos.add(veiculo);
             }
