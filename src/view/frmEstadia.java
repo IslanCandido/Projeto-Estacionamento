@@ -29,7 +29,30 @@ public class frmEstadia extends javax.swing.JFrame {
     Vector<Veiculo> vetorVeiculos;
     Vector<Funcionario> vetorFuncionarios;
 
-    public static Date StringParaDate(String data){
+    public static Time CriarNovaTime(String hora){
+        if(hora == null){
+            return null;
+        }
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+
+        java.sql.Time a = null;
+        try {
+            a = new java.sql.Time(format.parse(hora).getTime());
+        } catch (ParseException e) {
+        }
+        return a;
+    }
+    
+    public static String convertTime(Time timeConsult) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+            return formatter.format(timeConsult);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public static Date CriarNovaData(String data){
         if(data == null){
             return null;
         }
@@ -92,7 +115,9 @@ public class frmEstadia extends javax.swing.JFrame {
         estadia = new Estadia();
 
         txtCodigo.setText("");
-        txtData.setText("");
+        txtData.setValue("");
+        txtHoraEntrada.setValue("");
+        txtHoraSaida.setValue("");
         cbxDesconto.setSelectedIndex(0);
         cbxIdVeiculo.setSelectedIndex(0);
         cbxIdFuncionario.setSelectedIndex(0);
@@ -153,9 +178,7 @@ public class frmEstadia extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTimeHoraEntrada = new lu.tudor.santec.jtimechooser.JTimeChooser();
         jLabel3 = new javax.swing.JLabel();
-        jTimeHoraSaida = new lu.tudor.santec.jtimechooser.JTimeChooser();
         jLabel4 = new javax.swing.JLabel();
         cbxIdFuncionario = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -179,6 +202,8 @@ public class frmEstadia extends javax.swing.JFrame {
         txtData = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
+        txtHoraEntrada = new javax.swing.JFormattedTextField();
+        txtHoraSaida = new javax.swing.JFormattedTextField();
         jLabelTelaDeFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -197,16 +222,12 @@ public class frmEstadia extends javax.swing.JFrame {
         jLabel2.setText("Horário de Entrada");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(220, 10, 106, 14);
-        getContentPane().add(jTimeHoraEntrada);
-        jTimeHoraEntrada.setBounds(220, 30, 106, 28);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Horário de Saída");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(360, 10, 93, 14);
-        getContentPane().add(jTimeHoraSaida);
-        jTimeHoraSaida.setBounds(360, 30, 106, 28);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -293,7 +314,7 @@ public class frmEstadia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(440, 410, 80, 28);
+        btnSalvar.setBounds(440, 410, 80, 30);
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAlterar.setText("Alterar");
@@ -304,7 +325,7 @@ public class frmEstadia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAlterar);
-        btnAlterar.setBounds(650, 410, 90, 28);
+        btnAlterar.setBounds(650, 410, 90, 30);
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -315,18 +336,18 @@ public class frmEstadia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCancelar);
-        btnCancelar.setBounds(540, 410, 90, 28);
+        btnCancelar.setBounds(540, 410, 90, 30);
 
         btnFinalizarEstadia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnFinalizarEstadia.setText("Finalizar Estadia");
         btnFinalizarEstadia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(btnFinalizarEstadia);
-        btnFinalizarEstadia.setBounds(140, 410, 130, 28);
+        btnFinalizarEstadia.setBounds(140, 410, 130, 30);
 
         btnEmitirCupom.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnEmitirCupom.setText("Emitir Cupom");
         getContentPane().add(btnEmitirCupom);
-        btnEmitirCupom.setBounds(10, 410, 110, 28);
+        btnEmitirCupom.setBounds(10, 410, 110, 30);
 
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setText("Limpar");
@@ -377,11 +398,27 @@ public class frmEstadia extends javax.swing.JFrame {
         getContentPane().add(txtCodigo);
         txtCodigo.setBounds(10, 30, 60, 28);
 
+        try {
+            txtHoraEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(txtHoraEntrada);
+        txtHoraEntrada.setBounds(220, 30, 110, 28);
+
+        try {
+            txtHoraSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(txtHoraSaida);
+        txtHoraSaida.setBounds(360, 30, 100, 28);
+
         jLabelTelaDeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro 02.jpg"))); // NOI18N
         getContentPane().add(jLabelTelaDeFundo);
         jLabelTelaDeFundo.setBounds(0, -10, 790, 470);
 
-        setSize(new java.awt.Dimension(771, 479));
+        setSize(new java.awt.Dimension(771, 482));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -391,17 +428,17 @@ public class frmEstadia extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            estadia.setData(StringParaDate(txtData.getText()));
-            estadia.setHoraEntrada(Time.valueOf(jTimeHoraEntrada.getFormatedDate()));
-            estadia.setHoraSaida(Time.valueOf(jTimeHoraSaida.getFormatedDate()));
+            estadia.setData(CriarNovaData(txtData.getText()));
+            estadia.setHoraEntrada(CriarNovaTime(txtHoraEntrada.getText()));
+            estadia.setHoraSaida(CriarNovaTime(txtHoraSaida.getText()));
             estadia.setDesconto(cbxDesconto.getSelectedItem().toString());
             estadia.setIdVeiculo(vetorVeiculos.get(cbxIdVeiculo.getSelectedIndex()));
             estadia.setIdFuncionario(vetorFuncionarios.get(cbxIdFuncionario.getSelectedIndex()));
             estadia.setValor(Double.parseDouble(txtPreco.getText()));
             estadia.setSituacaoPagamento(buttonGroup1.getSelection().toString());
 
-            if (txtData.getText().equals("") || jTimeHoraEntrada.getTimeField().equals("")
-                    || jTimeHoraSaida.getTimeField().equals("") || cbxDesconto.getSelectedItem().equals("Selecione")
+            if (txtData.getText().equals("") || txtHoraEntrada.getText().equals("")
+                    || txtHoraSaida.getText().equals("") || cbxDesconto.getSelectedItem().equals("Selecione")
                     || txtPreco.getText().equals("") || buttonGroup1.getSelection().equals(false)) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else if (!txtCodigo.getText().isEmpty()) {
@@ -445,17 +482,17 @@ public class frmEstadia extends javax.swing.JFrame {
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         try {
             estadia.setCodigo(Integer.parseInt(txtCodigo.getText()));
-            estadia.setData(StringParaDate(txtData.getText()));
-            estadia.setHoraEntrada(Time.valueOf(jTimeHoraEntrada.getFormatedDate()));
-            estadia.setHoraSaida(Time.valueOf(jTimeHoraSaida.getFormatedDate()));
+            estadia.setData(CriarNovaData(txtData.getText()));
+            estadia.setHoraEntrada(CriarNovaTime(txtHoraEntrada.getText()));
+            estadia.setHoraSaida(CriarNovaTime(txtHoraSaida.getText()));
             estadia.setDesconto(cbxDesconto.getSelectedItem().toString());
             estadia.setIdVeiculo(vetorVeiculos.get(cbxIdVeiculo.getSelectedIndex()));
             estadia.setIdFuncionario(vetorFuncionarios.get(cbxIdFuncionario.getSelectedIndex()));
             estadia.setValor(Double.parseDouble(txtPreco.getText()));
             estadia.setSituacaoPagamento(buttonGroup1.getSelection().toString());
 
-            if (txtData.getText().equals("") || jTimeHoraEntrada.getTimeField().equals("")
-            || jTimeHoraSaida.getTimeField().equals("") || cbxDesconto.getSelectedItem().equals("Selecione")
+            if (txtData.getText().equals("") || txtData.getText().equals("")
+            || txtHoraSaida.getText().equals("") || cbxDesconto.getSelectedItem().equals("Selecione")
             || txtPreco.getText().equals("") || buttonGroup1.getSelection().equals(false)) {
                 
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
@@ -571,13 +608,13 @@ public class frmEstadia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelTelaDeFundo;
     private javax.swing.JScrollPane jScrollPane1;
-    private lu.tudor.santec.jtimechooser.JTimeChooser jTimeHoraEntrada;
-    private lu.tudor.santec.jtimechooser.JTimeChooser jTimeHoraSaida;
     private javax.swing.JRadioButton rbDevendo;
     private javax.swing.JRadioButton rbPago;
     private javax.swing.JTable tblEstadias;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JFormattedTextField txtData;
+    private javax.swing.JFormattedTextField txtHoraEntrada;
+    private javax.swing.JFormattedTextField txtHoraSaida;
     private javax.swing.JTextField txtPreco;
     // End of variables declaration//GEN-END:variables
 }

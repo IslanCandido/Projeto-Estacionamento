@@ -281,7 +281,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            veiculo.setPlaca(txtPlaca.getText());
+            veiculo.setPlaca(txtPlaca.getText().toUpperCase());
             veiculo.setModelo(txtModelo.getText());
             veiculo.setIdPropietario(vetorProprietarios.get(cbxIdProprietario.getSelectedIndex()));
             veiculo.setIdPreco(vetorPrecos.get(cbxIdPlano.getSelectedIndex()));
@@ -311,7 +311,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         try {
             veiculo.setCodigo(Integer.parseInt(txtCodigo.getText()));
-            veiculo.setPlaca(txtPlaca.getText());
+            veiculo.setPlaca(txtPlaca.getText().toUpperCase());
             veiculo.setModelo(txtModelo.getText());
             veiculo.setIdPropietario(vetorProprietarios.get(cbxIdProprietario.getSelectedIndex()));
             veiculo.setIdPreco(vetorPrecos.get(cbxIdPlano.getSelectedIndex()));
