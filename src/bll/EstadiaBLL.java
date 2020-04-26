@@ -26,7 +26,11 @@ public class EstadiaBLL {
         dal.excluir(id);
     }
     
-    public List<Estadia> getConsulta(){
+    public List<Estadia> getConsultaEstadiasDevendo(){
+        return dal.mostrarEstadiasDevendo();
+    }
+    
+    public List<Estadia> mostrarEstadiasFinalizadas(){
         return dal.mostrarTodos();
     }
     
@@ -36,6 +40,10 @@ public class EstadiaBLL {
 
     public Vector<Funcionario> listarFuncionarios() {
         return dal.listarFuncionarios();
+    }
+    
+    public double mostrarValor(int id){
+        return dal.pegarPreco(id);
     }
     
 }

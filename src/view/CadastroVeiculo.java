@@ -197,7 +197,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpar);
-        btnLimpar.setBounds(520, 310, 71, 28);
+        btnLimpar.setBounds(510, 300, 71, 30);
 
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalvar.setText("Salvar");
@@ -208,7 +208,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(250, 310, 69, 28);
+        btnSalvar.setBounds(240, 300, 69, 30);
 
         btnDeletar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnDeletar.setText("Deletar");
@@ -219,7 +219,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDeletar);
-        btnDeletar.setBounds(340, 310, 75, 28);
+        btnDeletar.setBounds(330, 300, 75, 30);
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAlterar.setText("Alterar");
@@ -230,7 +230,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAlterar);
-        btnAlterar.setBounds(430, 310, 73, 28);
+        btnAlterar.setBounds(420, 300, 73, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -255,7 +255,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblVeiculos);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 90, 600, 210);
+        jScrollPane2.setBounds(10, 90, 600, 200);
 
         cbxCor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Branco", "Preto", "Prata", "Vermelho", "Outro" }));
         cbxCor.addItemListener(new java.awt.event.ItemListener() {
@@ -269,9 +269,9 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabelTelaFundo.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTelaFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro.jpg"))); // NOI18N
         getContentPane().add(jLabelTelaFundo);
-        jLabelTelaFundo.setBounds(0, 0, 660, 370);
+        jLabelTelaFundo.setBounds(0, 0, 650, 360);
 
-        setSize(new java.awt.Dimension(632, 379));
+        setSize(new java.awt.Dimension(626, 368));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     

@@ -5,6 +5,7 @@ public class Menu extends javax.swing.JFrame {
     CadastroFuncionario telaFuncionario;
     CadastroPlano telaPlano;
     CadastroVeiculo telaVeiculo;
+    FrmEstadia telaEstadia;
 
     public Menu() {
         initComponents();
@@ -23,6 +24,8 @@ public class Menu extends javax.swing.JFrame {
         jMenuItemCadastroPlanos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItemEstadias = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menu principal");
@@ -31,7 +34,7 @@ public class Menu extends javax.swing.JFrame {
 
         jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo menu principal 01.png"))); // NOI18N
         getContentPane().add(jLabelImagemdeFundo);
-        jLabelImagemdeFundo.setBounds(0, 0, 990, 560);
+        jLabelImagemdeFundo.setBounds(0, 0, 990, 590);
 
         jMenuCadastros.setText("Cadastros");
 
@@ -71,7 +74,19 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu1.setText("Estadia");
+
+        jMenuItemEstadias.setText("Estadias");
+        jMenuItemEstadias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEstadiasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemEstadias);
+
         jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Histórico");
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -118,6 +133,16 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemCadastroVeiculosActionPerformed
 
+    private void jMenuItemEstadiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEstadiasActionPerformed
+        if(telaEstadia == null){
+            telaEstadia = new FrmEstadia();
+            telaEstadia.setVisible(true);
+        } else{
+            telaEstadia.setVisible(true);
+            telaEstadia.setResizable(false);
+        }
+    }//GEN-LAST:event_jMenuItemEstadiasActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -157,11 +182,13 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelImagemdeFundo;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuItemCadastroFuncionarios;
     private javax.swing.JMenuItem jMenuItemCadastroPlanos;
     private javax.swing.JMenuItem jMenuItemCadastroProprietarios;
     private javax.swing.JMenuItem jMenuItemCadastroVeiculos;
+    private javax.swing.JMenuItem jMenuItemEstadias;
     // End of variables declaration//GEN-END:variables
 }

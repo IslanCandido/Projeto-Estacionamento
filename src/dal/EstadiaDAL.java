@@ -1,7 +1,6 @@
 package dal;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -66,6 +65,55 @@ public class EstadiaDAL {
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
+    }
+    
+    public List<Estadia> mostrarEstadiasDevendo(){
+        List<Estadia> estadiasDevendo = new ArrayList<>();
+        
+        try {
+            PreparedStatement preparedStatement = conexao.prepareStatement
+            ("SELECT * FROM estadia e INNER JOIN veiculo v ON e.vei_fk = v.vei_id\n" +
+            "JOIN funcionario f ON e.fun_fk = f.fun_id\n" +
+            "where e.situacaopagamento like'%DEVENDO%'");
+            
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            while (rs.next()){
+                //pegando os dados de veiculo
+                Veiculo veiculo = new Veiculo();
+                veiculo.setCodigo(rs.getInt("vei_id"));
+                veiculo.setPlaca(rs.getString("placa"));
+                veiculo.setModelo(rs.getString("modelo"));
+                veiculo.setCor(rs.getString("cor"));
+                veiculo.getIdPreco();
+                veiculo.getIdPropietario();
+                
+                //pegando dados de funcionario
+                Funcionario funcionario = new Funcionario();
+                funcionario.setCodigo(rs.getInt("fun_id"));
+                funcionario.setNome(rs.getString("nome"));
+                funcionario.setCpf(rs.getString("cpf"));
+                funcionario.setTelefone(rs.getString("telefone"));
+                funcionario.setSenha(rs.getString("senha"));
+                
+                Estadia estadia = new Estadia();
+                estadia.setCodigo(rs.getInt("est_id"));
+                estadia.setData(rs.getDate("dt"));
+                estadia.setHoraEntrada(rs.getTime("horaEntrada"));
+                estadia.setHoraSaida(rs.getTime("horaSaida"));
+                estadia.setDesconto(rs.getString("desconto"));
+                estadia.setIdVeiculo(veiculo);
+                estadia.setIdFuncionario(funcionario);
+                estadia.setValor(rs.getDouble("valor"));
+                estadia.setSituacaoPagamento(rs.getString("situacaoPagamento"));
+                
+                estadiasDevendo.add(estadia);
+            }
+            
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        return estadiasDevendo;
     }
     
     public List<Estadia> mostrarTodos(){
@@ -160,5 +208,27 @@ public class EstadiaDAL {
             erro.printStackTrace();
         }
         return funcionarios;
+    }
+    
+    public double pegarPreco(int id){
+        double resultado = 0;
+        try {
+            PreparedStatement preparedStatement = conexao.prepareStatement
+            ("select p.preco \n" +
+            "from veiculo v join preco p \n" +
+            "on p.pre_id = v.pre_fk \n" +
+            "where v.vei_id = 10");
+            
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            String aux = String.valueOf(rs.first());
+            
+            resultado = Double.parseDouble(aux);
+            
+        } catch (SQLException erro) {
+            erro.printStackTrace();
+        }
+        return resultado;
     }
 }
