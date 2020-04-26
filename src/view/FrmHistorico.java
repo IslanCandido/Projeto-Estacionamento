@@ -1,5 +1,7 @@
 package view;
 
+
+
 import bll.EstadiaBLL;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +77,7 @@ public class FrmHistorico extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEstadiasFinalizadas = new javax.swing.JTable();
+        btnEmitirCupom = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -85,14 +88,18 @@ public class FrmHistorico extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblEstadiasFinalizadas);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 40, 800, 320);
+        jScrollPane1.setBounds(10, 60, 800, 320);
+
+        btnEmitirCupom.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnEmitirCupom.setText("Emitir Cupom");
+        getContentPane().add(btnEmitirCupom);
+        btnEmitirCupom.setBounds(30, 20, 110, 32);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Historico 02.jpg"))); // NOI18N
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 830, 380);
+        jLabel1.setBounds(0, 0, 860, 420);
 
-        setSize(new java.awt.Dimension(838, 413));
+        setSize(new java.awt.Dimension(838, 428));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -120,6 +127,20 @@ public class FrmHistorico extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -130,6 +151,7 @@ public class FrmHistorico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEmitirCupom;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblEstadiasFinalizadas;
