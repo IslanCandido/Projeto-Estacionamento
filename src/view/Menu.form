@@ -64,6 +64,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Hist&#xf3;rico"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemHistoricoEstadias">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Hist&#xf3;rico de Estadias"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemHistoricoEstadiasActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>

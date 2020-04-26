@@ -1,11 +1,13 @@
 package view;
 
+
 public class Menu extends javax.swing.JFrame {
     CadastroProprietario telaProprietario;
     CadastroFuncionario telaFuncionario;
     CadastroPlano telaPlano;
     CadastroVeiculo telaVeiculo;
     FrmEstadia telaEstadia;
+    FrmHistorico telaHistorico;
 
     public Menu() {
         initComponents();
@@ -26,6 +28,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItemEstadias = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItemHistoricoEstadias = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menu principal");
@@ -86,6 +89,15 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu3.setText("Histórico");
+
+        jMenuItemHistoricoEstadias.setText("Histórico de Estadias");
+        jMenuItemHistoricoEstadias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHistoricoEstadiasActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemHistoricoEstadias);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -143,6 +155,16 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemEstadiasActionPerformed
 
+    private void jMenuItemHistoricoEstadiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHistoricoEstadiasActionPerformed
+        if(telaHistorico == null){
+            telaHistorico = new FrmHistorico();
+            telaHistorico.setVisible(true);
+        } else{
+            telaHistorico.setVisible(true);
+            telaHistorico.setResizable(false);
+        }
+    }//GEN-LAST:event_jMenuItemHistoricoEstadiasActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -190,5 +212,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemCadastroProprietarios;
     private javax.swing.JMenuItem jMenuItemCadastroVeiculos;
     private javax.swing.JMenuItem jMenuItemEstadias;
+    private javax.swing.JMenuItem jMenuItemHistoricoEstadias;
     // End of variables declaration//GEN-END:variables
 }

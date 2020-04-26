@@ -26,12 +26,12 @@ public class EstadiaBLL {
         dal.excluir(id);
     }
     
-    public List<Estadia> getConsultaEstadiasDevendo(){
-        return dal.mostrarEstadiasDevendo();
+    public List<Estadia> getEstadiasDevendo(){
+        return dal.mostrarDevendo();
     }
     
-    public List<Estadia> mostrarEstadiasFinalizadas(){
-        return dal.mostrarTodos();
+    public List<Estadia> getEstadiasPagas(){
+        return dal.mostrarPago();
     }
     
     public Vector<Veiculo> listarVeiculos() {

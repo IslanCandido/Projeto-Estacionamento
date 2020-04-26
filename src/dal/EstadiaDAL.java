@@ -67,7 +67,7 @@ public class EstadiaDAL {
         }
     }
     
-    public List<Estadia> mostrarEstadiasDevendo(){
+    public List<Estadia> mostrarDevendo(){
         List<Estadia> estadiasDevendo = new ArrayList<>();
         
         try {
@@ -116,13 +116,14 @@ public class EstadiaDAL {
         return estadiasDevendo;
     }
     
-    public List<Estadia> mostrarTodos(){
+    public List<Estadia> mostrarPago(){
         List<Estadia> estadias = new ArrayList<>();
         
         try{
             PreparedStatement preparedStatement = conexao.prepareStatement
             ("SELECT * FROM estadia e INNER JOIN veiculo v ON e.vei_fk = v.vei_id\n" +
-            "JOIN funcionario f ON e.fun_fk = f.fun_id");
+            "JOIN funcionario f ON e.fun_fk = f.fun_id\n" +
+            "where e.situacaopagamento like'%PAGO%'");
             
             ResultSet rs = preparedStatement.executeQuery();
             
