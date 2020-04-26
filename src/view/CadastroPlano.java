@@ -200,9 +200,9 @@ public class CadastroPlano extends javax.swing.JFrame {
         getContentPane().add(txtPreco);
         txtPreco.setBounds(50, 90, 90, 28);
 
-        jLabelTelaFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro.jpg"))); // NOI18N
+        jLabelTelaFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Cadastros.jpg"))); // NOI18N
         getContentPane().add(jLabelTelaFundo);
-        jLabelTelaFundo.setBounds(0, -10, 530, 440);
+        jLabelTelaFundo.setBounds(0, -10, 530, 230);
 
         setSize(new java.awt.Dimension(519, 250));
         setLocationRelativeTo(null);

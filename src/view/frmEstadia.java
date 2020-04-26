@@ -121,7 +121,7 @@ public class frmEstadia extends javax.swing.JFrame {
         cbxDesconto.setSelectedIndex(0);
         cbxIdVeiculo.setSelectedIndex(0);
         cbxIdFuncionario.setSelectedIndex(0);
-        txtPreco.setText("");
+        txtValor.setText("");
         buttonGroup1.clearSelection();
         btnSalvar.setEnabled(true);
     }
@@ -130,7 +130,7 @@ public class frmEstadia extends javax.swing.JFrame {
         modelo.setNumRows(0);
         List<Estadia> lista = new ArrayList<Estadia>();
 
-        lista = estadiaBll.getConsulta();
+        lista = estadiaBll.getEstadiasDevendo();
 
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
@@ -170,6 +170,42 @@ public class frmEstadia extends javax.swing.JFrame {
             cbxIdFuncionario.setModel(new DefaultComboBoxModel(vetorFuncionarios));
         }
     }
+    
+    private boolean isData(String data) {
+        String[] dataparticionada = data.split("/");
+        int dia = Integer.parseInt(dataparticionada[0]);
+        int mes = Integer.parseInt(dataparticionada[1]);
+        int ano = Integer.parseInt(dataparticionada[2]);
+        boolean anoBissexto = ano % 4 == 0 && ano % 100 != 0 || ano % 400 == 0;
+
+        if (((mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) && (dia >= 1 && dia <= 31))
+        || ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && (dia >= 1 && dia <= 30))
+        || ((mes == 2) && (anoBissexto) && (dia >= 1 && dia <= 29) && (ano >=2020 && ano <=2021))
+        || ((mes == 2) && !(anoBissexto) && (dia >= 1 && dia <= 28)  && (ano >=2020 && ano <=2021))) {
+            
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    private boolean isHorario(String horario){
+        String[] horaparticionada = horario.split(":");
+        int hora = Integer.parseInt(horaparticionada[0]);
+        int minutos = Integer.parseInt(horaparticionada[1]);
+        int segundos = Integer.parseInt(horaparticionada[2]);
+        
+        if((hora >= 0 && hora <= 23) || (minutos >= 0 || minutos <=59) || (segundos >=0 && segundos <=99)){
+            return true;
+        } else{
+            return false;
+        }
+    } 
+    
+    private void valor(){
+        int id = estadia.getIdVeiculo().getCodigo();
+        txtValor.setText(String.valueOf(estadiaBll.mostrarValor(id)));
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -186,7 +222,7 @@ public class frmEstadia extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         cbxDesconto = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        txtPreco = new javax.swing.JTextField();
+        txtValor = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         rbDevendo = new javax.swing.JRadioButton();
@@ -194,8 +230,6 @@ public class frmEstadia extends javax.swing.JFrame {
         btnSalvar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        btnFinalizarEstadia = new javax.swing.JButton();
-        btnEmitirCupom = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEstadias = new javax.swing.JTable();
@@ -204,7 +238,7 @@ public class frmEstadia extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
         txtHoraEntrada = new javax.swing.JFormattedTextField();
         txtHoraSaida = new javax.swing.JFormattedTextField();
-        jLabelTelaDeFundo = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar estadia");
@@ -215,35 +249,35 @@ public class frmEstadia extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Data");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(100, 10, 40, 14);
+        jLabel1.setBounds(120, 10, 40, 14);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Horário de Entrada");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(220, 10, 106, 14);
+        jLabel2.setBounds(260, 10, 106, 14);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Horário de Saída");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(360, 10, 93, 14);
+        jLabel3.setBounds(400, 10, 93, 14);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Funcionário");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 70, 65, 14);
+        jLabel4.setBounds(30, 70, 65, 14);
 
         cbxIdFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cbxIdFuncionario);
-        cbxIdFuncionario.setBounds(10, 90, 190, 28);
+        cbxIdFuncionario.setBounds(30, 90, 190, 28);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Veículo");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(230, 70, 40, 14);
+        jLabel5.setBounds(250, 70, 40, 14);
 
         cbxIdVeiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxIdVeiculo.addItemListener(new java.awt.event.ItemListener() {
@@ -252,13 +286,13 @@ public class frmEstadia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cbxIdVeiculo);
-        cbxIdVeiculo.setBounds(230, 90, 140, 28);
+        cbxIdVeiculo.setBounds(250, 90, 150, 28);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Desconto");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(500, 10, 53, 14);
+        jLabel6.setBounds(530, 10, 53, 14);
 
         cbxDesconto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Nenhum", "10%", "20%", "30%" }));
         cbxDesconto.addItemListener(new java.awt.event.ItemListener() {
@@ -267,27 +301,27 @@ public class frmEstadia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cbxDesconto);
-        cbxDesconto.setBounds(500, 30, 100, 28);
+        cbxDesconto.setBounds(530, 30, 120, 28);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Preço");
+        jLabel7.setText("Valor");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(400, 70, 32, 14);
-        getContentPane().add(txtPreco);
-        txtPreco.setBounds(400, 90, 60, 28);
+        jLabel7.setBounds(430, 70, 29, 14);
+        getContentPane().add(txtValor);
+        txtValor.setBounds(430, 90, 60, 28);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText(" R$");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(460, 90, 20, 30);
+        jLabel8.setBounds(490, 90, 20, 30);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Situação pagamento");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(500, 70, 140, 14);
+        jLabel9.setBounds(530, 70, 140, 14);
 
         buttonGroup1.add(rbDevendo);
         rbDevendo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -295,7 +329,7 @@ public class frmEstadia extends javax.swing.JFrame {
         rbDevendo.setText("DEVENDO");
         rbDevendo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(rbDevendo);
-        rbDevendo.setBounds(500, 110, 110, 20);
+        rbDevendo.setBounds(530, 110, 110, 20);
 
         buttonGroup1.add(rbPago);
         rbPago.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -303,7 +337,7 @@ public class frmEstadia extends javax.swing.JFrame {
         rbPago.setText("PAGO");
         rbPago.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(rbPago);
-        rbPago.setBounds(500, 90, 110, 20);
+        rbPago.setBounds(530, 90, 110, 20);
 
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalvar.setText("Salvar");
@@ -314,7 +348,7 @@ public class frmEstadia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(440, 410, 80, 30);
+        btnSalvar.setBounds(270, 370, 80, 30);
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAlterar.setText("Alterar");
@@ -325,7 +359,7 @@ public class frmEstadia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAlterar);
-        btnAlterar.setBounds(650, 410, 90, 30);
+        btnAlterar.setBounds(480, 370, 90, 30);
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -336,18 +370,7 @@ public class frmEstadia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCancelar);
-        btnCancelar.setBounds(540, 410, 90, 30);
-
-        btnFinalizarEstadia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnFinalizarEstadia.setText("Finalizar Estadia");
-        btnFinalizarEstadia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(btnFinalizarEstadia);
-        btnFinalizarEstadia.setBounds(140, 410, 130, 30);
-
-        btnEmitirCupom.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnEmitirCupom.setText("Emitir Cupom");
-        getContentPane().add(btnEmitirCupom);
-        btnEmitirCupom.setBounds(10, 410, 110, 30);
+        btnCancelar.setBounds(370, 370, 90, 30);
 
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setText("Limpar");
@@ -358,13 +381,13 @@ public class frmEstadia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpar);
-        btnLimpar.setBounds(660, 90, 71, 28);
+        btnLimpar.setBounds(590, 370, 71, 30);
 
         tblEstadias.setModel(modelo);
         jScrollPane1.setViewportView(tblEstadias);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 140, 740, 260);
+        jScrollPane1.setBounds(10, 140, 670, 220);
 
         try {
             txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -382,13 +405,13 @@ public class frmEstadia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtData);
-        txtData.setBounds(100, 30, 90, 28);
+        txtData.setBounds(120, 30, 110, 28);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("ID");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(10, 10, 20, 14);
+        jLabel10.setBounds(30, 10, 20, 14);
 
         txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -396,7 +419,7 @@ public class frmEstadia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtCodigo);
-        txtCodigo.setBounds(10, 30, 60, 28);
+        txtCodigo.setBounds(30, 30, 60, 28);
 
         try {
             txtHoraEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
@@ -404,7 +427,7 @@ public class frmEstadia extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         getContentPane().add(txtHoraEntrada);
-        txtHoraEntrada.setBounds(220, 30, 110, 28);
+        txtHoraEntrada.setBounds(260, 30, 110, 28);
 
         try {
             txtHoraSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
@@ -412,13 +435,13 @@ public class frmEstadia extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         getContentPane().add(txtHoraSaida);
-        txtHoraSaida.setBounds(360, 30, 100, 28);
+        txtHoraSaida.setBounds(400, 30, 100, 28);
 
-        jLabelTelaDeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro 02.jpg"))); // NOI18N
-        getContentPane().add(jLabelTelaDeFundo);
-        jLabelTelaDeFundo.setBounds(0, -10, 790, 470);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Estadia e Login.jpg"))); // NOI18N
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(0, 0, 710, 430);
 
-        setSize(new java.awt.Dimension(771, 482));
+        setSize(new java.awt.Dimension(697, 439));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -434,49 +457,64 @@ public class frmEstadia extends javax.swing.JFrame {
             estadia.setDesconto(cbxDesconto.getSelectedItem().toString());
             estadia.setIdVeiculo(vetorVeiculos.get(cbxIdVeiculo.getSelectedIndex()));
             estadia.setIdFuncionario(vetorFuncionarios.get(cbxIdFuncionario.getSelectedIndex()));
-            estadia.setValor(Double.parseDouble(txtPreco.getText()));
-            estadia.setSituacaoPagamento(buttonGroup1.getSelection().toString());
-
+            estadia.setValor(Double.parseDouble(txtValor.getText()));
+            if(rbPago.isSelected()){
+                estadia.setSituacaoPagamento("PAGO");
+            } 
+            if(rbDevendo.isSelected()){
+                estadia.setSituacaoPagamento("DEVENDO");
+            }
+            
             if (txtData.getText().equals("") || txtHoraEntrada.getText().equals("")
                     || txtHoraSaida.getText().equals("") || cbxDesconto.getSelectedItem().equals("Selecione")
-                    || txtPreco.getText().equals("") || buttonGroup1.getSelection().equals(false)) {
+                    || txtValor.getText().equals("") || buttonGroup1.getSelection().equals(false)) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else if (!txtCodigo.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "ID GERADO AUTOMATICAMENTE!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
-                estadiaBll.adicionar(estadia);
-                limparCampos();
-                consultar();
+                if(isData(txtData.getText()) && isHorario(txtHoraEntrada.getText()) && isHorario(txtHoraSaida.getText())){
+                    estadiaBll.adicionar(estadia);
+                    limparCampos();
+                    consultar();
+                } else{
+                    if(!isData(txtData.getText())){
+                        JOptionPane.showMessageDialog(rootPane, "DATA INVALIDA!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
+                    }
+                    if(!isHorario(txtHoraEntrada.getText())){
+                        JOptionPane.showMessageDialog(rootPane, "HORÁRIO DE ENTRADA INVALIDA!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
+                    } 
+                    if(isHorario(txtHoraSaida.getText())){
+                        JOptionPane.showMessageDialog(rootPane, "HORÁRIO DE SAÍDA INVALIDA!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+                
+                
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Atenção!!!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
-
-    }//GEN-LAST:event_txtDataActionPerformed
-
     private void cbxDescontoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxDescontoItemStateChanged
-        if (txtPreco.getText().equals("")) {
+        if (txtValor.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "NENHUM VALOR PARA DESCONTO", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
         } else {
             DecimalFormat df = new DecimalFormat("####");
-            double preco = Double.parseDouble(txtPreco.getText());
+            double preco = Double.parseDouble(txtValor.getText());
 
             if (cbxDesconto.getSelectedItem().equals("10%")) {
-                txtPreco.setText(String.valueOf(df.format(preco - (preco * 0.1))));
+                txtValor.setText(String.valueOf(df.format(preco - (preco * 0.1))));
             } else if (cbxDesconto.getSelectedItem().equals("20%")) {
-                txtPreco.setText(String.valueOf(df.format(preco - (preco * 0.2))));
+                txtValor.setText(String.valueOf(df.format(preco - (preco * 0.2))));
             } else if (cbxDesconto.getSelectedItem().equals("30%")) {
-                txtPreco.setText(String.valueOf(df.format(preco - (preco * 0.3))));
+                txtValor.setText(String.valueOf(df.format(preco - (preco * 0.3))));
             }
         }
 
     }//GEN-LAST:event_cbxDescontoItemStateChanged
 
     private void cbxIdVeiculoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxIdVeiculoItemStateChanged
-
+        //valor();
     }//GEN-LAST:event_cbxIdVeiculoItemStateChanged
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -488,12 +526,12 @@ public class frmEstadia extends javax.swing.JFrame {
             estadia.setDesconto(cbxDesconto.getSelectedItem().toString());
             estadia.setIdVeiculo(vetorVeiculos.get(cbxIdVeiculo.getSelectedIndex()));
             estadia.setIdFuncionario(vetorFuncionarios.get(cbxIdFuncionario.getSelectedIndex()));
-            estadia.setValor(Double.parseDouble(txtPreco.getText()));
+            estadia.setValor(Double.parseDouble(txtValor.getText()));
             estadia.setSituacaoPagamento(buttonGroup1.getSelection().toString());
 
-            if (txtData.getText().equals("") || txtData.getText().equals("")
+            if (txtData.getText().equals("") || txtHoraEntrada.getText().equals("")
             || txtHoraSaida.getText().equals("") || cbxDesconto.getSelectedItem().equals("Selecione")
-            || txtPreco.getText().equals("") || buttonGroup1.getSelection().equals(false)) {
+            || txtValor.getText().equals("") || buttonGroup1.getSelection().equals(false)) {
                 
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
@@ -553,6 +591,10 @@ public class frmEstadia extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtDataKeyTyped
 
+    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
+
+    }//GEN-LAST:event_txtDataActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -576,6 +618,9 @@ public class frmEstadia extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frmEstadia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -588,8 +633,6 @@ public class frmEstadia extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEmitirCupom;
-    private javax.swing.JButton btnFinalizarEstadia;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -598,6 +641,7 @@ public class frmEstadia extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxIdVeiculo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -606,7 +650,6 @@ public class frmEstadia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelTelaDeFundo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rbDevendo;
     private javax.swing.JRadioButton rbPago;
@@ -615,6 +658,6 @@ public class frmEstadia extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtData;
     private javax.swing.JFormattedTextField txtHoraEntrada;
     private javax.swing.JFormattedTextField txtHoraSaida;
-    private javax.swing.JTextField txtPreco;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

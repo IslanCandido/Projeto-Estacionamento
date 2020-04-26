@@ -267,7 +267,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         cbxCor.setBounds(450, 50, 150, 28);
 
         jLabelTelaFundo.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelTelaFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro.jpg"))); // NOI18N
+        jLabelTelaFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Cadastros.jpg"))); // NOI18N
         getContentPane().add(jLabelTelaFundo);
         jLabelTelaFundo.setBounds(0, 0, 650, 360);
 

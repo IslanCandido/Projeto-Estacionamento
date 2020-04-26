@@ -328,7 +328,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/view/imagens/Fundo Cadastro.jpg"/>
+          <Image iconType="3" name="/view/imagens/Tela de Fundo Cadastros.jpg"/>
         </Property>
       </Properties>
       <Constraints>

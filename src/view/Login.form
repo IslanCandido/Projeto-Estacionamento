@@ -34,12 +34,12 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/view/imagens/Login 02.png"/>
+          <Image iconType="3" name="/view/imagens/Icone de Login.png"/>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="30" y="0" width="-1" height="180"/>
+          <AbsoluteConstraints x="30" y="0" width="260" height="180"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -149,7 +149,7 @@
     <Component class="javax.swing.JLabel" name="jLabelImagemdeFundo">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/view/imagens/Fundo Cadastro 02.jpg"/>
+          <Image iconType="3" name="/view/imagens/Tela de Fundo Estadia e Login.jpg"/>
         </Property>
       </Properties>
       <Constraints>

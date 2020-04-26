@@ -287,7 +287,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         getContentPane().add(btnAlterar);
         btnAlterar.setBounds(310, 260, 80, 30);
 
-        jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro.jpg"))); // NOI18N
+        jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Cadastros.jpg"))); // NOI18N
         getContentPane().add(jLabelImagemdeFundo);
         jLabelImagemdeFundo.setBounds(0, -10, 520, 320);
 

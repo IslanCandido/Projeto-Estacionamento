@@ -29,9 +29,9 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Login 02.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Icone de Login.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(30, 0, 256, 180);
+        jLabel1.setBounds(30, 0, 260, 180);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -88,7 +88,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(txtUsuario);
         txtUsuario.setBounds(60, 220, 200, 25);
 
-        jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro 02.jpg"))); // NOI18N
+        jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Estadia e Login.jpg"))); // NOI18N
         getContentPane().add(jLabelImagemdeFundo);
         jLabelImagemdeFundo.setBounds(0, -10, 350, 440);
 

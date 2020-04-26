@@ -6,8 +6,7 @@ public class Menu extends javax.swing.JFrame {
     CadastroFuncionario telaFuncionario;
     CadastroPlano telaPlano;
     CadastroVeiculo telaVeiculo;
-    FrmEstadia telaEstadia;
-    FrmHistorico telaHistorico;
+    frmEstadia telaEstadia;
 
     public Menu() {
         initComponents();
@@ -35,7 +34,7 @@ public class Menu extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo menu principal 01.png"))); // NOI18N
+        jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo menu.png"))); // NOI18N
         getContentPane().add(jLabelImagemdeFundo);
         jLabelImagemdeFundo.setBounds(0, 0, 990, 590);
 
@@ -147,7 +146,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItemEstadiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEstadiasActionPerformed
         if(telaEstadia == null){
-            telaEstadia = new FrmEstadia();
+            telaEstadia = new frmEstadia();
             telaEstadia.setVisible(true);
         } else{
             telaEstadia.setVisible(true);
@@ -156,13 +155,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemEstadiasActionPerformed
 
     private void jMenuItemHistoricoEstadiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHistoricoEstadiasActionPerformed
-        if(telaHistorico == null){
-            telaHistorico = new FrmHistorico();
-            telaHistorico.setVisible(true);
-        } else{
-            telaHistorico.setVisible(true);
-            telaHistorico.setResizable(false);
-        }
+        
     }//GEN-LAST:event_jMenuItemHistoricoEstadiasActionPerformed
 
     public static void main(String args[]) {
