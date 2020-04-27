@@ -7,6 +7,7 @@ public class Menu extends javax.swing.JFrame {
     CadastroPlano telaPlano;
     CadastroVeiculo telaVeiculo;
     frmEstadia telaEstadia;
+    FrmHistorico telaHistorico;
 
     public Menu() {
         initComponents();
@@ -17,16 +18,16 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabelImagemdeFundo = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenuCadastros = new javax.swing.JMenu();
+        BarraDeMenu = new javax.swing.JMenuBar();
+        MenuCadastros = new javax.swing.JMenu();
         jMenuItemCadastroProprietarios = new javax.swing.JMenuItem();
         jMenuItemCadastroFuncionarios = new javax.swing.JMenuItem();
         jMenuItemCadastroVeiculos = new javax.swing.JMenuItem();
         jMenuItemCadastroPlanos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
+        MenuEstadias = new javax.swing.JMenu();
         jMenuItemEstadias = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        MenuHistorico = new javax.swing.JMenu();
         jMenuItemHistoricoEstadias = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -38,68 +39,87 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().add(jLabelImagemdeFundo);
         jLabelImagemdeFundo.setBounds(0, 0, 990, 590);
 
-        jMenuCadastros.setText("Cadastros");
+        BarraDeMenu.setBorder(null);
+        BarraDeMenu.setToolTipText("");
+        BarraDeMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jMenuItemCadastroProprietarios.setText("Proprietários");
+        MenuCadastros.setBorder(null);
+        MenuCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Icone de Cadastro.png"))); // NOI18N
+        MenuCadastros.setToolTipText("Cadastros");
+        MenuCadastros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jMenuItemCadastroProprietarios.setText("Cadastrar Proprietários");
+        jMenuItemCadastroProprietarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItemCadastroProprietarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemCadastroProprietariosActionPerformed(evt);
             }
         });
-        jMenuCadastros.add(jMenuItemCadastroProprietarios);
+        MenuCadastros.add(jMenuItemCadastroProprietarios);
 
-        jMenuItemCadastroFuncionarios.setText("Funcionários");
+        jMenuItemCadastroFuncionarios.setText("Cadastrar Funcionários");
+        jMenuItemCadastroFuncionarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItemCadastroFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemCadastroFuncionariosActionPerformed(evt);
             }
         });
-        jMenuCadastros.add(jMenuItemCadastroFuncionarios);
+        MenuCadastros.add(jMenuItemCadastroFuncionarios);
 
-        jMenuItemCadastroVeiculos.setText("Veículos");
+        jMenuItemCadastroVeiculos.setText("Cadastrar Veículos");
+        jMenuItemCadastroVeiculos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItemCadastroVeiculos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemCadastroVeiculosActionPerformed(evt);
             }
         });
-        jMenuCadastros.add(jMenuItemCadastroVeiculos);
+        MenuCadastros.add(jMenuItemCadastroVeiculos);
 
-        jMenuItemCadastroPlanos.setText("Planos");
+        jMenuItemCadastroPlanos.setText("Cadastrar Planos");
+        jMenuItemCadastroPlanos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItemCadastroPlanos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemCadastroPlanosActionPerformed(evt);
             }
         });
-        jMenuCadastros.add(jMenuItemCadastroPlanos);
+        MenuCadastros.add(jMenuItemCadastroPlanos);
 
-        jMenuBar1.add(jMenuCadastros);
-        jMenuBar1.add(jMenu2);
+        BarraDeMenu.add(MenuCadastros);
+        BarraDeMenu.add(jMenu2);
 
-        jMenu1.setText("Estadia");
+        MenuEstadias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Icone de Estacionamento.png"))); // NOI18N
+        MenuEstadias.setToolTipText("Estadia");
+        MenuEstadias.setContentAreaFilled(false);
+        MenuEstadias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jMenuItemEstadias.setText("Estadias");
+        jMenuItemEstadias.setText("Controlar Estadias");
+        jMenuItemEstadias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItemEstadias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemEstadiasActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemEstadias);
+        MenuEstadias.add(jMenuItemEstadias);
 
-        jMenuBar1.add(jMenu1);
+        BarraDeMenu.add(MenuEstadias);
 
-        jMenu3.setText("Histórico");
+        MenuHistorico.setBorder(null);
+        MenuHistorico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Icone de historicos.png"))); // NOI18N
+        MenuHistorico.setToolTipText("Histórico");
+        MenuHistorico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenuItemHistoricoEstadias.setText("Histórico de Estadias");
+        jMenuItemHistoricoEstadias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItemHistoricoEstadias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemHistoricoEstadiasActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItemHistoricoEstadias);
+        MenuHistorico.add(jMenuItemHistoricoEstadias);
 
-        jMenuBar1.add(jMenu3);
+        BarraDeMenu.add(MenuHistorico);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(BarraDeMenu);
 
         setSize(new java.awt.Dimension(993, 622));
         setLocationRelativeTo(null);
@@ -155,7 +175,13 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemEstadiasActionPerformed
 
     private void jMenuItemHistoricoEstadiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHistoricoEstadiasActionPerformed
-        
+        if(telaHistorico == null){
+            telaHistorico = new FrmHistorico();
+            telaHistorico.setVisible(true);
+        } else{
+            telaHistorico.setVisible(true);
+            telaHistorico.setResizable(false);
+        }
     }//GEN-LAST:event_jMenuItemHistoricoEstadiasActionPerformed
 
     public static void main(String args[]) {
@@ -194,12 +220,12 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar BarraDeMenu;
+    private javax.swing.JMenu MenuCadastros;
+    private javax.swing.JMenu MenuEstadias;
+    private javax.swing.JMenu MenuHistorico;
     private javax.swing.JLabel jLabelImagemdeFundo;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuItemCadastroFuncionarios;
     private javax.swing.JMenuItem jMenuItemCadastroPlanos;
     private javax.swing.JMenuItem jMenuItemCadastroProprietarios;

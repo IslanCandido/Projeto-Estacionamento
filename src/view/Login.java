@@ -96,31 +96,6 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        Funcionario funcionario = new Funcionario();
-        funcionario.setCpf(txtUsuario.getText());
-        funcionario.setSenha(txtSenha.getText());
-
-        FuncionarioDAL funcionarioDal = new FuncionarioDAL();
-        boolean existe = funcionarioDal.autenticarUsuario(txtUsuario.getText(), txtSenha.getText());
-
-        if (txtUsuario.getText().isEmpty() || txtSenha.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
-        } else {
-            if (existe) {
-                Menu obj = new Menu();
-                obj.setVisible(true);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "USUARIO OU SENHA INVALIDA!", "Atenção!", JOptionPane.WARNING_MESSAGE);
-                txtUsuario.setText("");
-                txtSenha.setText("");
-            }
-        }
-
-
-    }//GEN-LAST:event_btnLoginActionPerformed
-
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         JOptionPane.showConfirmDialog(rootPane, new Object[]{txtSenha}, "SENHA DE ACESSO...", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         String senhaDigitada = new String(txtSenha.getPassword());
@@ -145,6 +120,30 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "DIGITE SOMENTE NUMEROS!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        Funcionario funcionario = new Funcionario();
+        funcionario.setCpf(txtUsuario.getText());
+        funcionario.setSenha(txtSenha.getText());
+
+        FuncionarioDAL funcionarioDal = new FuncionarioDAL();
+        boolean existe = funcionarioDal.autenticarUsuario(txtUsuario.getText(), txtSenha.getText());
+
+        if (txtUsuario.getText().isEmpty() || txtSenha.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (existe) {
+                Menu obj = new Menu();
+                obj.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "USUARIO OU SENHA INVALIDA!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+                txtUsuario.setText("");
+                txtSenha.setText("");
+            }
+        }
+
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
