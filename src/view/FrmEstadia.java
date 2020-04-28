@@ -125,6 +125,18 @@ public class FrmEstadia extends javax.swing.JFrame {
         buttonGroup1.clearSelection();
         btnSalvar.setEnabled(true);
     }
+    
+    private void preencheCampos(int id){
+        estadia = estadiaBll.getConsultaPorId(id);
+        txtData.setText(convertDate(estadia.getData()));
+        txtHoraEntrada.setText(convertTime(estadia.getHoraEntrada()));
+        txtHoraSaida.setText(convertTime(estadia.getHoraSaida()));
+        cbxDesconto.setSelectedItem(estadia.getDesconto());
+        cbxIdFuncionario.setSelectedItem(estadia.getIdFuncionario());
+        cbxIdVeiculo.setSelectedItem(estadia.getIdVeiculo());
+        txtValor.setText(String.valueOf(estadia.getValor()));
+        rbDevendo.isSelected();
+    }
 
     private void consultar() {
         modelo.setNumRows(0);
@@ -201,11 +213,6 @@ public class FrmEstadia extends javax.swing.JFrame {
             return false;
         }
     } 
-    
-    private void valor(){
-        int id = estadia.getIdVeiculo().getCodigo();
-        txtValor.setText(String.valueOf(estadiaBll.mostrarValor(id)));
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -230,7 +237,6 @@ public class FrmEstadia extends javax.swing.JFrame {
         btnSalvar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        btnEmitirCupom = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEstadias = new javax.swing.JTable();
@@ -239,7 +245,7 @@ public class FrmEstadia extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
         txtHoraEntrada = new javax.swing.JFormattedTextField();
         txtHoraSaida = new javax.swing.JFormattedTextField();
-        jLabelTelaDeFundo = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar estadia");
@@ -373,11 +379,6 @@ public class FrmEstadia extends javax.swing.JFrame {
         getContentPane().add(btnCancelar);
         btnCancelar.setBounds(370, 370, 90, 30);
 
-        btnEmitirCupom.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnEmitirCupom.setText("Emitir Cupom");
-        getContentPane().add(btnEmitirCupom);
-        btnEmitirCupom.setBounds(10, 370, 110, 30);
-
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setText("Limpar");
         btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -390,6 +391,11 @@ public class FrmEstadia extends javax.swing.JFrame {
         btnLimpar.setBounds(590, 370, 71, 30);
 
         tblEstadias.setModel(modelo);
+        tblEstadias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEstadiasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEstadias);
 
         getContentPane().add(jScrollPane1);
@@ -443,9 +449,9 @@ public class FrmEstadia extends javax.swing.JFrame {
         getContentPane().add(txtHoraSaida);
         txtHoraSaida.setBounds(400, 30, 100, 28);
 
-        jLabelTelaDeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Fundo Cadastro 02.jpg"))); // NOI18N
-        getContentPane().add(jLabelTelaDeFundo);
-        jLabelTelaDeFundo.setBounds(0, -10, 720, 460);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Estadia e Login.jpg"))); // NOI18N
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(0, 0, 710, 430);
 
         setSize(new java.awt.Dimension(697, 439));
         setLocationRelativeTo(null);
@@ -520,7 +526,7 @@ public class FrmEstadia extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxDescontoItemStateChanged
 
     private void cbxIdVeiculoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxIdVeiculoItemStateChanged
-        //valor();
+
     }//GEN-LAST:event_cbxIdVeiculoItemStateChanged
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -601,6 +607,13 @@ public class FrmEstadia extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtDataActionPerformed
 
+    private void tblEstadiasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEstadiasMouseClicked
+        btnSalvar.setEnabled(false);
+        int linha = tblEstadias.getSelectedRow();
+        Integer codigo = (Integer) tblEstadias.getValueAt(linha, 0);
+        preencheCampos((int) codigo);
+    }//GEN-LAST:event_tblEstadiasMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -625,6 +638,12 @@ public class FrmEstadia extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -637,7 +656,6 @@ public class FrmEstadia extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEmitirCupom;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -646,6 +664,7 @@ public class FrmEstadia extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxIdVeiculo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -654,7 +673,6 @@ public class FrmEstadia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelTelaDeFundo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rbDevendo;
     private javax.swing.JRadioButton rbPago;

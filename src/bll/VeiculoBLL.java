@@ -26,14 +26,18 @@ public class VeiculoBLL {
     public void remover(int id) throws Exception {
         dal.excluir(id);
     }
+    
+    /*public void remover(Veiculo veiculo) throws Exception {
+        dal.excluir(veiculo.getCodigo());
+    }*/
 
     public List<Veiculo> getConsulta() {
         return dal.mostrarTodos();
     }
-
-    /*public Veiculo getConsultaPorId(int cod) {
+    
+    public Veiculo getConsultaPorId(int cod) {
         return dal.consultarPorId(cod);
-    }*/
+    }
 
     public Vector<Plano> listarPlanos() {
         return dal.listarPlanos();

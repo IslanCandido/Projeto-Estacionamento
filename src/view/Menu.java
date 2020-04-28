@@ -6,7 +6,7 @@ public class Menu extends javax.swing.JFrame {
     CadastroFuncionario telaFuncionario;
     CadastroPlano telaPlano;
     CadastroVeiculo telaVeiculo;
-    frmEstadia telaEstadia;
+    FrmEstadia telaEstadia;
     FrmHistorico telaHistorico;
 
     public Menu() {
@@ -37,7 +37,7 @@ public class Menu extends javax.swing.JFrame {
 
         jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo menu.png"))); // NOI18N
         getContentPane().add(jLabelImagemdeFundo);
-        jLabelImagemdeFundo.setBounds(0, 0, 990, 590);
+        jLabelImagemdeFundo.setBounds(0, 0, 1140, 590);
 
         BarraDeMenu.setBorder(null);
         BarraDeMenu.setToolTipText("");
@@ -121,7 +121,7 @@ public class Menu extends javax.swing.JFrame {
 
         setJMenuBar(BarraDeMenu);
 
-        setSize(new java.awt.Dimension(993, 622));
+        setSize(new java.awt.Dimension(1142, 682));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -166,7 +166,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItemEstadiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEstadiasActionPerformed
         if(telaEstadia == null){
-            telaEstadia = new frmEstadia();
+            telaEstadia = new FrmEstadia();
             telaEstadia.setVisible(true);
         } else{
             telaEstadia.setVisible(true);

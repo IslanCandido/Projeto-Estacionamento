@@ -106,7 +106,7 @@ public class VeiculoDAL {
         return veiculos;
     }
 
-    /*public Veiculo consultarPorId(int id) {
+    public Veiculo consultarPorId(int id) {
         Veiculo veiculo = new Veiculo();
 
         try {
@@ -117,12 +117,11 @@ public class VeiculoDAL {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-
                 veiculo.setCodigo(rs.getInt("vei_id"));
                 veiculo.setPlaca(rs.getString("placa"));
                 veiculo.setModelo(rs.getString("modelo"));
                 veiculo.setCor(rs.getString("cor"));
-
+                
                 Plano plano = new Plano();
                 plano.setCodigo(rs.getInt("pre_id"));
                 plano.setPlano(rs.getString("plano"));
@@ -138,13 +137,15 @@ public class VeiculoDAL {
                 
                 veiculo.setIdPreco(plano);
                 veiculo.setIdPropietario(prop);
+                
+                
             }
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
 
         return veiculo;
-    }*/
+    }
 
     public Vector<Plano> listarPlanos() {
         Vector<Plano> precos = new Vector<Plano>();

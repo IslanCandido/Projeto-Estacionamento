@@ -111,7 +111,16 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             cbxIdProprietario.setModel(new DefaultComboBoxModel(vetorProprietarios));
         }
     }
-
+    
+    /*private void preencheCampos(int id) {
+        veiculo = veiculoBll.getConsultaPorId(id);
+        txtPlaca.setText(veiculo.getPlaca());
+        txtModelo.setText(veiculo.getModelo());
+        cbxCor.setSelectedItem(veiculo.getCor());
+        cbxIdPlano.setSelectedItem(veiculo.getIdPreco());
+        cbxIdProprietario.setSelectedItem(veiculo.getIdPropietario());
+    }*/
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -339,11 +348,16 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         try {
+            
+            /*if(txtPlaca.getText().isEmpty() || txtModelo.getText().isEmpty() || cbxCor.getSelectedItem().equals("Selecione")){
+                JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+            }*/
             if(txtCodigo.getText().isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "CAMPO ID É OBRIGATORIO!", "Atenção!", JOptionPane.WARNING_MESSAGE);
-            } else{
+            }else{
                 veiculo.setCodigo(Integer.parseInt(txtCodigo.getText()));
                 veiculoBll.remover(veiculo.getCodigo());
+                //veiculoBll.remover(veiculoBll.getConsultaPorId(veiculo.getCodigo()));
             }
             
         } catch (Exception ex) {
@@ -355,13 +369,10 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeletarActionPerformed
 
     private void tblVeiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVeiculosMouseClicked
+        /*btnSalvar.setEnabled(false);
         int linha = tblVeiculos.getSelectedRow();
-        txtPlaca.setText(tblVeiculos.getValueAt(linha, 1).toString());
-        txtModelo.setText(tblVeiculos.getValueAt(linha, 2).toString());
-        cbxCor.setSelectedItem(tblVeiculos.getValueAt(linha, 4).toString());
-        cbxIdPlano.setSelectedItem(tblVeiculos.getValueAt(linha, 5).toString());
-        cbxIdProprietario.setSelectedItem(tblVeiculos.getValueAt(linha, 6).toString());
-        btnSalvar.setEnabled(false);
+        Integer codigo = (Integer) tblVeiculos.getValueAt(linha, 0);
+        preencheCampos((int) codigo);*/
     }//GEN-LAST:event_tblVeiculosMouseClicked
 
     private void cbxCorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCorItemStateChanged

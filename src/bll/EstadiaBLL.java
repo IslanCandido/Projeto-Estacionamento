@@ -34,6 +34,10 @@ public class EstadiaBLL {
         return dal.mostrarPago();
     }
     
+    public Estadia getConsultaPorId(int cod) {
+        return dal.consultarPorId(cod);
+    }
+    
     public Vector<Veiculo> listarVeiculos() {
         return dal.listarVeiculos();
     }
@@ -42,8 +46,8 @@ public class EstadiaBLL {
         return dal.listarFuncionarios();
     }
     
-    public void mostrarValor(Veiculo veiculo){
-        dal.pegarPreco(veiculo.getCodigo());
+    public void mostrarValor(int id){
+        dal.pegarPreco(id);
     }
-    
+
 }
