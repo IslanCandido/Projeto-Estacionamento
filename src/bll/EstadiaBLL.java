@@ -42,8 +42,8 @@ public class EstadiaBLL {
         return dal.listarFuncionarios();
     }
     
-    public double mostrarValor(int id){
-        return dal.pegarPreco(id);
+    public void mostrarValor(Veiculo veiculo){
+        dal.pegarPreco(veiculo.getCodigo());
     }
     
 }

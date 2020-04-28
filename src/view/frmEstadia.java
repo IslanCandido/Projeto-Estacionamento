@@ -203,8 +203,8 @@ public class frmEstadia extends javax.swing.JFrame {
     } 
     
     private void valor(){
-        int id = estadia.getIdVeiculo().getCodigo();
-        txtValor.setText(String.valueOf(estadiaBll.mostrarValor(id)));
+        estadiaBll.mostrarValor(vetorVeiculos.get(cbxIdVeiculo.getSelectedIndex()));
+        JOptionPane.showMessageDialog(rootPane, "");
     }
 
     @SuppressWarnings("unchecked")
@@ -514,7 +514,7 @@ public class frmEstadia extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxDescontoItemStateChanged
 
     private void cbxIdVeiculoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxIdVeiculoItemStateChanged
-        //valor();
+        valor();
     }//GEN-LAST:event_cbxIdVeiculoItemStateChanged
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed

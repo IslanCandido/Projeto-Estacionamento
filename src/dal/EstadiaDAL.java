@@ -211,25 +211,21 @@ public class EstadiaDAL {
         return funcionarios;
     }
     
-    public double pegarPreco(int id){
-        double resultado = 0;
+    public void pegarPreco(int id){
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement
             ("select p.preco \n" +
             "from veiculo v join preco p \n" +
             "on p.pre_id = v.pre_fk \n" +
-            "where v.vei_id = 10");
+            "where v.vei_id = ?");;
             
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
+            rs.next();
             
-            String aux = String.valueOf(rs.first());
-            
-            resultado = Double.parseDouble(aux);
             
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
-        return resultado;
     }
 }
