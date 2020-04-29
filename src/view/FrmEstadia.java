@@ -125,18 +125,6 @@ public class FrmEstadia extends javax.swing.JFrame {
         buttonGroup1.clearSelection();
         btnSalvar.setEnabled(true);
     }
-    
-    private void preencheCampos(int id){
-        estadia = estadiaBll.getConsultaPorId(id);
-        txtData.setText(convertDate(estadia.getData()));
-        txtHoraEntrada.setText(convertTime(estadia.getHoraEntrada()));
-        txtHoraSaida.setText(convertTime(estadia.getHoraSaida()));
-        cbxDesconto.setSelectedItem(estadia.getDesconto());
-        cbxIdFuncionario.setSelectedItem(estadia.getIdFuncionario());
-        cbxIdVeiculo.setSelectedItem(estadia.getIdVeiculo());
-        txtValor.setText(String.valueOf(estadia.getValor()));
-        rbDevendo.isSelected();
-    }
 
     private void consultar() {
         modelo.setNumRows(0);
@@ -391,11 +379,6 @@ public class FrmEstadia extends javax.swing.JFrame {
         btnLimpar.setBounds(590, 370, 71, 30);
 
         tblEstadias.setModel(modelo);
-        tblEstadias.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblEstadiasMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tblEstadias);
 
         getContentPane().add(jScrollPane1);
@@ -526,7 +509,7 @@ public class FrmEstadia extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxDescontoItemStateChanged
 
     private void cbxIdVeiculoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxIdVeiculoItemStateChanged
-
+        
     }//GEN-LAST:event_cbxIdVeiculoItemStateChanged
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -606,13 +589,6 @@ public class FrmEstadia extends javax.swing.JFrame {
     private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
 
     }//GEN-LAST:event_txtDataActionPerformed
-
-    private void tblEstadiasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEstadiasMouseClicked
-        btnSalvar.setEnabled(false);
-        int linha = tblEstadias.getSelectedRow();
-        Integer codigo = (Integer) tblEstadias.getValueAt(linha, 0);
-        preencheCampos((int) codigo);
-    }//GEN-LAST:event_tblEstadiasMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

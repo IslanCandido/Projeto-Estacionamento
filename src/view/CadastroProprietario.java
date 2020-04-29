@@ -1,6 +1,7 @@
 package view;
 
 import bll.ProprietarioBLL;
+import bll.VeiculoBLL;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -16,7 +17,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
     private DefaultTableModel modelo = new DefaultTableModel();
     private ProprietarioBLL proprietarioBll = new ProprietarioBLL();
     Proprietario proprietario = new Proprietario();
-
+    
     public CadastroProprietario() {
         criarTabela();
         consultar();

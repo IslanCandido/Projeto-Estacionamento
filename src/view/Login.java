@@ -97,7 +97,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        JOptionPane.showConfirmDialog(rootPane, new Object[]{txtSenha}, "SENHA DE ACESSO...", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        JOptionPane.showConfirmDialog(rootPane, new Object[]{txtSenha}, "Senha de acesso", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         String senhaDigitada = new String(txtSenha.getPassword());
 
         if ("admin".equals(senhaDigitada)) {

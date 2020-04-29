@@ -135,7 +135,7 @@ public class CadastroPlano extends javax.swing.JFrame {
 
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnSalvar.setText("Salvar");
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Salver.png"))); // NOI18N
         btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,11 +143,11 @@ public class CadastroPlano extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(110, 150, 80, 30);
+        btnSalvar.setBounds(160, 160, 60, 40);
 
         btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnExcluir.setText("Deletar");
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Excluir.png"))); // NOI18N
         btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,10 +155,10 @@ public class CadastroPlano extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnExcluir);
-        btnExcluir.setBounds(200, 150, 80, 30);
+        btnExcluir.setBounds(240, 160, 60, 40);
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnAlterar.setText("Alterar");
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Editar.png"))); // NOI18N
         btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,11 +166,11 @@ public class CadastroPlano extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAlterar);
-        btnAlterar.setBounds(290, 150, 80, 30);
+        btnAlterar.setBounds(320, 160, 60, 40);
 
         btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnLimpar.setText("Limpar");
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Limpar.png"))); // NOI18N
         btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +178,7 @@ public class CadastroPlano extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpar);
-        btnLimpar.setBounds(380, 150, 80, 30);
+        btnLimpar.setBounds(400, 160, 60, 40);
 
         tblPlanos.setModel(modelo);
         tblPlanos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -190,7 +190,7 @@ public class CadastroPlano extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblPlanos);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(170, 10, 300, 130);
+        jScrollPane2.setBounds(170, 10, 310, 140);
 
         txtPreco.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -204,7 +204,7 @@ public class CadastroPlano extends javax.swing.JFrame {
         getContentPane().add(jLabelTelaFundo);
         jLabelTelaFundo.setBounds(0, 0, 550, 300);
 
-        setSize(new java.awt.Dimension(492, 221));
+        setSize(new java.awt.Dimension(500, 243));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
