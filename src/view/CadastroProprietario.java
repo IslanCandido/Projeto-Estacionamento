@@ -1,10 +1,13 @@
 package view;
 
 import bll.ProprietarioBLL;
-import bll.VeiculoBLL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -17,6 +20,29 @@ public class CadastroProprietario extends javax.swing.JFrame {
     private DefaultTableModel modelo = new DefaultTableModel();
     private ProprietarioBLL proprietarioBll = new ProprietarioBLL();
     Proprietario proprietario = new Proprietario();
+    
+        public static Date CriarNovaData(String data){
+        if(data == null){
+            return null;
+        }
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        java.sql.Date a = null;
+        try {
+            a = new java.sql.Date(format.parse(data).getTime());
+        } catch (ParseException e) {
+        }
+        return a;
+    }
+
+    public static String convertDate(Date dtConsulta) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt", "BR"));
+            return formatter.format(dtConsulta);
+        } catch (Exception e) {
+            return null;
+        }
+    }
     
     public CadastroProprietario() {
         criarTabela();
@@ -31,12 +57,14 @@ public class CadastroProprietario extends javax.swing.JFrame {
         modelo.addColumn("CPF");
         modelo.addColumn("Telefone");
         modelo.addColumn("CNH");
+        modelo.addColumn("Data CNH");
 
         tblProprietarios.getColumnModel().getColumn(0).setPreferredWidth(10);
         tblProprietarios.getColumnModel().getColumn(1).setPreferredWidth(100);
         tblProprietarios.getColumnModel().getColumn(2).setPreferredWidth(100);
         tblProprietarios.getColumnModel().getColumn(3).setPreferredWidth(30);
         tblProprietarios.getColumnModel().getColumn(4).setPreferredWidth(50);
+        tblProprietarios.getColumnModel().getColumn(5).setPreferredWidth(50);
 
     }
 
@@ -50,11 +78,13 @@ public class CadastroProprietario extends javax.swing.JFrame {
         if (lista.size() > 0) {
 
             for (int i = 0; i < lista.size(); i++) {
-                modelo.addRow(new Object[]{lista.get(i).getCodigo(),
+                modelo.addRow(new Object[]{
+                    lista.get(i).getCodigo(),
                     lista.get(i).getNome(),
                     lista.get(i).getCpf(),
                     lista.get(i).getTelefone(),
-                    lista.get(i).getCnh()});
+                    lista.get(i).getCnh(),
+                    lista.get(i).getDataCnh()});
             }
 
         } else {
@@ -70,19 +100,19 @@ public class CadastroProprietario extends javax.swing.JFrame {
         txtCpf.setValue("");
         txtTelefone.setValue("");
         txtCnh.setValue("");
+        txtDataCnh.setValue("");
         btnSalvar.setEnabled(true);
     }
 
     private void preencheCampos(int id) {
-
         proprietario = proprietarioBll.getConsultaPorId(id);
         txtNome.setText(proprietario.getNome());
         txtCpf.setText(proprietario.getCpf());
         txtTelefone.setText(proprietario.getTelefone());
         txtCnh.setText(proprietario.getCnh());
-
+        txtDataCnh.setText(convertDate(proprietario.getDataCnh()));
     }
-
+    
     private boolean isCPF(String CPF) {
         if (CPF.equals("00000000000")
                 || CPF.equals("11111111111")
@@ -172,6 +202,24 @@ public class CadastroProprietario extends javax.swing.JFrame {
         return (String.valueOf(vl1) + String.valueOf(vl2)).equals(cnh.substring(cnh.length() - 2));
 
     }
+    
+    private boolean isData(String data) {
+        String[] dataparticionada = data.split("/");
+        int dia = Integer.parseInt(dataparticionada[0]);
+        int mes = Integer.parseInt(dataparticionada[1]);
+        int ano = Integer.parseInt(dataparticionada[2]);
+        boolean anoBissexto = ano % 4 == 0 && ano % 100 != 0 || ano % 400 == 0;
+
+        if (((mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) && (dia >= 1 && dia <= 31))
+        || ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && (dia >= 1 && dia <= 30))
+        || ((mes == 2) && (anoBissexto) && (dia >= 1 && dia <= 29) && (ano >=2015 && ano <=2020))
+        || ((mes == 2) && !(anoBissexto) && (dia >= 1 && dia <= 28)  && (ano >=2015 && ano <=2020))) {
+            
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -191,6 +239,8 @@ public class CadastroProprietario extends javax.swing.JFrame {
         txtCpf = new javax.swing.JFormattedTextField();
         txtCnh = new javax.swing.JFormattedTextField();
         btnAlterar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtDataCnh = new javax.swing.JFormattedTextField();
         jLabelImagemdeFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -201,7 +251,8 @@ public class CadastroProprietario extends javax.swing.JFrame {
 
         btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnLimpar.setText("Limpar");
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Limpar.png"))); // NOI18N
+        btnLimpar.setToolTipText("Limpar campos");
         btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,11 +260,12 @@ public class CadastroProprietario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpar);
-        btnLimpar.setBounds(400, 260, 71, 30);
+        btnLimpar.setBounds(440, 310, 52, 38);
 
         btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnExcluir.setText("Deletar");
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Excluir.png"))); // NOI18N
+        btnExcluir.setToolTipText("Excluir proprietário");
         btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,11 +273,12 @@ public class CadastroProprietario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnExcluir);
-        btnExcluir.setBounds(220, 260, 75, 30);
+        btnExcluir.setBounds(300, 310, 52, 38);
 
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnSalvar.setText("Salvar");
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Salver.png"))); // NOI18N
+        btnSalvar.setToolTipText("Salvar proprietário");
         btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,7 +286,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(140, 260, 69, 30);
+        btnSalvar.setBounds(230, 310, 52, 38);
 
         tblProprietarios.setModel(modelo);
         tblProprietarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -245,13 +298,13 @@ public class CadastroProprietario extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblProprietarios);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 90, 470, 160);
+        jScrollPane2.setBounds(10, 130, 520, 170);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("CNH");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(270, 50, 40, 30);
+        jLabel5.setBounds(30, 90, 50, 30);
 
         try {
             txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
@@ -264,13 +317,13 @@ public class CadastroProprietario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtTelefone);
-        txtTelefone.setBounds(320, 10, 150, 28);
+        txtTelefone.setBounds(350, 50, 160, 28);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Telefone");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(260, 10, 50, 30);
+        jLabel4.setBounds(280, 50, 50, 30);
 
         txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -278,19 +331,19 @@ public class CadastroProprietario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtNome);
-        txtNome.setBounds(60, 10, 169, 28);
+        txtNome.setBounds(80, 10, 430, 28);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nome");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 10, 40, 30);
+        jLabel2.setBounds(30, 10, 50, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText(" CPF");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 50, 30, 30);
+        jLabel3.setBounds(30, 50, 50, 30);
 
         try {
             txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
@@ -303,7 +356,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtCpf);
-        txtCpf.setBounds(60, 50, 170, 25);
+        txtCpf.setBounds(80, 50, 150, 25);
 
         try {
             txtCnh.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
@@ -316,10 +369,11 @@ public class CadastroProprietario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtCnh);
-        txtCnh.setBounds(320, 50, 150, 25);
+        txtCnh.setBounds(80, 90, 150, 25);
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnAlterar.setText("Alterar");
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Editar.png"))); // NOI18N
+        btnAlterar.setToolTipText("Editar proprietário ");
         btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -327,13 +381,37 @@ public class CadastroProprietario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAlterar);
-        btnAlterar.setBounds(310, 260, 80, 30);
+        btnAlterar.setBounds(370, 310, 52, 38);
 
-        jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Cadastros.jpg"))); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Data CNH");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(280, 90, 60, 30);
+
+        try {
+            txtDataCnh.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtDataCnh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataCnhActionPerformed(evt);
+            }
+        });
+        txtDataCnh.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDataCnhKeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtDataCnh);
+        txtDataCnh.setBounds(350, 90, 160, 25);
+
+        jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela.jpg"))); // NOI18N
         getContentPane().add(jLabelImagemdeFundo);
-        jLabelImagemdeFundo.setBounds(0, -10, 510, 330);
+        jLabelImagemdeFundo.setBounds(0, -10, 560, 390);
 
-        setSize(new java.awt.Dimension(496, 328));
+        setSize(new java.awt.Dimension(545, 387));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -361,13 +439,14 @@ public class CadastroProprietario extends javax.swing.JFrame {
             proprietario.setCpf(txtCpf.getText());
             proprietario.setTelefone(txtTelefone.getText());
             proprietario.setCnh(txtCnh.getText());
-
+            proprietario.setDataCnh(CriarNovaData(txtDataCnh.getText()));
+            
             if (txtNome.getText().isEmpty() || txtCpf.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtCnh.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
                 if (isCPF(txtCpf.getText()) && isCNH(txtCnh.getText()) && 
                 proprietarioBll.verificarCpfsIguais(txtCpf.getText()) == false &&
-                proprietarioBll.verificarCnhsIguais(txtCnh.getText()) == false) {
+                proprietarioBll.verificarCnhsIguais(txtCnh.getText()) == false && isData(txtDataCnh.getText())) {
                     
                     proprietarioBll.adicionar(proprietario);
 
@@ -385,6 +464,9 @@ public class CadastroProprietario extends javax.swing.JFrame {
                     }
                     if(proprietarioBll.verificarCnhsIguais(txtCnh.getText())){
                         JOptionPane.showMessageDialog(rootPane, "CNH JÁ CADASTRADO!", "Cuidado!", JOptionPane.ERROR_MESSAGE);                        
+                    }
+                    if(!isData(txtDataCnh.getText())){
+                        JOptionPane.showMessageDialog(rootPane, "DATA INVALIDA!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
                     }
                 }
             }
@@ -456,11 +538,12 @@ public class CadastroProprietario extends javax.swing.JFrame {
             proprietario.setCpf(txtCpf.getText());
             proprietario.setTelefone(txtTelefone.getText());
             proprietario.setCnh(txtCnh.getText());
-
+            proprietario.setDataCnh(CriarNovaData(txtDataCnh.getText()));
+            
             if (txtNome.getText().isEmpty() || txtCpf.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtCnh.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (isCPF(txtCpf.getText()) && isCNH(txtCnh.getText())) {
+                if (isCPF(txtCpf.getText()) && isCNH(txtCnh.getText()) && isData(txtDataCnh.getText())) {
                     
                     proprietarioBll.alterar(proprietario);
                     consultar();
@@ -472,6 +555,9 @@ public class CadastroProprietario extends javax.swing.JFrame {
                     if (isCNH(txtCnh.getText()) == false) {
                         JOptionPane.showMessageDialog(rootPane, "CNH Invalido!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
                     }
+                    if(!isData(txtDataCnh.getText())){
+                        JOptionPane.showMessageDialog(rootPane, "DATA INVALIDA!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
 
@@ -480,9 +566,22 @@ public class CadastroProprietario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void txtDataCnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataCnhActionPerformed
+
+    }//GEN-LAST:event_txtDataCnhActionPerformed
+
+    private void txtDataCnhKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataCnhKeyTyped
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "DIGITE SOMENTE NUMEROS!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtDataCnhKeyTyped
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -523,6 +622,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -532,6 +632,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
     private javax.swing.JTable tblProprietarios;
     private javax.swing.JFormattedTextField txtCnh;
     private javax.swing.JFormattedTextField txtCpf;
+    private javax.swing.JFormattedTextField txtDataCnh;
     private javax.swing.JTextField txtNome;
     private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables

@@ -229,7 +229,8 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnSalvar.setText("Salvar");
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Salver.png"))); // NOI18N
+        btnSalvar.setToolTipText("Salvar funcionário");
         btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,11 +238,12 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(140, 260, 69, 30);
+        btnSalvar.setBounds(200, 260, 52, 38);
 
         btnDeletar.setBackground(new java.awt.Color(255, 255, 255));
         btnDeletar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnDeletar.setText("Deletar");
+        btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Excluir.png"))); // NOI18N
+        btnDeletar.setToolTipText("Excluir funcionário");
         btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,11 +251,12 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDeletar);
-        btnDeletar.setBounds(220, 260, 75, 30);
+        btnDeletar.setBounds(270, 260, 52, 38);
 
         btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnLimpar.setText("Limpar");
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Limpar.png"))); // NOI18N
+        btnLimpar.setToolTipText("Limpar campos");
         btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,7 +264,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpar);
-        btnLimpar.setBounds(400, 260, 71, 30);
+        btnLimpar.setBounds(410, 260, 52, 38);
 
         try {
             txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
@@ -276,8 +279,10 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         getContentPane().add(txtCpf);
         txtCpf.setBounds(50, 50, 180, 25);
 
+        btnAlterar.setBackground(new java.awt.Color(255, 255, 255));
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnAlterar.setText("Alterar");
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Editar.png"))); // NOI18N
+        btnAlterar.setToolTipText("Editar funcionário");
         btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,19 +290,19 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAlterar);
-        btnAlterar.setBounds(310, 260, 80, 30);
+        btnAlterar.setBounds(340, 260, 52, 38);
 
-        jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Cadastros.jpg"))); // NOI18N
+        jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela.jpg"))); // NOI18N
         getContentPane().add(jLabelImagemdeFundo);
         jLabelImagemdeFundo.setBounds(0, -10, 520, 320);
 
-        setSize(new java.awt.Dimension(498, 325));
+        setSize(new java.awt.Dimension(498, 336));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped
         char validar = evt.getKeyChar();
-
+        
         if (Character.isDigit(validar)) {
             getToolkit().beep();
 

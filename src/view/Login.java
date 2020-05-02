@@ -31,28 +31,35 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Icone de Login.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(30, 0, 260, 180);
+        jLabel1.setBounds(30, 20, 260, 190);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("              USUÁRIO (CPF)");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(60, 200, 200, 15);
+        jLabel3.setBounds(60, 220, 200, 15);
 
         jLabelSenha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelSenha.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSenha.setText("                    SENHA");
         jLabelSenha.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLabelSenha);
-        jLabelSenha.setBounds(60, 250, 200, 15);
+        jLabelSenha.setBounds(60, 270, 200, 15);
 
         txtSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtSenha);
-        txtSenha.setBounds(60, 270, 200, 25);
+        txtSenha.setBounds(60, 290, 200, 25);
 
-        btnLogin.setBackground(new java.awt.Color(153, 255, 153));
+        btnLogin.setBackground(new java.awt.Color(255, 255, 255));
         btnLogin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnLogin.setText("LOGIN");
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Login.png"))); // NOI18N
+        btnLogin.setToolTipText("Fazer login");
+        btnLogin.setContentAreaFilled(false);
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,11 +67,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLogin);
-        btnLogin.setBounds(60, 310, 200, 30);
+        btnLogin.setBounds(60, 320, 90, 70);
 
-        btnCadastrar.setBackground(new java.awt.Color(153, 153, 255));
+        btnCadastrar.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnCadastrar.setText("ADMINISTRADOR");
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/admin.png"))); // NOI18N
+        btnCadastrar.setToolTipText("Entrar como administrador");
+        btnCadastrar.setContentAreaFilled(false);
         btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,7 +81,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCadastrar);
-        btnCadastrar.setBounds(60, 350, 200, 30);
+        btnCadastrar.setBounds(170, 320, 90, 70);
 
         try {
             txtUsuario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
@@ -86,7 +95,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtUsuario);
-        txtUsuario.setBounds(60, 220, 200, 25);
+        txtUsuario.setBounds(60, 240, 200, 25);
 
         jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Estadia e Login.jpg"))); // NOI18N
         getContentPane().add(jLabelImagemdeFundo);
@@ -144,6 +153,15 @@ public class Login extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtSenhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyTyped
+        Character ch = evt.getKeyChar();
+        int comprimentoDeCampo = txtSenha.getText().length();
+        if (comprimentoDeCampo >= 12) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, " MAXIMO DE 12 CARACTERES!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtSenhaKeyTyped
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

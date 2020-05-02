@@ -15,7 +15,7 @@ public class CadastroPlano extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     PlanoBLL planoBll = new PlanoBLL();
     Plano plano = new Plano();
-
+       
     public CadastroPlano() {
         criarTabela();
         consultar();
@@ -101,33 +101,33 @@ public class CadastroPlano extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Plano");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 20, 32, 28);
+        jLabel1.setBounds(10, 10, 32, 28);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Tipo");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 60, 32, 28);
+        jLabel2.setBounds(10, 50, 32, 28);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Preço");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 100, 40, 28);
+        jLabel3.setBounds(10, 90, 40, 28);
 
         cbxPlano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Livre", "Diário", "Mensal" }));
         getContentPane().add(cbxPlano);
-        cbxPlano.setBounds(50, 20, 110, 30);
+        cbxPlano.setBounds(50, 10, 100, 30);
 
-        cbxTipoVeiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Carro", "Moto" }));
+        cbxTipoVeiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Pequeno", "Medio", "Grande" }));
         getContentPane().add(cbxTipoVeiculo);
-        cbxTipoVeiculo.setBounds(50, 60, 110, 30);
+        cbxTipoVeiculo.setBounds(50, 50, 100, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("R$");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(140, 100, 15, 30);
+        jLabel4.setBounds(130, 90, 15, 30);
 
         jTable1.setModel(modelo);
         getContentPane().add(jTable1);
@@ -136,6 +136,7 @@ public class CadastroPlano extends javax.swing.JFrame {
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Salver.png"))); // NOI18N
+        btnSalvar.setToolTipText("Salvar plano");
         btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,11 +144,12 @@ public class CadastroPlano extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(160, 160, 60, 40);
+        btnSalvar.setBounds(20, 140, 52, 38);
 
         btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Excluir.png"))); // NOI18N
+        btnExcluir.setToolTipText("Excluir plano");
         btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,10 +157,11 @@ public class CadastroPlano extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnExcluir);
-        btnExcluir.setBounds(240, 160, 60, 40);
+        btnExcluir.setBounds(90, 140, 52, 38);
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Editar.png"))); // NOI18N
+        btnAlterar.setToolTipText("Editar plano");
         btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,11 +169,12 @@ public class CadastroPlano extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAlterar);
-        btnAlterar.setBounds(320, 160, 60, 40);
+        btnAlterar.setBounds(20, 190, 52, 38);
 
         btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Limpar.png"))); // NOI18N
+        btnLimpar.setToolTipText("Limpar campos");
         btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +182,7 @@ public class CadastroPlano extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpar);
-        btnLimpar.setBounds(400, 160, 60, 40);
+        btnLimpar.setBounds(90, 190, 52, 38);
 
         tblPlanos.setModel(modelo);
         tblPlanos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -190,7 +194,7 @@ public class CadastroPlano extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblPlanos);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(170, 10, 310, 140);
+        jScrollPane2.setBounds(160, 10, 320, 210);
 
         txtPreco.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -198,19 +202,19 @@ public class CadastroPlano extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtPreco);
-        txtPreco.setBounds(50, 100, 90, 28);
+        txtPreco.setBounds(50, 90, 80, 28);
 
-        jLabelTelaFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Cadastros.jpg"))); // NOI18N
+        jLabelTelaFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela.jpg"))); // NOI18N
         getContentPane().add(jLabelTelaFundo);
         jLabelTelaFundo.setBounds(0, 0, 550, 300);
 
-        setSize(new java.awt.Dimension(500, 243));
+        setSize(new java.awt.Dimension(500, 265));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            plano.setPlano(cbxPlano.getSelectedItem().toString());
+            plano.setPlano(cbxPlano.getSelectedItem().toString());  
             plano.setTipoVeiculo(cbxTipoVeiculo.getSelectedItem().toString());
             plano.setPreco(Double.parseDouble(txtPreco.getText()));
 
@@ -245,7 +249,7 @@ public class CadastroPlano extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         try {
-            plano.setPlano(cbxPlano.getSelectedItem().toString());
+            plano.setPlano(cbxPlano.getSelectedItem().toString()); 
             plano.setTipoVeiculo(cbxTipoVeiculo.getSelectedItem().toString());
             plano.setPreco(Double.parseDouble(txtPreco.getText()));
 

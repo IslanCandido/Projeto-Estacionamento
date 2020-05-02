@@ -18,27 +18,17 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     VeiculoBLL veiculoBll = new VeiculoBLL();
     Veiculo veiculo = new Veiculo();
+    String cor;
     
     Vector<Plano> vetorPrecos;
     Vector<Proprietario> vetorProprietarios;
     
     public CadastroVeiculo() {        
         initComponents();
-
-        //Instancias de Objetos
-        veiculo = new Veiculo();
-        veiculoBll = new VeiculoBLL();
-
-        //Preencher comboBox de proprietario e plano
-        vetorPrecos = veiculoBll.listarPlanos();
-        vetorProprietarios = veiculoBll.listarProprietarios();
-
-        //metodos
         criarTabela();
         verificarPlanos();
         verificarProprietarios();
         consultar();
-        
     }
     
     private void criarTabela(){
@@ -69,8 +59,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         cbxIdProprietario.setSelectedIndex(0);
         
         btnSalvar.setEnabled(true);
-        veiculoBll.listarPlanos();
-        veiculoBll.listarProprietarios();
+        verificarPlanos();
+        verificarProprietarios();
     }
     
     private void consultar(){
@@ -96,6 +86,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     }
 
     private void verificarPlanos() {
+        vetorPrecos = veiculoBll.listarPlanos();     
         if (vetorPrecos == null) {
             Vector msg = new Vector();
             msg.add("Nenhum plano cadastrado");
@@ -106,6 +97,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     }
 
     private void verificarProprietarios() {
+        vetorProprietarios = veiculoBll.listarProprietarios();
         if (vetorProprietarios == null) {
             Vector msg = new Vector();
             msg.add("Nenhum proprietario cadastrado");
@@ -120,8 +112,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         txtPlaca.setText(veiculo.getPlaca());
         txtModelo.setText(veiculo.getModelo());
         cbxCor.setSelectedItem(veiculo.getCor());
-        cbxIdPlano.setSelectedIndex(veiculo.getIdPreco().getCodigo());
-        cbxIdProprietario.setSelectedIndex(veiculo.getIdPropietario().getCodigo());
+        cbxIdPlano.setSelectedItem(veiculo.getIdPreco().getCodigo());
+        cbxIdProprietario.setSelectedItem(veiculo.getIdPropietario().getCodigo());
     }
     
     @SuppressWarnings("unchecked")
@@ -147,6 +139,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblVeiculos = new javax.swing.JTable();
         cbxCor = new javax.swing.JComboBox<>();
+        btnProprietario = new javax.swing.JButton();
+        btnPlano = new javax.swing.JButton();
         jLabelTelaFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -172,36 +166,37 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Modelo");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(410, 10, 50, 30);
+        jLabel2.setBounds(150, 50, 50, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cor");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(430, 50, 19, 30);
+        jLabel3.setBounds(160, 10, 20, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Proprietário");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(140, 10, 68, 30);
+        jLabel4.setBounds(340, 10, 68, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Plano");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(160, 50, 40, 30);
+        jLabel5.setBounds(360, 50, 40, 30);
         getContentPane().add(txtModelo);
-        txtModelo.setBounds(460, 10, 150, 28);
+        txtModelo.setBounds(200, 50, 120, 28);
 
         getContentPane().add(cbxIdProprietario);
-        cbxIdProprietario.setBounds(210, 10, 190, 28);
+        cbxIdProprietario.setBounds(420, 10, 200, 28);
 
         getContentPane().add(cbxIdPlano);
-        cbxIdPlano.setBounds(210, 50, 190, 28);
+        cbxIdPlano.setBounds(420, 50, 200, 28);
 
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnLimpar.setText("Limpar");
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Limpar.png"))); // NOI18N
+        btnLimpar.setToolTipText("Limpar campos");
         btnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,10 +204,11 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpar);
-        btnLimpar.setBounds(520, 300, 71, 30);
+        btnLimpar.setBounds(560, 300, 52, 38);
 
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnSalvar.setText("Salvar");
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Salver.png"))); // NOI18N
+        btnSalvar.setToolTipText("Salvar veículo");
         btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,10 +216,11 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(250, 300, 69, 30);
+        btnSalvar.setBounds(350, 300, 52, 38);
 
         btnDeletar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnDeletar.setText("Deletar");
+        btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Excluir.png"))); // NOI18N
+        btnDeletar.setToolTipText("Excluir veículo");
         btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,10 +228,11 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDeletar);
-        btnDeletar.setBounds(340, 300, 75, 30);
+        btnDeletar.setBounds(420, 300, 52, 38);
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnAlterar.setText("Alterar");
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Editar.png"))); // NOI18N
+        btnAlterar.setToolTipText("Editar veículo");
         btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,7 +240,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAlterar);
-        btnAlterar.setBounds(430, 300, 73, 30);
+        btnAlterar.setBounds(490, 300, 52, 38);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -259,6 +257,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         txtCodigo.setBounds(50, 10, 70, 28);
 
         tblVeiculos.setModel(modelo);
+        tblVeiculos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblVeiculos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblVeiculosMouseClicked(evt);
@@ -267,7 +266,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblVeiculos);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 90, 600, 200);
+        jScrollPane2.setBounds(10, 90, 660, 200);
 
         cbxCor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Branco", "Preto", "Prata", "Vermelho", "Outro" }));
         cbxCor.addItemListener(new java.awt.event.ItemListener() {
@@ -276,14 +275,38 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cbxCor);
-        cbxCor.setBounds(460, 50, 150, 28);
+        cbxCor.setBounds(200, 10, 120, 28);
+
+        btnProprietario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnProprietario.setText("+");
+        btnProprietario.setToolTipText("Adicionar proprietário");
+        btnProprietario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProprietario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProprietarioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnProprietario);
+        btnProprietario.setBounds(620, 10, 40, 28);
+
+        btnPlano.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnPlano.setText("+");
+        btnPlano.setToolTipText("Adicionar plano");
+        btnPlano.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPlano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlanoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPlano);
+        btnPlano.setBounds(620, 50, 40, 28);
 
         jLabelTelaFundo.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelTelaFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Cadastros.jpg"))); // NOI18N
+        jLabelTelaFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela.jpg"))); // NOI18N
         getContentPane().add(jLabelTelaFundo);
-        jLabelTelaFundo.setBounds(0, -10, 680, 370);
+        jLabelTelaFundo.setBounds(0, -10, 690, 370);
 
-        setSize(new java.awt.Dimension(632, 368));
+        setSize(new java.awt.Dimension(686, 378));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
@@ -298,7 +321,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             veiculo.setIdPropietario(vetorProprietarios.get(cbxIdProprietario.getSelectedIndex()));
             veiculo.setIdPreco(vetorPrecos.get(cbxIdPlano.getSelectedIndex()));
             if(cbxCor.getSelectedItem().equals("Outro")){
-                String cor = JOptionPane.showInputDialog(rootPane, "Cor: ");
+                cor = JOptionPane.showInputDialog(rootPane, "Cor: ");
                 veiculo.setCor(cor);
             } else{
                 veiculo.setCor(cbxCor.getSelectedItem().toString());
@@ -329,7 +352,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             veiculo.setIdPreco(vetorPrecos.get(cbxIdPlano.getSelectedIndex()));
             
             if(cbxCor.getSelectedItem().equals("Outro")){
-                String cor = JOptionPane.showInputDialog(rootPane, "Cor: ");
+                cor = JOptionPane.showInputDialog(rootPane, "Cor: ");
                 veiculo.setCor(cor);
             } else{
                 veiculo.setCor(cbxCor.getSelectedItem().toString());
@@ -401,6 +424,29 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCodigoKeyTyped
 
+    CadastroProprietario telaProprietario;
+    CadastroPlano telaPlano;
+    
+    private void btnProprietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProprietarioActionPerformed
+        if(telaProprietario == null){
+            telaProprietario = new CadastroProprietario();
+            telaProprietario.setVisible(true);
+        } else{
+            telaProprietario.setVisible(true);
+            telaProprietario.setResizable(false);
+        }
+    }//GEN-LAST:event_btnProprietarioActionPerformed
+
+    private void btnPlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlanoActionPerformed
+        if(telaPlano == null){
+            telaPlano = new CadastroPlano();
+            telaPlano.setVisible(true);
+        } else{
+            telaPlano.setVisible(true);
+            telaPlano.setResizable(false);
+        }
+    }//GEN-LAST:event_btnPlanoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -441,6 +487,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnPlano;
+    private javax.swing.JButton btnProprietario;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbxCor;
     private javax.swing.JComboBox<Vector> cbxIdPlano;

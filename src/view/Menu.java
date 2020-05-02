@@ -8,6 +8,7 @@ public class Menu extends javax.swing.JFrame {
     CadastroVeiculo telaVeiculo;
     FrmEstadia telaEstadia;
     FrmHistorico telaHistorico;
+    FrmEmitirCupom telaCupom;
 
     public Menu() {
         initComponents();
@@ -29,13 +30,15 @@ public class Menu extends javax.swing.JFrame {
         jMenuItemEstadias = new javax.swing.JMenuItem();
         MenuHistorico = new javax.swing.JMenu();
         jMenuItemHistoricoEstadias = new javax.swing.JMenuItem();
+        MenuEmitirComprovante = new javax.swing.JMenu();
+        MenuItemEmitirComprovante = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu principal");
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo menu.png"))); // NOI18N
+        jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Historico.jpg"))); // NOI18N
         getContentPane().add(jLabelImagemdeFundo);
         jLabelImagemdeFundo.setBounds(0, 0, 1140, 590);
 
@@ -119,6 +122,18 @@ public class Menu extends javax.swing.JFrame {
 
         BarraDeMenu.add(MenuHistorico);
 
+        MenuEmitirComprovante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Bilhete.png"))); // NOI18N
+
+        MenuItemEmitirComprovante.setText("Emitir Comprovante");
+        MenuItemEmitirComprovante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemEmitirComprovanteActionPerformed(evt);
+            }
+        });
+        MenuEmitirComprovante.add(MenuItemEmitirComprovante);
+
+        BarraDeMenu.add(MenuEmitirComprovante);
+
         setJMenuBar(BarraDeMenu);
 
         setSize(new java.awt.Dimension(1142, 682));
@@ -184,6 +199,16 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemHistoricoEstadiasActionPerformed
 
+    private void MenuItemEmitirComprovanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemEmitirComprovanteActionPerformed
+        if(telaCupom == null){
+            telaCupom = new FrmEmitirCupom();
+            telaCupom.setVisible(true);
+        } else{
+            telaCupom.setVisible(true);
+            telaCupom.setResizable(false);
+        }
+    }//GEN-LAST:event_MenuItemEmitirComprovanteActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -222,8 +247,10 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarraDeMenu;
     private javax.swing.JMenu MenuCadastros;
+    private javax.swing.JMenu MenuEmitirComprovante;
     private javax.swing.JMenu MenuEstadias;
     private javax.swing.JMenu MenuHistorico;
+    private javax.swing.JMenuItem MenuItemEmitirComprovante;
     private javax.swing.JLabel jLabelImagemdeFundo;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItemCadastroFuncionarios;

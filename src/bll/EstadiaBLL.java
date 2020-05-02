@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Vector;
 import model.Estadia;
 import model.Funcionario;
+import model.Plano;
 import model.Veiculo;
 
 public class EstadiaBLL {
@@ -46,8 +47,8 @@ public class EstadiaBLL {
         return dal.listarFuncionarios();
     }
     
-    public void mostrarValor(int id){
-        dal.pegarPreco(id);
+    public double mostrarValor(int id){
+        return dal.pegarPreco(id);
     }
 
 }

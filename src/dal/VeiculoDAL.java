@@ -67,8 +67,9 @@ public class VeiculoDAL {
         List<Veiculo> veiculos = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement
-            ("SELECT v.vei_id, v.placa, v.modelo, v.cor, p.pre_id, p.plano, p.tipoVeiculo, \n" +
-            "p.preco, pr.pro_id, pr.nome, pr.cpf, pr.telefone, pr.cnh\n" +
+            ("SELECT v.vei_id, v.placa, v.modelo, v.cor, \n" +
+            "p.pre_id, p.plano, p.tipoveiculo, p.preco, \n" +
+            "pr.pro_id, pr.nome ,pr.cpf, pr.telefone, pr.cnh\n" +
             "FROM veiculo v INNER JOIN proprietario pr ON v.pro_fk = pr.pro_id\n" +
             "JOIN preco p ON v.pre_fk = p.pre_id");
             
@@ -87,15 +88,16 @@ public class VeiculoDAL {
                 plano.setTipoVeiculo(rs.getString("tipoVeiculo"));
                 plano.setPreco(rs.getDouble("preco"));
                 
-                Proprietario prop = new Proprietario();
-                prop.setCodigo(rs.getInt("pro_id"));
-                prop.setNome(rs.getString("nome"));
-                prop.setCpf(rs.getString("cpf"));
-                prop.setTelefone(rs.getString("telefone"));
-                prop.setCnh(rs.getString("cnh"));
+                Proprietario propietario = new Proprietario();
+                propietario.setCodigo(rs.getInt("pro_id"));
+                propietario.setNome(rs.getString("nome"));
+                propietario.setCpf(rs.getString("cpf"));
+                propietario.setTelefone(rs.getString("telefone"));
+                propietario.setCnh(rs.getString("cnh"));
+                
                 
                 veiculo.setIdPreco(plano);
-                veiculo.setIdPropietario(prop);
+                veiculo.setIdPropietario(propietario);
                 
                 veiculos.add(veiculo);
             }
@@ -106,44 +108,41 @@ public class VeiculoDAL {
         return veiculos;
     }
 
+
     public Veiculo consultarPorId(int id) {
         Veiculo veiculo = new Veiculo();
-
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement
             ("SELECT * veiculo WHERE vei_id = ?");
-            
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
-
+            
             if (rs.next()) {
-                veiculo.setCodigo(rs.getInt("vei_id"));
-                veiculo.setPlaca(rs.getString("placa"));
-                veiculo.setModelo(rs.getString("modelo"));
-                veiculo.setCor(rs.getString("cor"));
-                
                 Plano plano = new Plano();
                 plano.setCodigo(rs.getInt("pre_id"));
                 plano.setPlano(rs.getString("plano"));
                 plano.setTipoVeiculo(rs.getString("tipoVeiculo"));
                 plano.setPreco(rs.getDouble("preco"));
                 
-                Proprietario prop = new Proprietario();
-                prop.setCodigo(rs.getInt("pro_id"));
-                prop.setNome(rs.getString("nome"));
-                prop.setCpf(rs.getString("cpf"));
-                prop.setTelefone(rs.getString("telefone"));
-                prop.setCnh(rs.getString("cnh"));
+                Proprietario propietario = new Proprietario();
+                propietario.setCodigo(rs.getInt("pro_id"));
+                propietario.setNome(rs.getString("nome"));
+                propietario.setCpf(rs.getString("cpf"));
+                propietario.setTelefone(rs.getString("telefone"));
+                propietario.setCnh(rs.getString("cnh"));
+                propietario.setDataCnh(rs.getDate("datacnh"));
                 
+                //instanciando atributos de veiculo
+                veiculo.setCodigo(rs.getInt("vei_id"));
+                veiculo.setPlaca(rs.getString("placa"));
+                veiculo.setModelo(rs.getString("modelo"));
+                veiculo.setCor(rs.getString("cor"));
                 veiculo.setIdPreco(plano);
-                veiculo.setIdPropietario(prop);
-                
-                
+                veiculo.setIdPropietario(propietario); 
             }
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
-
         return veiculo;
     }
 
@@ -182,6 +181,7 @@ public class VeiculoDAL {
                 prop.setCpf(rs.getString("cpf"));
                 prop.setTelefone(rs.getString("telefone"));
                 prop.setCnh(rs.getString("cnh"));
+                prop.setDataCnh(rs.getDate("datacnh"));
 
                 proprietarios.add(prop);
             }

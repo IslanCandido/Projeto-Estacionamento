@@ -127,11 +127,28 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="MenuEmitirComprovante">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/view/imagens/Bilhete.png"/>
+            </Property>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="MenuItemEmitirComprovante">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Emitir Comprovante"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemEmitirComprovanteActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Menu principal"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
@@ -161,7 +178,7 @@
     <Component class="javax.swing.JLabel" name="jLabelImagemdeFundo">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/view/imagens/Tela de Fundo menu.png"/>
+          <Image iconType="3" name="/view/imagens/Tela de Fundo Historico.jpg"/>
         </Property>
       </Properties>
       <Constraints>

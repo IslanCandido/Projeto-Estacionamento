@@ -11,9 +11,11 @@ import model.Estadia;
 import model.Funcionario;
 import model.Veiculo;
 import util.Conexao;
+import view.FrmEstadia;
 
 public class EstadiaDAL {
     private Connection conexao;
+    FrmEstadia view;
 
     public EstadiaDAL() {
         conexao = Conexao.getConexao();
@@ -255,20 +257,23 @@ public class EstadiaDAL {
         return funcionarios;
     }
     
-    public void pegarPreco(int id){
+    public double pegarPreco(int id){
+        double result = 0;
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement
             ("select p.preco \n" +
             "from veiculo v join preco p \n" +
             "on p.pre_id = v.pre_fk \n" +
-            "where v.vei_id = ?");;
+            "where v.vei_id = ?");
             
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             rs.first();
+            result = rs.getDouble("preco");
             
         } catch (SQLException erro) {
             erro.printStackTrace();
         }
+        return result;
     }
 }

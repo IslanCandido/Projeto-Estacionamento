@@ -5,6 +5,7 @@ package view;
 import bll.EstadiaBLL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Estadia;
@@ -78,30 +79,52 @@ public class FrmHistorico extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEstadiasFinalizadas = new javax.swing.JTable();
         btnEmitirCupom = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Histórico de estadias finalizadas");
+        setTitle("Histórico de estadias");
         getContentPane().setLayout(null);
 
         tblEstadiasFinalizadas.setModel(modelo);
         jScrollPane1.setViewportView(tblEstadiasFinalizadas);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 60, 800, 320);
+        jScrollPane1.setBounds(10, 90, 800, 300);
 
         btnEmitirCupom.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnEmitirCupom.setText("Emitir Cupom");
+        btnEmitirCupom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Icone emitir cupom.png"))); // NOI18N
+        btnEmitirCupom.setToolTipText("Emitir cupom");
+        btnEmitirCupom.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEmitirCupom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmitirCupomActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnEmitirCupom);
-        btnEmitirCupom.setBounds(30, 20, 110, 32);
+        btnEmitirCupom.setBounds(760, 40, 50, 40);
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(30, 40, 430, 40);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Pesquisar.png"))); // NOI18N
+        jButton1.setToolTipText("Pesquisar");
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(jButton1);
+        jButton1.setBounds(460, 40, 40, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Historico 02.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 860, 420);
 
-        setSize(new java.awt.Dimension(838, 428));
+        setSize(new java.awt.Dimension(838, 440));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEmitirCupomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirCupomActionPerformed
+        
+    }//GEN-LAST:event_btnEmitirCupomActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -152,8 +175,10 @@ public class FrmHistorico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEmitirCupom;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblEstadiasFinalizadas;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,11 +20,12 @@ public class ProprietarioDAL {
 
     public void salvar(Proprietario proprietario) {
         try {
-            PreparedStatement preparedStatement = conexao.prepareStatement("INSERT INTO proprietario (nome, cpf, telefone, cnh) VALUES (?, ?, ?, ? )");
+            PreparedStatement preparedStatement = conexao.prepareStatement("INSERT INTO proprietario (nome, cpf, telefone, cnh, datacnh) VALUES (?, ?, ?, ?, ?)");
             preparedStatement.setString(1, proprietario.getNome());
             preparedStatement.setString(2, proprietario.getCpf());
             preparedStatement.setString(3, proprietario.getTelefone());
             preparedStatement.setString(4, proprietario.getCnh());
+            preparedStatement.setDate(5, new java.sql.Date(proprietario.getDataCnh().getTime()));
             preparedStatement.executeUpdate();
 
         } catch (SQLException erro) {
@@ -44,12 +45,13 @@ public class ProprietarioDAL {
 
     public void alterar(Proprietario proprietario) {
         try {
-            PreparedStatement preparedStatement = conexao.prepareStatement("UPDATE proprietario SET nome = ?, cpf = ?, telefone = ?, cnh = ? WHERE pro_id = ?");
+            PreparedStatement preparedStatement = conexao.prepareStatement("UPDATE proprietario SET nome = ?, cpf = ?, telefone = ?, cnh = ?, datacnh = ? WHERE pro_id = ?");
             preparedStatement.setString(1, proprietario.getNome());
             preparedStatement.setString(2, proprietario.getCpf());
             preparedStatement.setString(3, proprietario.getTelefone());
             preparedStatement.setString(4, proprietario.getCnh());
-            preparedStatement.setInt(5, proprietario.getCodigo());
+            preparedStatement.setDate(5, new java.sql.Date(proprietario.getDataCnh().getTime()));
+            preparedStatement.setInt(6, proprietario.getCodigo());
             preparedStatement.executeUpdate();
 
         } catch (SQLException erro) {
@@ -69,6 +71,7 @@ public class ProprietarioDAL {
                 proprietario.setCpf(rs.getString("cpf"));
                 proprietario.setTelefone(rs.getString("telefone"));
                 proprietario.setCnh(rs.getString("cnh"));
+                proprietario.setDataCnh(rs.getDate("dataCnh"));
                 proprietarios.add(proprietario);
             }
         } catch (SQLException erro) {
@@ -91,6 +94,7 @@ public class ProprietarioDAL {
                 proprietario.setCpf(rs.getString("cpf"));
                 proprietario.setTelefone(rs.getString("telefone"));
                 proprietario.setCnh(rs.getString("cnh"));
+                proprietario.setDataCnh(rs.getDate("dataCnh"));
             }
         } catch (SQLException erro) {
             erro.printStackTrace();
