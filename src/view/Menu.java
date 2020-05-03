@@ -9,7 +9,8 @@ public class Menu extends javax.swing.JFrame {
     FrmEstadia telaEstadia;
     FrmHistorico telaHistorico;
     FrmEmitirCupom telaCupom;
-
+    
+    
     public Menu() {
         initComponents();
     }
@@ -123,6 +124,8 @@ public class Menu extends javax.swing.JFrame {
         BarraDeMenu.add(MenuHistorico);
 
         MenuEmitirComprovante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Bilhete.png"))); // NOI18N
+        MenuEmitirComprovante.setToolTipText("Emitir comprovante");
+        MenuEmitirComprovante.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         MenuItemEmitirComprovante.setText("Emitir Comprovante");
         MenuItemEmitirComprovante.addActionListener(new java.awt.event.ActionListener() {

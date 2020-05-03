@@ -485,6 +485,13 @@ public class CadastroProprietario extends javax.swing.JFrame {
     }//GEN-LAST:event_tblProprietariosMouseClicked
 
     private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped
+        Character ch = evt.getKeyChar();
+        int comprimentoDeCampo = txtNome.getText().length();
+        if (comprimentoDeCampo >= 40) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "EXCEDEU O LIMITE DE CARACTERES!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+        }
+        
         char validar = evt.getKeyChar();
 
         if (Character.isDigit(validar)) {

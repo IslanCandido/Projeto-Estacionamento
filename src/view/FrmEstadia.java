@@ -85,7 +85,7 @@ public class FrmEstadia extends javax.swing.JFrame {
         consultar();
     }
     
-    private void criarTabela() {
+private void criarTabela() {
         tblEstadias = new JTable(modelo);
         modelo.addColumn("Código");
         modelo.addColumn("Data");
@@ -107,30 +107,12 @@ public class FrmEstadia extends javax.swing.JFrame {
         tblEstadias.getColumnModel().getColumn(7).setPreferredWidth(30);
         tblEstadias.getColumnModel().getColumn(8).setPreferredWidth(30);
     }
-
-    private void limparCampos() {
-        estadia = new Estadia();
-
-        txtCodigo.setText("");
-        txtData.setValue("");
-        txtHoraEntrada.setValue("");
-        txtHoraSaida.setValue("");
-        cbxDesconto.setSelectedIndex(0);
-        cbxIdVeiculo.setSelectedIndex(0);
-        cbxIdFuncionario.setSelectedIndex(0);
-        txtValor.setText("");
-        buttonGroup1.clearSelection();
-        
-        btnSalvar.setEnabled(true);
-        verificarVeiculos();
-        verificarFuncionarios();
-    }
-
+    
     private void consultar() {
         modelo.setNumRows(0);
         List<Estadia> lista = new ArrayList<Estadia>();
 
-        lista = estadiaBll.getEstadiasDevendo();
+        lista = estadiaBll.getEstadiasPagas();
 
         if (lista.size() > 0) {
             for (int i = 0; i < lista.size(); i++) {
@@ -151,6 +133,24 @@ public class FrmEstadia extends javax.swing.JFrame {
         }
     }
 
+    private void limparCampos() {
+        estadia = new Estadia();
+
+        txtCodigo.setText("");
+        txtData.setValue("");
+        txtHoraEntrada.setValue("");
+        txtHoraSaida.setValue("");
+        cbxDesconto.setSelectedIndex(0);
+        cbxIdVeiculo.setSelectedIndex(0);
+        cbxIdFuncionario.setSelectedIndex(0);
+        txtValor.setText("");
+        buttonGroup1.clearSelection();
+        
+        btnSalvar.setEnabled(true);
+        verificarVeiculos();
+        verificarFuncionarios();
+    }
+    
     private void verificarVeiculos() {
         vetorVeiculos = estadiaBll.listarVeiculos();
         if (vetorVeiculos == null) {
@@ -229,8 +229,6 @@ public class FrmEstadia extends javax.swing.JFrame {
         btnAlterar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblEstadias = new javax.swing.JTable();
         txtData = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
@@ -239,6 +237,8 @@ public class FrmEstadia extends javax.swing.JFrame {
         btnTelaHistorico = new javax.swing.JButton();
         btnVeiculo = new javax.swing.JButton();
         btnFuncionario = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblEstadias = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -390,12 +390,6 @@ public class FrmEstadia extends javax.swing.JFrame {
         getContentPane().add(btnLimpar);
         btnLimpar.setBounds(580, 370, 52, 39);
 
-        tblEstadias.setModel(modelo);
-        jScrollPane1.setViewportView(tblEstadias);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 140, 660, 220);
-
         try {
             txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -479,11 +473,22 @@ public class FrmEstadia extends javax.swing.JFrame {
         getContentPane().add(btnFuncionario);
         btnFuncionario.setBounds(520, 30, 40, 28);
 
+        tblEstadias.setModel(modelo);
+        tblEstadias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEstadiasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblEstadias);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 140, 680, 220);
+
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela teste.jpg"))); // NOI18N
         getContentPane().add(jLabel11);
         jLabel11.setBounds(0, 0, 730, 520);
 
-        setSize(new java.awt.Dimension(721, 445));
+        setSize(new java.awt.Dimension(706, 445));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -675,6 +680,29 @@ public class FrmEstadia extends javax.swing.JFrame {
             telaVeiculo.setResizable(false);
         }
     }//GEN-LAST:event_btnVeiculoActionPerformed
+
+    private void tblEstadiasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEstadiasMouseClicked
+        int linha = tblEstadias.getSelectedRow();
+        
+
+        if (linha > -1) {
+            /* Captura o modelo da tabela */
+            modelo = (DefaultTableModel) tblEstadias.getModel();
+
+            /* Copia os dados do registro selecionado para os campos texto */
+            txtCodigo.setText(modelo.getValueAt(linha, 0).toString());
+            txtData.setText(modelo.getValueAt(linha, 1).toString());
+            txtHoraEntrada.setText(modelo.getValueAt(linha, 2).toString());
+            txtHoraSaida.setText(modelo.getValueAt(linha, 3).toString());
+            cbxDesconto.setSelectedItem(modelo.getValueAt(linha, 4).toString());
+            //cbxIdVeiculo.setSelectedItem(modelo.getValueAt(linha, 5).toString());
+            //cbxIdVeiculo.setSelectedItem(modelo.getValueAt(linha, 6).toString());
+            txtValor.setText(modelo.getValueAt(linha, 7).toString());
+            rbDevendo.setSelected(true);
+        } else{
+            JOptionPane.showMessageDialog(null, "Nenhuma linha selecionada");
+        }
+    }//GEN-LAST:event_tblEstadiasMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

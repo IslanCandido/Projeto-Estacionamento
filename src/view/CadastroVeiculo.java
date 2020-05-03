@@ -112,8 +112,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         txtPlaca.setText(veiculo.getPlaca());
         txtModelo.setText(veiculo.getModelo());
         cbxCor.setSelectedItem(veiculo.getCor());
-        cbxIdPlano.setSelectedItem(veiculo.getIdPreco().getCodigo());
-        cbxIdProprietario.setSelectedItem(veiculo.getIdPropietario().getCodigo());
+        cbxIdPlano.setSelectedItem(veiculo.getIdPreco().toString());
+        cbxIdProprietario.setSelectedItem(veiculo.getIdPropietario().toString());
     }
     
     @SuppressWarnings("unchecked")
@@ -185,6 +185,12 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabel5.setText("Plano");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(360, 50, 40, 30);
+
+        txtModelo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtModeloKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtModelo);
         txtModelo.setBounds(200, 50, 120, 28);
 
@@ -395,10 +401,14 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeletarActionPerformed
 
     private void tblVeiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVeiculosMouseClicked
-        btnSalvar.setEnabled(false);
+        /*btnSalvar.setEnabled(false);
         int linha = tblVeiculos.getSelectedRow();
         Integer codigo = (Integer) tblVeiculos.getValueAt(linha, 0);
-        preencheCampos((int) codigo);
+        preencheCampos((int) codigo);*/
+        
+        int linha = tblVeiculos.getSelectedRow();
+        JOptionPane.showMessageDialog(null, linha);
+
     }//GEN-LAST:event_tblVeiculosMouseClicked
 
     private void cbxCorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCorItemStateChanged
@@ -435,6 +445,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             telaProprietario.setVisible(true);
             telaProprietario.setResizable(false);
         }
+        
     }//GEN-LAST:event_btnProprietarioActionPerformed
 
     private void btnPlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlanoActionPerformed
@@ -446,6 +457,15 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             telaPlano.setResizable(false);
         }
     }//GEN-LAST:event_btnPlanoActionPerformed
+
+    private void txtModeloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModeloKeyTyped
+        Character ch = evt.getKeyChar();
+        int comprimentoDeCampo = txtModelo.getText().length();
+        if (comprimentoDeCampo >= 30) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "EXCEDEU O LIMITE DE CARACTERES!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtModeloKeyTyped
 
     /**
      * @param args the command line arguments

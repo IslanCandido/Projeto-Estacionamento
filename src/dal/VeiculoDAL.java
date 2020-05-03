@@ -118,6 +118,11 @@ public class VeiculoDAL {
             ResultSet rs = preparedStatement.executeQuery();
             
             if (rs.next()) {
+                veiculo.setCodigo(rs.getInt("vei_id"));
+                veiculo.setPlaca(rs.getString("placa"));
+                veiculo.setModelo(rs.getString("modelo"));
+                veiculo.setCor(rs.getString("cor"));
+                
                 Plano plano = new Plano();
                 plano.setCodigo(rs.getInt("pre_id"));
                 plano.setPlano(rs.getString("plano"));
@@ -130,15 +135,9 @@ public class VeiculoDAL {
                 propietario.setCpf(rs.getString("cpf"));
                 propietario.setTelefone(rs.getString("telefone"));
                 propietario.setCnh(rs.getString("cnh"));
-                propietario.setDataCnh(rs.getDate("datacnh"));
                 
-                //instanciando atributos de veiculo
-                veiculo.setCodigo(rs.getInt("vei_id"));
-                veiculo.setPlaca(rs.getString("placa"));
-                veiculo.setModelo(rs.getString("modelo"));
-                veiculo.setCor(rs.getString("cor"));
                 veiculo.setIdPreco(plano);
-                veiculo.setIdPropietario(propietario); 
+                veiculo.setIdPropietario(propietario);
             }
         } catch (SQLException erro) {
             erro.printStackTrace();

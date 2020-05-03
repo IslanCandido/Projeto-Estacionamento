@@ -174,7 +174,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtNome);
-        txtNome.setBounds(50, 10, 180, 28);
+        txtNome.setBounds(50, 10, 200, 28);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -193,19 +193,19 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtTelefone);
-        txtTelefone.setBounds(320, 10, 160, 28);
+        txtTelefone.setBounds(360, 10, 160, 28);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Telefone");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(260, 10, 50, 30);
+        jLabel5.setBounds(300, 10, 50, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Senha");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(270, 50, 40, 30);
+        jLabel6.setBounds(300, 50, 40, 30);
 
         txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -213,7 +213,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtSenha);
-        txtSenha.setBounds(320, 50, 160, 25);
+        txtSenha.setBounds(360, 50, 160, 25);
 
         tblFuncionarios.setModel(modelo);
         tblFuncionarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -225,7 +225,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblFuncionarios);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 90, 470, 160);
+        jScrollPane2.setBounds(10, 90, 520, 160);
 
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -238,7 +238,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalvar);
-        btnSalvar.setBounds(200, 260, 52, 38);
+        btnSalvar.setBounds(240, 260, 52, 38);
 
         btnDeletar.setBackground(new java.awt.Color(255, 255, 255));
         btnDeletar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -251,7 +251,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDeletar);
-        btnDeletar.setBounds(270, 260, 52, 38);
+        btnDeletar.setBounds(310, 260, 52, 38);
 
         btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -264,7 +264,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpar);
-        btnLimpar.setBounds(410, 260, 52, 38);
+        btnLimpar.setBounds(450, 260, 52, 38);
 
         try {
             txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
@@ -277,7 +277,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtCpf);
-        txtCpf.setBounds(50, 50, 180, 25);
+        txtCpf.setBounds(50, 50, 200, 25);
 
         btnAlterar.setBackground(new java.awt.Color(255, 255, 255));
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -290,17 +290,25 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAlterar);
-        btnAlterar.setBounds(340, 260, 52, 38);
+        btnAlterar.setBounds(380, 260, 52, 38);
 
         jLabelImagemdeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela.jpg"))); // NOI18N
         getContentPane().add(jLabelImagemdeFundo);
-        jLabelImagemdeFundo.setBounds(0, -10, 520, 320);
+        jLabelImagemdeFundo.setBounds(0, -10, 560, 320);
 
-        setSize(new java.awt.Dimension(498, 336));
+        setSize(new java.awt.Dimension(546, 336));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped
+        
+        Character ch = evt.getKeyChar();
+        int comprimentoDeCampo = txtNome.getText().length();
+        if (comprimentoDeCampo >= 30) {
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "EXCEDEU O LIMITE DE CARACTERES!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+        }
+        
         char validar = evt.getKeyChar();
         
         if (Character.isDigit(validar)) {

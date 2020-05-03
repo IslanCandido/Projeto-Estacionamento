@@ -3,7 +3,9 @@ package view;
 
 
 import bll.EstadiaBLL;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -15,6 +17,19 @@ public class FrmHistorico extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     EstadiaBLL estadiaBll = new EstadiaBLL();
     Estadia estadia = new Estadia();
+    
+    FrmEmitirCupom telaComprovante;
+    
+    int codigo;
+    String data;
+    String horaEntrada;
+    String horaSaida;
+    String desconto;
+    String veiculo;
+    String funcionario;
+    double valor;
+    String situacao;
+    boolean preecamp = true;
     
     public FrmHistorico() {
         criarTabela();
@@ -88,6 +103,11 @@ public class FrmHistorico extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         tblEstadiasFinalizadas.setModel(modelo);
+        tblEstadiasFinalizadas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEstadiasFinalizadasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEstadiasFinalizadas);
 
         getContentPane().add(jScrollPane1);
@@ -111,6 +131,11 @@ public class FrmHistorico extends javax.swing.JFrame {
         jButton1.setToolTipText("Pesquisar");
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(460, 40, 40, 40);
 
@@ -123,8 +148,41 @@ public class FrmHistorico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEmitirCupomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirCupomActionPerformed
+        if(telaComprovante == null){
+            telaComprovante = new FrmEmitirCupom();
+            telaComprovante.setVisible(true);
+        } else{
+            telaComprovante.setVisible(true);
+            telaComprovante.setResizable(false);
+        }
         
     }//GEN-LAST:event_btnEmitirCupomActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tblEstadiasFinalizadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEstadiasFinalizadasMouseClicked
+        int linha = tblEstadiasFinalizadas.getSelectedRow();
+        JOptionPane.showMessageDialog(null, linha);
+        
+        if (linha > -1) {
+            /* Captura o modelo da tabela */
+            modelo = (DefaultTableModel) tblEstadiasFinalizadas.getModel();
+
+            /* Copia os dados do registro selecionado para os campos texto */
+            codigo = Integer.parseInt(modelo.getValueAt(linha, 0).toString());
+            data = modelo.getValueAt(linha, 1).toString();
+            horaEntrada = modelo.getValueAt(linha, 2).toString();
+            horaSaida = modelo.getValueAt(linha, 3).toString();
+            desconto = modelo.getValueAt(linha, 4).toString();
+            veiculo = modelo.getValueAt(linha, 5).toString();
+            funcionario = modelo.getValueAt(linha, 6).toString();
+            valor = Double.parseDouble(modelo.getValueAt(linha, 7).toString());
+            situacao = modelo.getValueAt(linha, 8).toString();
+            preecamp = true;
+        }
+    }//GEN-LAST:event_tblEstadiasFinalizadasMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
