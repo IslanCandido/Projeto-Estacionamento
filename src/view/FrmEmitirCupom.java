@@ -1,30 +1,26 @@
-
 package view;
 
 import javax.swing.JOptionPane;
 
 public class FrmEmitirCupom extends javax.swing.JFrame {
 
-    FrmHistorico telaHistorico;
-    Menu telaMenu;
+    
+    
+    
     public FrmEmitirCupom() {
         initComponents();
-        preencherCampos();
+
     }
     
-    private void preencherCampos(){
-        FrmHistorico historico = new FrmHistorico();
-        if(historico.preecamp==true){
-            txtCodigo.setText(String.valueOf(historico.codigo));
-            txtData.setText(historico.data);
-            txtHoraEntrada.setText(historico.horaEntrada);
-            txtHoraSaida.setText(historico.horaSaida);
-            txtVeiculo.setText(historico.veiculo);
-            txtDesconto.setText(historico.desconto);
-            txtValor.setText(String.valueOf(historico.valor));
-            txtFuncionario.setText(historico.funcionario);
-        }
-        historico.preecamp=false;
+    public void preencherCampos(FrmHistorico telaHistorico ,String cod, String data, String horaEntrada, String horaSaida, String desconto, String veiculo, String funcionario, String valor) {
+        txtCodigo.setText("  "+cod);
+        txtData.setText(data);
+        txtHoraEntrada.setText(horaEntrada);
+        txtHoraSaida.setText(horaSaida);
+        txtVeiculo.setText(veiculo);
+        txtDesconto.setText(desconto);
+        txtValor.setText(valor);
+        txtFuncionario.setText(funcionario);
     }
 
     /**
@@ -38,24 +34,23 @@ public class FrmEmitirCupom extends javax.swing.JFrame {
 
         btnTelaHistorico = new javax.swing.JButton();
         btnImprimir = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
         txtValor = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        txtFuncionario = new javax.swing.JLabel();
-        txtVeiculo = new javax.swing.JLabel();
         txtDesconto = new javax.swing.JLabel();
         txtHoraSaida = new javax.swing.JLabel();
         txtHoraEntrada = new javax.swing.JLabel();
-        txtData = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtVeiculo = new javax.swing.JLabel();
+        txtFuncionario = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JLabel();
+        txtData = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -72,7 +67,7 @@ public class FrmEmitirCupom extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnTelaHistorico);
-        btnTelaHistorico.setBounds(370, 190, 74, 50);
+        btnTelaHistorico.setBounds(200, 220, 74, 50);
 
         btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/imprimir.png"))); // NOI18N
         btnImprimir.setToolTipText("Imprimir comprovante");
@@ -83,157 +78,130 @@ public class FrmEmitirCupom extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnImprimir);
-        btnImprimir.setBounds(470, 190, 74, 50);
+        btnImprimir.setBounds(300, 220, 74, 50);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Comprovante", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
-
+        txtValor.setBackground(new java.awt.Color(255, 255, 255));
+        txtValor.setForeground(new java.awt.Color(255, 255, 255));
         txtValor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txtValor);
+        txtValor.setBounds(270, 120, 90, 20);
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel13.setText("R$");
-
-        txtFuncionario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        txtVeiculo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
+        txtDesconto.setBackground(new java.awt.Color(255, 255, 255));
+        txtDesconto.setForeground(new java.awt.Color(255, 255, 255));
         txtDesconto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txtDesconto);
+        txtDesconto.setBounds(270, 70, 90, 20);
 
+        txtHoraSaida.setBackground(new java.awt.Color(255, 255, 255));
+        txtHoraSaida.setForeground(new java.awt.Color(255, 255, 255));
         txtHoraSaida.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txtHoraSaida);
+        txtHoraSaida.setBounds(150, 120, 90, 20);
 
+        txtHoraEntrada.setBackground(new java.awt.Color(255, 255, 255));
+        txtHoraEntrada.setForeground(new java.awt.Color(255, 255, 255));
         txtHoraEntrada.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        txtData.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        txtCodigo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setText("ID");
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("DATA ");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setText("HORÁRIO DE SAÍDA");
+        getContentPane().add(txtHoraEntrada);
+        txtHoraEntrada.setBounds(30, 120, 90, 20);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("DESCONTO");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setText("VEÍCULO");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4.setText("FUNCIONÁRIO");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(270, 50, 80, 20);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel11.setText("VALOR PAGO");
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("VALOR");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(270, 100, 50, 20);
+
+        txtVeiculo.setBackground(new java.awt.Color(255, 255, 255));
+        txtVeiculo.setForeground(new java.awt.Color(255, 255, 255));
+        txtVeiculo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txtVeiculo);
+        txtVeiculo.setBounds(210, 170, 150, 20);
+
+        txtFuncionario.setBackground(new java.awt.Color(255, 255, 255));
+        txtFuncionario.setForeground(new java.awt.Color(255, 255, 255));
+        txtFuncionario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txtFuncionario);
+        txtFuncionario.setBounds(30, 170, 160, 20);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText(" SAÍDA");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(150, 100, 50, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel5.setText("HORÁRIO DE ENTRADA");
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("ENTRADA");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(30, 100, 60, 20);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(7, 7, 7)
-                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel1)
-                                .addGap(16, 16, 16)
-                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(31, 31, 31)
-                                .addComponent(txtHoraSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel11)
-                                .addGap(9, 9, 9)
-                                .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(3, 3, 3)
-                                .addComponent(jLabel13))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(90, 90, 90)
-                                .addComponent(jLabel4)
-                                .addGap(13, 13, 13)
-                                .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtHoraEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel3)
-                        .addGap(33, 33, 33)
-                        .addComponent(txtVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtHoraEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtHoraSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
+        txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
+        txtCodigo.setForeground(new java.awt.Color(255, 255, 255));
+        txtCodigo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txtCodigo);
+        txtCodigo.setBounds(30, 70, 90, 20);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(10, 10, 550, 170);
+        txtData.setBackground(new java.awt.Color(255, 255, 255));
+        txtData.setForeground(new java.awt.Color(255, 255, 255));
+        txtData.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txtData);
+        txtData.setBounds(150, 70, 90, 20);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("CÓDIGO");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(30, 50, 50, 20);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText(" DATA ");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(150, 50, 40, 20);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("FUNCIONÁRIO");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(30, 150, 100, 20);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("VEÍCULO");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(210, 150, 60, 20);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("COMPROVANTE");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(130, 10, 140, 20);
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Historico 02.jpg"))); // NOI18N
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(0, 0, 600, 280);
+        jLabel14.setBounds(0, 0, 430, 310);
 
-        setSize(new java.awt.Dimension(581, 286));
+        setSize(new java.awt.Dimension(400, 309));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Imprimindo comprovante...");
+        if(txtCodigo.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "COMPROVANTE VAZIO!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+        } else{
+            JOptionPane.showMessageDialog(rootPane, "COMPROVANTE IMPRIMIDO COM SUCESSO!", "Mensagem", JOptionPane.CLOSED_OPTION);
+        }
+        
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void btnTelaHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTelaHistoricoActionPerformed
-        if(telaHistorico == null){
-            telaHistorico = new FrmHistorico();
-            telaHistorico.setVisible(true);
-        } else{
-            telaHistorico.setVisible(true);
-            telaHistorico.setResizable(false);
-        }
+        FrmHistorico telaHistorico = new FrmHistorico();
+        telaHistorico.setVisible(true);
     }//GEN-LAST:event_btnTelaHistoricoActionPerformed
 
     /**
@@ -276,15 +244,14 @@ public class FrmEmitirCupom extends javax.swing.JFrame {
     private javax.swing.JButton btnTelaHistorico;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel txtCodigo;
     private javax.swing.JLabel txtData;
     private javax.swing.JLabel txtDesconto;

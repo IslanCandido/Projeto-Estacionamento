@@ -6,7 +6,7 @@ public class Menu extends javax.swing.JFrame {
     CadastroFuncionario telaFuncionario;
     CadastroPlano telaPlano;
     CadastroVeiculo telaVeiculo;
-    FrmEstadia telaEstadia;
+    frmEstadia telaEstadia;
     FrmHistorico telaHistorico;
     FrmEmitirCupom telaCupom;
     
@@ -184,7 +184,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItemEstadiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEstadiasActionPerformed
         if(telaEstadia == null){
-            telaEstadia = new FrmEstadia();
+            telaEstadia = new frmEstadia();
             telaEstadia.setVisible(true);
         } else{
             telaEstadia.setVisible(true);

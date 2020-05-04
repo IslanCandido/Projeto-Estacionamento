@@ -11,11 +11,11 @@ import model.Estadia;
 import model.Funcionario;
 import model.Veiculo;
 import util.Conexao;
-import view.FrmEstadia;
+import view.frmEstadia;
 
 public class EstadiaDAL {
     private Connection conexao;
-    FrmEstadia view;
+    frmEstadia view;
 
     public EstadiaDAL() {
         conexao = Conexao.getConexao();

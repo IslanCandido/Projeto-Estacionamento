@@ -1,11 +1,7 @@
 package view;
 
-
-
 import bll.EstadiaBLL;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -17,27 +13,14 @@ public class FrmHistorico extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     EstadiaBLL estadiaBll = new EstadiaBLL();
     Estadia estadia = new Estadia();
-    
-    FrmEmitirCupom telaComprovante;
-    
-    int codigo;
-    String data;
-    String horaEntrada;
-    String horaSaida;
-    String desconto;
-    String veiculo;
-    String funcionario;
-    double valor;
-    String situacao;
-    boolean preecamp = true;
-    
+
     public FrmHistorico() {
         criarTabela();
         consultar();
         initComponents();
-        
+
     }
-    
+
     private void criarTabela() {
         tblEstadiasFinalizadas = new JTable(modelo);
         modelo.addColumn("Código");
@@ -60,7 +43,7 @@ public class FrmHistorico extends javax.swing.JFrame {
         tblEstadiasFinalizadas.getColumnModel().getColumn(7).setPreferredWidth(30);
         tblEstadiasFinalizadas.getColumnModel().getColumn(8).setPreferredWidth(30);
     }
-    
+
     private void consultar() {
         modelo.setNumRows(0);
         List<Estadia> lista = new ArrayList<Estadia>();
@@ -86,7 +69,6 @@ public class FrmHistorico extends javax.swing.JFrame {
         }
     }
 
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -94,8 +76,7 @@ public class FrmHistorico extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEstadiasFinalizadas = new javax.swing.JTable();
         btnEmitirCupom = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtDadosEstadia = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -111,11 +92,11 @@ public class FrmHistorico extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblEstadiasFinalizadas);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 90, 800, 300);
+        jScrollPane1.setBounds(10, 70, 800, 280);
 
         btnEmitirCupom.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnEmitirCupom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Icone emitir cupom.png"))); // NOI18N
-        btnEmitirCupom.setToolTipText("Emitir cupom");
+        btnEmitirCupom.setToolTipText("Emitir comprovante");
         btnEmitirCupom.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEmitirCupom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,64 +104,63 @@ public class FrmHistorico extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEmitirCupom);
-        btnEmitirCupom.setBounds(760, 40, 50, 40);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(30, 40, 430, 40);
+        btnEmitirCupom.setBounds(720, 20, 50, 40);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Pesquisar.png"))); // NOI18N
-        jButton1.setToolTipText("Pesquisar");
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(460, 40, 40, 40);
+        txtDadosEstadia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtDadosEstadia.setEnabled(false);
+        getContentPane().add(txtDadosEstadia);
+        txtDadosEstadia.setBounds(20, 20, 690, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela de Fundo Historico 02.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 860, 420);
 
-        setSize(new java.awt.Dimension(838, 440));
+        setSize(new java.awt.Dimension(829, 397));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEmitirCupomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirCupomActionPerformed
-        if(telaComprovante == null){
-            telaComprovante = new FrmEmitirCupom();
-            telaComprovante.setVisible(true);
-        } else{
-            telaComprovante.setVisible(true);
-            telaComprovante.setResizable(false);
-        }
-        
-    }//GEN-LAST:event_btnEmitirCupomActionPerformed
+    FrmEmitirCupom telaComprovante = new FrmEmitirCupom();
+    String dados;
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnEmitirCupomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirCupomActionPerformed
+
+        if (txtDadosEstadia.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "SELECIONE UMA ESTADIA!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (telaComprovante == null) {
+                telaComprovante = new FrmEmitirCupom();
+                telaComprovante.setVisible(true);
+            } else {
+                telaComprovante.setVisible(true);
+                telaComprovante.setResizable(false);
+            }
+
+            String[] dadosRepartidos = dados.split("/");
+
+            telaComprovante.preencherCampos(this, dadosRepartidos[0], dadosRepartidos[1], dadosRepartidos[2],
+            dadosRepartidos[3], dadosRepartidos[4], dadosRepartidos[5], dadosRepartidos[6], dadosRepartidos[7]);
+            
+            txtDadosEstadia.setText("");
+        }
+
+
+    }//GEN-LAST:event_btnEmitirCupomActionPerformed
 
     private void tblEstadiasFinalizadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEstadiasFinalizadasMouseClicked
         int linha = tblEstadiasFinalizadas.getSelectedRow();
-        JOptionPane.showMessageDialog(null, linha);
-        
+
         if (linha > -1) {
             /* Captura o modelo da tabela */
             modelo = (DefaultTableModel) tblEstadiasFinalizadas.getModel();
 
             /* Copia os dados do registro selecionado para os campos texto */
-            codigo = Integer.parseInt(modelo.getValueAt(linha, 0).toString());
-            data = modelo.getValueAt(linha, 1).toString();
-            horaEntrada = modelo.getValueAt(linha, 2).toString();
-            horaSaida = modelo.getValueAt(linha, 3).toString();
-            desconto = modelo.getValueAt(linha, 4).toString();
-            veiculo = modelo.getValueAt(linha, 5).toString();
-            funcionario = modelo.getValueAt(linha, 6).toString();
-            valor = Double.parseDouble(modelo.getValueAt(linha, 7).toString());
-            situacao = modelo.getValueAt(linha, 8).toString();
-            preecamp = true;
+            dados = "  "+modelo.getValueAt(linha, 0).toString() + " / " + modelo.getValueAt(linha, 1).toString()
+                    + " / " + modelo.getValueAt(linha, 2).toString() + " / " + modelo.getValueAt(linha, 3).toString()
+                    + " / " + modelo.getValueAt(linha, 4).toString() + " / " + modelo.getValueAt(linha, 5).toString()
+                    + " / " + modelo.getValueAt(linha, 6).toString() + " / " + modelo.getValueAt(linha, 7).toString() + " R$";
+
+            txtDadosEstadia.setText(dados);
+
         }
     }//GEN-LAST:event_tblEstadiasFinalizadasMouseClicked
 
@@ -233,10 +213,9 @@ public class FrmHistorico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEmitirCupom;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblEstadiasFinalizadas;
+    private javax.swing.JTextField txtDadosEstadia;
     // End of variables declaration//GEN-END:variables
 }
