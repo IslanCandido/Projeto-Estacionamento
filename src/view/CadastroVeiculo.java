@@ -110,8 +110,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         txtPlaca.setText(veiculo.getPlaca());
         txtModelo.setText(veiculo.getModelo());
         cbxCor.setSelectedItem(veiculo.getCor());
-        cbxIdPlano.setSelectedItem(veiculo.getIdPreco().toString());
-        cbxIdProprietario.setSelectedItem(veiculo.getIdPropietario().toString());
+        cbxIdPlano.setSelectedItem(veiculo.getIdPreco());
+        cbxIdProprietario.setSelectedItem(veiculo.getIdPropietario());
     }
     
     @SuppressWarnings("unchecked")

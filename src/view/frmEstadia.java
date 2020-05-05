@@ -76,12 +76,11 @@ public class frmEstadia extends javax.swing.JFrame {
     }
 
     public frmEstadia() {
-        initComponents();
         criarTabela();
+        consultar();
+        initComponents();
         verificarVeiculos();
         verificarFuncionarios();
-        consultar();
-        
         
     }
 
@@ -201,6 +200,17 @@ public class frmEstadia extends javax.swing.JFrame {
             return false;
         }
     } 
+    
+    private void preencheCampos(int id){
+        estadia = estadiaBll.getConsultaPorId(id);
+        txtData.setText(convertDate(estadia.getData()));
+        txtHoraEntrada.setText(convertTime(estadia.getHoraEntrada()));
+        txtHoraSaida.setText(convertTime(estadia.getHoraSaida()));
+        cbxDesconto.setSelectedItem(estadia.getDesconto());
+        cbxIdVeiculo.setSelectedItem(estadia.getIdVeiculo());
+        cbxIdFuncionario.setSelectedItem(estadia.getIdFuncionario());
+        txtValor.setText(String.valueOf(estadia.getValor()));
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -385,6 +395,11 @@ public class frmEstadia extends javax.swing.JFrame {
         btnLimpar.setBounds(610, 370, 52, 38);
 
         tblEstadias.setModel(modelo);
+        tblEstadias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEstadiasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEstadias);
 
         getContentPane().add(jScrollPane1);
@@ -532,7 +547,7 @@ public class frmEstadia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void cbxDescontoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxDescontoItemStateChanged
-        if (txtValor.getText().equals("")) {
+        /*if (txtValor.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "NENHUM VALOR PARA DESCONTO", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
         } else {
             DecimalFormat df = new DecimalFormat("####");
@@ -548,7 +563,7 @@ public class frmEstadia extends javax.swing.JFrame {
             } else if (cbxDesconto.getSelectedItem().equals("30%")) {
                 txtValor.setText(String.valueOf(df.format(preco - (preco * 0.20))));
             }
-        }
+        }*/
 
     }//GEN-LAST:event_cbxDescontoItemStateChanged
 
@@ -702,6 +717,13 @@ public class frmEstadia extends javax.swing.JFrame {
             telaHistorico.setResizable(false);
         }
     }//GEN-LAST:event_btnTelaHistoricoActionPerformed
+
+    private void tblEstadiasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEstadiasMouseClicked
+        btnSalvar.setEnabled(false);
+        int linha = tblEstadias.getSelectedRow();
+        Integer codigo = (Integer) tblEstadias.getValueAt(linha, 0);
+        preencheCampos((int) codigo);
+    }//GEN-LAST:event_tblEstadiasMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

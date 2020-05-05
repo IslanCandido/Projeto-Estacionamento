@@ -30,13 +30,13 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         modelo.addColumn("Nome");
         modelo.addColumn("CPF");
         modelo.addColumn("Telefone");
-        modelo.addColumn("Senha");
+        //modelo.addColumn("Senha");
 
         tblFuncionarios.getColumnModel().getColumn(0).setPreferredWidth(10);
         tblFuncionarios.getColumnModel().getColumn(1).setPreferredWidth(100);
         tblFuncionarios.getColumnModel().getColumn(2).setPreferredWidth(100);
         tblFuncionarios.getColumnModel().getColumn(3).setPreferredWidth(30);
-        tblFuncionarios.getColumnModel().getColumn(4).setPreferredWidth(50);
+        //tblFuncionarios.getColumnModel().getColumn(4).setPreferredWidth(50);
 
     }
 
@@ -53,8 +53,8 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                 modelo.addRow(new Object[]{lista.get(i).getCodigo(),
                     lista.get(i).getNome(),
                     lista.get(i).getCpf(),
-                    lista.get(i).getTelefone(),
-                    lista.get(i).getSenha()});
+                    lista.get(i).getTelefone()/*,
+                    lista.get(i).getSenha()*/});
             }
 
         } else {

@@ -171,14 +171,19 @@ public class EstadiaDAL {
             PreparedStatement preparedStatement = conexao.prepareStatement
             ("SELECT * FROM estadia e INNER JOIN veiculo v ON e.vei_fk = v.vei_id\n" +
             "JOIN funcionario f ON e.fun_fk = f.fun_id\n" +
-            "where e.situacaopagamento like'%PAGO%'\n" +
+            "where e.situacaopagamento like'%DEVENDO%'\n" +
             "and e.est_id = ?");
             
             preparedStatement.setInt(1, cod);
             ResultSet rs = preparedStatement.executeQuery();
             
             if(rs.next()){
-                //pegando os dados de veiculo
+                estadia.setCodigo(rs.getInt("est_id"));
+                estadia.setData(rs.getDate("dt"));
+                estadia.setHoraEntrada(rs.getTime("horaEntrada"));
+                estadia.setHoraSaida(rs.getTime("horaSaida"));
+                estadia.setDesconto(rs.getString("desconto"));
+                
                 Veiculo veiculo = new Veiculo();
                 veiculo.setCodigo(rs.getInt("vei_id"));
                 veiculo.setPlaca(rs.getString("placa"));
@@ -195,11 +200,7 @@ public class EstadiaDAL {
                 funcionario.setTelefone(rs.getString("telefone"));
                 funcionario.setSenha(rs.getString("senha"));
                 
-                estadia.setCodigo(rs.getInt("est_id"));
-                estadia.setData(rs.getDate("dt"));
-                estadia.setHoraEntrada(rs.getTime("horaEntrada"));
-                estadia.setHoraSaida(rs.getTime("horaSaida"));
-                estadia.setDesconto(rs.getString("desconto"));
+                
                 estadia.setIdVeiculo(veiculo);
                 estadia.setIdFuncionario(funcionario);
                 estadia.setValor(rs.getDouble("valor"));
