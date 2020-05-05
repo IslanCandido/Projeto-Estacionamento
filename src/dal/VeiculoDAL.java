@@ -113,7 +113,13 @@ public class VeiculoDAL {
         Veiculo veiculo = new Veiculo();
         try {
             PreparedStatement preparedStatement = conexao.prepareStatement
-            ("SELECT * veiculo WHERE vei_id = ?");
+            ("SELECT v.vei_id, v.placa, v.modelo, v.cor,\n" +
+            "p.pre_id, p.plano, p.tipoveiculo, p.preco,\n" +
+            "pr.pro_id, pr.nome ,pr.cpf, pr.telefone, pr.cnh\n" +
+            "FROM veiculo v INNER JOIN proprietario pr ON v.pro_fk = pr.pro_id\n" +
+            "JOIN preco p ON v.pre_fk = p.pre_id\n" +
+            "WHERE vei_id = ?");
+            
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             

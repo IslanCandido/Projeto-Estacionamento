@@ -81,6 +81,8 @@ public class frmEstadia extends javax.swing.JFrame {
         verificarVeiculos();
         verificarFuncionarios();
         consultar();
+        
+        
     }
 
     private void criarTabela() {
@@ -199,10 +201,6 @@ public class frmEstadia extends javax.swing.JFrame {
             return false;
         }
     } 
-    
-    private void valor(){
-
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -308,6 +306,9 @@ public class frmEstadia extends javax.swing.JFrame {
         jLabel7.setText("Valor");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(600, 10, 29, 14);
+
+        txtValor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtValor.setEnabled(false);
         getContentPane().add(txtValor);
         txtValor.setBounds(600, 30, 60, 28);
 
@@ -552,7 +553,39 @@ public class frmEstadia extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxDescontoItemStateChanged
 
     private void cbxIdVeiculoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxIdVeiculoItemStateChanged
-        valor();
+        estadia.setIdVeiculo(vetorVeiculos.get(cbxIdVeiculo.getSelectedIndex()));
+        int id = estadia.getIdVeiculo().getCodigo();
+        double preco = estadiaBll.mostrarValor(id);
+        DecimalFormat df = new DecimalFormat("####");
+        
+        txtValor.setText(String.valueOf(preco));
+        if(txtHoraEntrada.getText().equals("")){
+            
+        }
+        if(preco >= 100){
+            rbPago.setSelected(true);
+            JOptionPane.showMessageDialog(rootPane, "PLANO INCLUIDO!");
+        } else{
+            buttonGroup1.clearSelection();
+        }
+        
+        if(preco <= 15){
+            if(txtHoraEntrada.getValue().equals("") || txtHoraSaida.getValue().equals("")){
+                JOptionPane.showMessageDialog(rootPane, "HORÁRIOS EM BRANCO!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+            }
+            String horarioEntrada = txtHoraEntrada.getText();
+            String horarioSaida = txtHoraSaida.getText();
+            
+            String[] entradaParticionada = horarioEntrada.split(":");
+            String[] saidaParticionada = horarioSaida.split(":");
+            
+            int horaEntrada = Integer.parseInt(entradaParticionada[0]);
+            int horaSaida = Integer.parseInt(saidaParticionada[0]);
+            
+            txtValor.setText(String.valueOf(df.format(preco+(3*(horaSaida - horaEntrada)))));
+        } else{
+            txtValor.setText(String.valueOf(preco));
+        }
     }//GEN-LAST:event_cbxIdVeiculoItemStateChanged
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed

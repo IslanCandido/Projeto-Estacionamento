@@ -22,14 +22,10 @@ public class VeiculoBLL {
     public void alterar(Veiculo veiculo) throws Exception {
         dal.alterar(veiculo);
     }
-
-    public void remover(int id) throws Exception {
-        dal.excluir(id);
-    }
     
-    /*public void remover(Veiculo veiculo) throws Exception {
+    public void remover(Veiculo veiculo) throws Exception {
         dal.excluir(veiculo.getCodigo());
-    }*/
+    }
 
     public List<Veiculo> getConsulta() {
         return dal.mostrarTodos();

@@ -24,11 +24,11 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     Vector<Proprietario> vetorProprietarios;
     
     public CadastroVeiculo() {        
-        initComponents();
         criarTabela();
+        consultar();
+        initComponents();
         verificarPlanos();
         verificarProprietarios();
-        consultar();
     }
     
     private void criarTabela(){
@@ -50,8 +50,6 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
     private void limparCampos() {
         veiculo = new Veiculo();
-
-        txtCodigo.setText("");
         txtPlaca.setValue("");
         txtModelo.setText("");
         cbxCor.setSelectedIndex(0);
@@ -134,8 +132,6 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         btnSalvar = new javax.swing.JButton();
         btnDeletar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblVeiculos = new javax.swing.JTable();
         cbxCor = new javax.swing.JComboBox<>();
@@ -152,7 +148,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Placa");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 50, 30, 30);
+        jLabel1.setBounds(20, 10, 30, 30);
 
         try {
             txtPlaca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("???-####")));
@@ -160,31 +156,31 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         getContentPane().add(txtPlaca);
-        txtPlaca.setBounds(50, 50, 70, 28);
+        txtPlaca.setBounds(20, 40, 80, 28);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Modelo");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(150, 50, 50, 30);
+        jLabel2.setBounds(130, 50, 50, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cor");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(160, 10, 20, 30);
+        jLabel3.setBounds(140, 10, 20, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Proprietário");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(340, 10, 68, 30);
+        jLabel4.setBounds(330, 10, 68, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Plano");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(360, 50, 40, 30);
+        jLabel5.setBounds(350, 50, 40, 30);
 
         txtModelo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -192,13 +188,13 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtModelo);
-        txtModelo.setBounds(200, 50, 120, 28);
+        txtModelo.setBounds(180, 50, 120, 28);
 
         getContentPane().add(cbxIdProprietario);
-        cbxIdProprietario.setBounds(420, 10, 200, 28);
+        cbxIdProprietario.setBounds(410, 10, 200, 28);
 
         getContentPane().add(cbxIdPlano);
-        cbxIdPlano.setBounds(420, 50, 200, 28);
+        cbxIdPlano.setBounds(410, 50, 200, 28);
 
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Limpar.png"))); // NOI18N
@@ -248,20 +244,6 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         getContentPane().add(btnAlterar);
         btnAlterar.setBounds(490, 300, 52, 38);
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("ID");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(20, 10, 13, 28);
-
-        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCodigoKeyTyped(evt);
-            }
-        });
-        getContentPane().add(txtCodigo);
-        txtCodigo.setBounds(50, 10, 70, 28);
-
         tblVeiculos.setModel(modelo);
         tblVeiculos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblVeiculos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -272,16 +254,16 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblVeiculos);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 90, 660, 200);
+        jScrollPane2.setBounds(10, 90, 650, 200);
 
-        cbxCor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Branco", "Preto", "Prata", "Vermelho", "Outro" }));
+        cbxCor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Branco", "Prata", "Preto", "Vermelho", "Outro" }));
         cbxCor.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxCorItemStateChanged(evt);
             }
         });
         getContentPane().add(cbxCor);
-        cbxCor.setBounds(200, 10, 120, 28);
+        cbxCor.setBounds(180, 10, 120, 28);
 
         btnProprietario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnProprietario.setText("+");
@@ -293,7 +275,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnProprietario);
-        btnProprietario.setBounds(620, 10, 40, 28);
+        btnProprietario.setBounds(610, 10, 40, 28);
 
         btnPlano.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnPlano.setText("+");
@@ -305,14 +287,14 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnPlano);
-        btnPlano.setBounds(620, 50, 40, 28);
+        btnPlano.setBounds(610, 50, 40, 28);
 
         jLabelTelaFundo.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTelaFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Tela.jpg"))); // NOI18N
         getContentPane().add(jLabelTelaFundo);
         jLabelTelaFundo.setBounds(0, -10, 690, 370);
 
-        setSize(new java.awt.Dimension(686, 378));
+        setSize(new java.awt.Dimension(679, 378));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
@@ -336,9 +318,6 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             if (txtPlaca.getText().isEmpty() || txtModelo.getText().isEmpty() || cbxCor.getSelectedItem().equals("Selecione")) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             }
-            else if(!txtCodigo.getText().isEmpty()){
-                JOptionPane.showMessageDialog(rootPane, "ID GERADO AUTOMATICAMENTE!", "Atenção!", JOptionPane.WARNING_MESSAGE);
-            }
             else {
                 veiculoBll.adicionar(veiculo);
                 consultar();
@@ -351,7 +330,6 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         try {
-            veiculo.setCodigo(Integer.parseInt(txtCodigo.getText()));
             veiculo.setPlaca(txtPlaca.getText().toUpperCase());
             veiculo.setModelo(txtModelo.getText());
             veiculo.setIdPropietario(vetorProprietarios.get(cbxIdProprietario.getSelectedIndex()));
@@ -364,7 +342,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
                 veiculo.setCor(cbxCor.getSelectedItem().toString());
             }
 
-            if (txtCodigo.getText().isEmpty() || txtPlaca.getText().isEmpty() || txtModelo.getText().isEmpty() || cbxCor.getSelectedItem().equals("Selecione")) {
+            if (txtPlaca.getText().isEmpty() || txtModelo.getText().isEmpty() || cbxCor.getSelectedItem().equals("Selecione")) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             }
             else {
@@ -381,15 +359,10 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         try {
             
-            /*if(txtPlaca.getText().isEmpty() || txtModelo.getText().isEmpty() || cbxCor.getSelectedItem().equals("Selecione")){
+            if(txtPlaca.getText().isEmpty() || txtModelo.getText().isEmpty() || cbxCor.getSelectedItem().equals("Selecione")){
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
-            }*/
-            if(txtCodigo.getText().isEmpty()){
-            JOptionPane.showMessageDialog(rootPane, "CAMPO ID É OBRIGATORIO!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             }else{
-                veiculo.setCodigo(Integer.parseInt(txtCodigo.getText()));
-                veiculoBll.remover(veiculo.getCodigo());
-                //veiculoBll.remover(veiculoBll.getConsultaPorId(veiculo.getCodigo()));
+                veiculoBll.remover(veiculoBll.getConsultaPorId(veiculo.getCodigo()));
             }
             
         } catch (Exception ex) {
@@ -401,38 +374,15 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeletarActionPerformed
 
     private void tblVeiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVeiculosMouseClicked
-        /*btnSalvar.setEnabled(false);
+        btnSalvar.setEnabled(false);
         int linha = tblVeiculos.getSelectedRow();
         Integer codigo = (Integer) tblVeiculos.getValueAt(linha, 0);
-        preencheCampos((int) codigo);*/
-        
-        int linha = tblVeiculos.getSelectedRow();
-        JOptionPane.showMessageDialog(null, linha);
-
+        preencheCampos((int) codigo);
     }//GEN-LAST:event_tblVeiculosMouseClicked
 
     private void cbxCorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCorItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxCorItemStateChanged
-
-    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
-        Character ch = evt.getKeyChar();
-        int comprimentoDeCampo = txtCodigo.getText().length();
-        if (comprimentoDeCampo >= 3) {
-            evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "LIMITE DE 3 DIGITOS!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
-        }
-        
-        char validar = evt.getKeyChar();
-
-        if (Character.isLetter(validar)) {
-            getToolkit().beep();
-
-            evt.consume();
-
-            JOptionPane.showMessageDialog(rootPane, "DIGITE SOMENTE NUMEROS!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_txtCodigoKeyTyped
 
     CadastroProprietario telaProprietario;
     CadastroPlano telaPlano;
@@ -518,12 +468,10 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelTelaFundo;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblVeiculos;
-    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtModelo;
     private javax.swing.JFormattedTextField txtPlaca;
     // End of variables declaration//GEN-END:variables
