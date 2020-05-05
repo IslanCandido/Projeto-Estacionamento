@@ -18,10 +18,12 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     VeiculoBLL veiculoBll = new VeiculoBLL();
     Veiculo veiculo = new Veiculo();
-    String cor;
     
+    Vector vetorCores = new Vector();
     Vector<Plano> vetorPrecos;
     Vector<Proprietario> vetorProprietarios;
+    
+    String cor;
     
     public CadastroVeiculo() {        
         criarTabela();
@@ -29,6 +31,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         initComponents();
         verificarPlanos();
         verificarProprietarios();
+        preencherCores();
     }
     
     private void criarTabela(){
@@ -110,9 +113,23 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         txtPlaca.setText(veiculo.getPlaca());
         txtModelo.setText(veiculo.getModelo());
         cbxCor.setSelectedItem(veiculo.getCor());
-        cbxIdPlano.setSelectedItem(veiculo.getIdPreco());
-        cbxIdProprietario.setSelectedItem(veiculo.getIdPropietario());
+        cbxIdPlano.setSelectedItem(veiculo.getIdPreco().getPlano());
+        cbxIdProprietario.setSelectedItem(veiculo.getIdPropietario().getNome());
+        //cbxIdPlano.setSelectedItem(vetorPrecos.get(veiculo.getIdPreco().getCodigo()));
+        //cbxIdProprietario.setSelectedItem(vetorProprietarios.get(veiculo.getIdPropietario().getCodigo()));
     }
+    
+    private void preencherCores(){
+        vetorCores.add("Selecione");
+        vetorCores.add("Branco");
+        vetorCores.add("Preto");
+        vetorCores.add("Prata");
+        vetorCores.add("Vermelho");
+        vetorCores.add("Amarelo");
+        vetorCores.add("Outro");
+        cbxCor.setModel(new DefaultComboBoxModel<>(vetorCores));
+    }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -308,8 +325,10 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             veiculo.setModelo(txtModelo.getText());
             veiculo.setIdPropietario(vetorProprietarios.get(cbxIdProprietario.getSelectedIndex()));
             veiculo.setIdPreco(vetorPrecos.get(cbxIdPlano.getSelectedIndex()));
+            
             if(cbxCor.getSelectedItem().equals("Outro")){
                 cor = JOptionPane.showInputDialog(rootPane, "Cor: ");
+                vetorCores.add(cor);
                 veiculo.setCor(cor);
             } else{
                 veiculo.setCor(cbxCor.getSelectedItem().toString());
@@ -322,6 +341,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
                 veiculoBll.adicionar(veiculo);
                 consultar();
                 limparCampos();
+                preencherCores();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Atenção!!!", JOptionPane.WARNING_MESSAGE);
@@ -337,6 +357,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             
             if(cbxCor.getSelectedItem().equals("Outro")){
                 cor = JOptionPane.showInputDialog(rootPane, "Cor: ");
+                vetorCores.add(cor);
                 veiculo.setCor(cor);
             } else{
                 veiculo.setCor(cbxCor.getSelectedItem().toString());

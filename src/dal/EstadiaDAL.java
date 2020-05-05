@@ -59,6 +59,9 @@ public class EstadiaDAL {
             preparedStatement.setString(4, estadia.getDesconto());
             preparedStatement.setInt(5, estadia.getIdVeiculo().getCodigo());
             preparedStatement.setInt(6, estadia.getIdFuncionario().getCodigo());
+            preparedStatement.setDouble(7, estadia.getValor());
+            preparedStatement.setString(8, estadia.getSituacaoPagamento());
+            preparedStatement.setInt(9, estadia.getCodigo());
             
             preparedStatement.executeUpdate();
         } catch (SQLException erro) {
@@ -171,8 +174,7 @@ public class EstadiaDAL {
             PreparedStatement preparedStatement = conexao.prepareStatement
             ("SELECT * FROM estadia e INNER JOIN veiculo v ON e.vei_fk = v.vei_id\n" +
             "JOIN funcionario f ON e.fun_fk = f.fun_id\n" +
-            "where e.situacaopagamento like'%DEVENDO%'\n" +
-            "and e.est_id = ?");
+            "where e.est_id = ?");
             
             preparedStatement.setInt(1, cod);
             ResultSet rs = preparedStatement.executeQuery();
@@ -183,6 +185,8 @@ public class EstadiaDAL {
                 estadia.setHoraEntrada(rs.getTime("horaEntrada"));
                 estadia.setHoraSaida(rs.getTime("horaSaida"));
                 estadia.setDesconto(rs.getString("desconto"));
+                estadia.setValor(rs.getDouble("valor"));
+                estadia.setSituacaoPagamento(rs.getString("situacaoPagamento"));
                 
                 Veiculo veiculo = new Veiculo();
                 veiculo.setCodigo(rs.getInt("vei_id"));
@@ -200,11 +204,9 @@ public class EstadiaDAL {
                 funcionario.setTelefone(rs.getString("telefone"));
                 funcionario.setSenha(rs.getString("senha"));
                 
-                
                 estadia.setIdVeiculo(veiculo);
                 estadia.setIdFuncionario(funcionario);
-                estadia.setValor(rs.getDouble("valor"));
-                estadia.setSituacaoPagamento(rs.getString("situacaoPagamento"));
+                
             }
         } catch (SQLException erro) {
             erro.printStackTrace();

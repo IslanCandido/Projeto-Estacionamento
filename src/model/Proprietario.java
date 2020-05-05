@@ -24,7 +24,7 @@ public class Proprietario {
     }
 
     public String toString() {
-        return getNome() + " - " + getCpf()+"\n";
+        return getNome();
     }
 
     public int getCodigo() {
