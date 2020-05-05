@@ -15,8 +15,8 @@ public class Conexao {
             try {
                 String DBUrl = "jdbc:postgresql://localhost:5432/estacionamento";
                 String usuario = "postgres";
-                //String senha = "root";
-                String senha = "12345";
+                String senha = "root";
+                //String senha = "12345";
                 String driver = "org.postgresql.Driver";
 
                 Class.forName(driver);

@@ -84,6 +84,7 @@ public class FrmHistorico extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         tblEstadiasFinalizadas.setModel(modelo);
+        tblEstadiasFinalizadas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblEstadiasFinalizadas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblEstadiasFinalizadasMouseClicked(evt);
@@ -124,6 +125,7 @@ public class FrmHistorico extends javax.swing.JFrame {
 
     private void btnEmitirCupomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirCupomActionPerformed
 
+        
         if (txtDadosEstadia.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "SELECIONE UMA ESTADIA!", "Atenção!", JOptionPane.WARNING_MESSAGE);
         } else {

@@ -119,7 +119,7 @@ public class frmEstadia extends javax.swing.JFrame {
         txtValor.setText("");
         buttonGroup1.clearSelection();
         btnSalvar.setEnabled(true);
-        
+
         verificarVeiculos();
         verificarFuncionarios();
     }
@@ -556,55 +556,54 @@ public class frmEstadia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void cbxDescontoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxDescontoItemStateChanged
-            try {
-                DecimalFormat df = new DecimalFormat("####");
-                double preco = Double.parseDouble(txtValor.getText());
+        try {
+            DecimalFormat df = new DecimalFormat("####");
+            double preco = Double.parseDouble(txtValor.getText());
 
-                if (cbxDesconto.getSelectedItem().equals("Nenhum")) {
-                    txtValor.setText(String.valueOf(df.format(preco)));
-                }
-                if (cbxDesconto.getSelectedItem().equals("10%")) {
-                    txtValor.setText(String.valueOf(df.format(preco - (preco * 0.1))));
-                }
-                if (cbxDesconto.getSelectedItem().equals("15%")) {
-                    txtValor.setText(String.valueOf(df.format(preco - (preco * 0.15))));
-                }
-                if (cbxDesconto.getSelectedItem().equals("30%")) {
-                    txtValor.setText(String.valueOf(df.format(preco - (preco * 0.20))));
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(rootPane, "NENHUM VALOR PARA DESCONTO", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+            if (cbxDesconto.getSelectedItem().equals("Nenhum")) {
+                txtValor.setText(String.valueOf(df.format(preco)));
             }
-            
+            if (cbxDesconto.getSelectedItem().equals("10%")) {
+                txtValor.setText(String.valueOf(df.format(preco - (preco * 0.1))));
+            }
+            if (cbxDesconto.getSelectedItem().equals("15%")) {
+                txtValor.setText(String.valueOf(df.format(preco - (preco * 0.15))));
+            }
+            if (cbxDesconto.getSelectedItem().equals("30%")) {
+                txtValor.setText(String.valueOf(df.format(preco - (preco * 0.20))));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "NENHUM VALOR PARA DESCONTO", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+        }
+
 
     }//GEN-LAST:event_cbxDescontoItemStateChanged
 
     private void cbxIdVeiculoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxIdVeiculoItemStateChanged
-        try {
-            estadia.setIdVeiculo(vetorVeiculos.get(cbxIdVeiculo.getSelectedIndex()));
-            int id = estadia.getIdVeiculo().getCodigo();
-            double preco = estadiaBll.mostrarValor(id);
-            DecimalFormat df = new DecimalFormat("####");
+        try{
+        estadia.setIdVeiculo(vetorVeiculos.get(cbxIdVeiculo.getSelectedIndex()));
+        int id = estadia.getIdVeiculo().getCodigo();
+        double preco = estadiaBll.mostrarValor(id);
+        DecimalFormat df = new DecimalFormat("####");
 
-            if (preco > 100) {
-                rbPago.setSelected(true);
-                JOptionPane.showMessageDialog(rootPane, "PLANO INCLUIDO!");
-            } else if (preco <= 100) {
-                buttonGroup1.clearSelection();
-            }
-            if (preco <= 15) {
-                txtValor.setText(String.valueOf(df.format(valorLivre(preco))));
-            } else if (preco >= 15) {
-                txtValor.setText(String.valueOf(preco));
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Valor não entrontrado!");
-            }
+        if (preco > 100) {
+            rbPago.setSelected(true);
+            JOptionPane.showMessageDialog(rootPane, "PLANO INCLUIDO!");
+        } else if (preco <= 100) {
+            buttonGroup1.clearSelection();
+        }
+        if (preco <= 15) {
+            txtValor.setText(String.valueOf(df.format(valorLivre(preco))));
+        } else if (preco >= 15) {
+            txtValor.setText(String.valueOf(preco));
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Valor não entrontrado!");
+        }
         } catch (Exception e) {
-                        JOptionPane.showMessageDialog(rootPane, "HORÁRIOS EM BRANCO!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
-
+            
         }
 
-
+        
     }//GEN-LAST:event_cbxIdVeiculoItemStateChanged
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
