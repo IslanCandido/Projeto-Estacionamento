@@ -131,6 +131,7 @@ public class FrmHistorico extends javax.swing.JFrame {
                 telaComprovante = new FrmEmitirCupom();
                 telaComprovante.setVisible(true);
             } else {
+                telaComprovante.dispose();
                 telaComprovante.setVisible(true);
                 telaComprovante.setResizable(false);
             }

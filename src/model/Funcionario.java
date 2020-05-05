@@ -20,7 +20,7 @@ public class Funcionario {
     }
 
     public String toString() {
-        return getNome() + " - " + getCpf();
+        return getNome();
     }
         
     public int getCodigo() {

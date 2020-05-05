@@ -430,7 +430,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         int comprimentoDeCampo = txtSenha.getText().length();
         if (comprimentoDeCampo >= 12) {
             evt.consume();
-            JOptionPane.showMessageDialog(rootPane, " SENHA LONGA!\n(Maximo de 12 caracteres)", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, " SENHA MUITO LONGA!\n(Maximo de 12 caracteres)", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_txtSenhaKeyTyped
 

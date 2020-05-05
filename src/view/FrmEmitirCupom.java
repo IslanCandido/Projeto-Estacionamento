@@ -4,16 +4,13 @@ import javax.swing.JOptionPane;
 
 public class FrmEmitirCupom extends javax.swing.JFrame {
 
-    
-    
-    
     public FrmEmitirCupom() {
         initComponents();
 
     }
-    
-    public void preencherCampos(FrmHistorico telaHistorico ,String cod, String data, String horaEntrada, String horaSaida, String desconto, String veiculo, String funcionario, String valor) {
-        txtCodigo.setText("  "+cod);
+
+    public void preencherCampos(FrmHistorico telaHistorico, String cod, String data, String horaEntrada, String horaSaida, String desconto, String veiculo, String funcionario, String valor) {
+        txtCodigo.setText("  " + cod);
         txtData.setText(data);
         txtHoraEntrada.setText(horaEntrada);
         txtHoraSaida.setText(horaSaida);
@@ -191,17 +188,25 @@ public class FrmEmitirCupom extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        if(txtCodigo.getText().isEmpty()){
+        if (txtCodigo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "COMPROVANTE VAZIO!", "Atenção!", JOptionPane.WARNING_MESSAGE);
-        } else{
+        } else {
             JOptionPane.showMessageDialog(rootPane, "COMPROVANTE IMPRIMIDO COM SUCESSO!", "Mensagem", JOptionPane.CLOSED_OPTION);
         }
-        
+
     }//GEN-LAST:event_btnImprimirActionPerformed
 
+    FrmHistorico telaHistorico;
+
     private void btnTelaHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTelaHistoricoActionPerformed
-        FrmHistorico telaHistorico = new FrmHistorico();
-        telaHistorico.setVisible(true);
+        if (telaHistorico == null) {
+            telaHistorico = new FrmHistorico();
+            telaHistorico.setVisible(true);
+        } else {
+            telaHistorico.dispose();
+            telaHistorico.setVisible(true);
+            telaHistorico.setResizable(false);
+        }
     }//GEN-LAST:event_btnTelaHistoricoActionPerformed
 
     /**

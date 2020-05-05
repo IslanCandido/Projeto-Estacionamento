@@ -113,10 +113,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         txtPlaca.setText(veiculo.getPlaca());
         txtModelo.setText(veiculo.getModelo());
         cbxCor.setSelectedItem(veiculo.getCor());
-        cbxIdPlano.setSelectedItem(veiculo.getIdPreco().getPlano());
-        cbxIdProprietario.setSelectedItem(veiculo.getIdPropietario().getNome());
-        //cbxIdPlano.setSelectedItem(vetorPrecos.get(veiculo.getIdPreco().getCodigo()));
-        //cbxIdProprietario.setSelectedItem(vetorProprietarios.get(veiculo.getIdPropietario().getCodigo()));
+        cbxIdPlano.setSelectedItem(veiculo.getIdPreco());
+        cbxIdProprietario.setSelectedItem(veiculo.getIdPropietario());
     }
     
     private void preencherCores(){
@@ -191,13 +189,13 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Proprietário");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(330, 10, 68, 30);
+        jLabel4.setBounds(350, 10, 68, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Plano");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(350, 50, 40, 30);
+        jLabel5.setBounds(370, 50, 40, 30);
 
         txtModelo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -205,13 +203,13 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtModelo);
-        txtModelo.setBounds(180, 50, 120, 28);
+        txtModelo.setBounds(180, 50, 150, 28);
 
         getContentPane().add(cbxIdProprietario);
-        cbxIdProprietario.setBounds(410, 10, 200, 28);
+        cbxIdProprietario.setBounds(430, 10, 180, 28);
 
         getContentPane().add(cbxIdPlano);
-        cbxIdPlano.setBounds(410, 50, 200, 28);
+        cbxIdPlano.setBounds(430, 50, 180, 28);
 
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Limpar.png"))); // NOI18N
@@ -262,7 +260,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         btnAlterar.setBounds(490, 300, 52, 38);
 
         tblVeiculos.setModel(modelo);
-        tblVeiculos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tblVeiculos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblVeiculos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblVeiculosMouseClicked(evt);
@@ -280,7 +278,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cbxCor);
-        cbxCor.setBounds(180, 10, 120, 28);
+        cbxCor.setBounds(180, 10, 150, 28);
 
         btnProprietario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnProprietario.setText("+");
@@ -311,7 +309,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         getContentPane().add(jLabelTelaFundo);
         jLabelTelaFundo.setBounds(0, -10, 690, 370);
 
-        setSize(new java.awt.Dimension(679, 378));
+        setSize(new java.awt.Dimension(676, 378));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
@@ -341,7 +339,6 @@ public class CadastroVeiculo extends javax.swing.JFrame {
                 veiculoBll.adicionar(veiculo);
                 consultar();
                 limparCampos();
-                preencherCores();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Atenção!!!", JOptionPane.WARNING_MESSAGE);
@@ -413,6 +410,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             telaProprietario = new CadastroProprietario();
             telaProprietario.setVisible(true);
         } else{
+            telaProprietario.dispose();
             telaProprietario.setVisible(true);
             telaProprietario.setResizable(false);
         }
@@ -424,6 +422,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             telaPlano = new CadastroPlano();
             telaPlano.setVisible(true);
         } else{
+            telaPlano.dispose();
             telaPlano.setVisible(true);
             telaPlano.setResizable(false);
         }
