@@ -20,9 +20,9 @@ public class CadastroProprietario extends javax.swing.JFrame {
     private DefaultTableModel modelo = new DefaultTableModel();
     private ProprietarioBLL proprietarioBll = new ProprietarioBLL();
     Proprietario proprietario = new Proprietario();
-    
-        public static Date CriarNovaData(String data){
-        if(data == null){
+
+    public static Date CriarNovaData(String data) {
+        if (data == null) {
             return null;
         }
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -43,7 +43,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
             return null;
         }
     }
-    
+
     public CadastroProprietario() {
         criarTabela();
         consultar();
@@ -112,7 +112,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
         txtCnh.setText(proprietario.getCnh());
         txtDataCnh.setText(convertDate(proprietario.getDataCnh()));
     }
-    
+
     private boolean isCPF(String CPF) {
         if (CPF.equals("00000000000")
                 || CPF.equals("11111111111")
@@ -202,7 +202,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
         return (String.valueOf(vl1) + String.valueOf(vl2)).equals(cnh.substring(cnh.length() - 2));
 
     }
-    
+
     private boolean isData(String data) {
         String[] dataparticionada = data.split("/");
         int dia = Integer.parseInt(dataparticionada[0]);
@@ -210,11 +210,11 @@ public class CadastroProprietario extends javax.swing.JFrame {
         int ano = Integer.parseInt(dataparticionada[2]);
         boolean anoBissexto = ano % 4 == 0 && ano % 100 != 0 || ano % 400 == 0;
 
-        if (((mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) && (dia >= 1 && dia <= 31) && (ano >=2015 && ano <=2020))
-        || ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && (dia >= 1 && dia <= 30) && (ano >=2015 && ano <=2020))
-        || ((mes == 2) && (anoBissexto) && (dia >= 1 && dia <= 29) && (ano >=2015 && ano <=2020))
-        || ((mes == 2) && !(anoBissexto) && (dia >= 1 && dia <= 28)  && (ano >=2015 && ano <=2020))) {
-            
+        if (((mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) && (dia >= 1 && dia <= 31) && (ano >= 2015 && ano <= 2020))
+                || ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && (dia >= 1 && dia <= 30) && (ano >= 2015 && ano <= 2020))
+                || ((mes == 2) && (anoBissexto) && (dia >= 1 && dia <= 29) && (ano >= 2015 && ano <= 2020))
+                || ((mes == 2) && !(anoBissexto) && (dia >= 1 && dia <= 28) && (ano >= 2015 && ano <= 2020))) {
+
             return true;
         } else {
             return false;
@@ -423,7 +423,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
         try {
             if (txtNome.getText().isEmpty() || txtCpf.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtCnh.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "NENHUM PROPRIETÁRIO FOI SELECIONADO!", "Erro!", JOptionPane.ERROR_MESSAGE);
-            } else{
+            } else {
                 proprietarioBll.remover(proprietarioBll.getConsultaPorId(proprietario.getCodigo()));
             }
         } catch (Exception ex) {
@@ -440,14 +440,14 @@ public class CadastroProprietario extends javax.swing.JFrame {
             proprietario.setTelefone(txtTelefone.getText());
             proprietario.setCnh(txtCnh.getText());
             proprietario.setDataCnh(CriarNovaData(txtDataCnh.getText()));
-            
+
             if (txtNome.getText().isEmpty() || txtCpf.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtCnh.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (isCPF(txtCpf.getText()) && isCNH(txtCnh.getText()) && 
-                proprietarioBll.verificarCpfsIguais(txtCpf.getText()) == false &&
-                proprietarioBll.verificarCnhsIguais(txtCnh.getText()) == false && isData(txtDataCnh.getText())) {
-                    
+                if (isCPF(txtCpf.getText()) && isCNH(txtCnh.getText())
+                        && proprietarioBll.verificarCpfsIguais(txtCpf.getText()) == false
+                        && proprietarioBll.verificarCnhsIguais(txtCnh.getText()) == false && isData(txtDataCnh.getText())) {
+
                     proprietarioBll.adicionar(proprietario);
 
                     consultar();
@@ -459,13 +459,13 @@ public class CadastroProprietario extends javax.swing.JFrame {
                     if (isCNH(txtCnh.getText()) == false) {
                         JOptionPane.showMessageDialog(rootPane, "CNH Invalido!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
                     }
-                    if(proprietarioBll.verificarCpfsIguais(txtCpf.getText())){
+                    if (proprietarioBll.verificarCpfsIguais(txtCpf.getText())) {
                         JOptionPane.showMessageDialog(rootPane, "CPF JÁ CADASTRADO!", "Cuidado!", JOptionPane.ERROR_MESSAGE);
                     }
-                    if(proprietarioBll.verificarCnhsIguais(txtCnh.getText())){
-                        JOptionPane.showMessageDialog(rootPane, "CNH JÁ CADASTRADO!", "Cuidado!", JOptionPane.ERROR_MESSAGE);                        
+                    if (proprietarioBll.verificarCnhsIguais(txtCnh.getText())) {
+                        JOptionPane.showMessageDialog(rootPane, "CNH JÁ CADASTRADO!", "Cuidado!", JOptionPane.ERROR_MESSAGE);
                     }
-                    if(!isData(txtDataCnh.getText())){
+                    if (!isData(txtDataCnh.getText())) {
                         JOptionPane.showMessageDialog(rootPane, "DATA INVALIDA!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
                     }
                 }
@@ -491,7 +491,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
             evt.consume();
             JOptionPane.showMessageDialog(rootPane, "EXCEDEU O LIMITE DE CARACTERES!", "Atenção!!!", JOptionPane.WARNING_MESSAGE);
         }
-        
+
         char validar = evt.getKeyChar();
 
         if (Character.isDigit(validar)) {
@@ -546,12 +546,12 @@ public class CadastroProprietario extends javax.swing.JFrame {
             proprietario.setTelefone(txtTelefone.getText());
             proprietario.setCnh(txtCnh.getText());
             proprietario.setDataCnh(CriarNovaData(txtDataCnh.getText()));
-            
+
             if (txtNome.getText().isEmpty() || txtCpf.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtCnh.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "TODOS OS CAMPOS SÃO OBRIGATORIOS!", "Atenção!", JOptionPane.WARNING_MESSAGE);
             } else {
                 if (isCPF(txtCpf.getText()) && isCNH(txtCnh.getText()) && isData(txtDataCnh.getText())) {
-                    
+
                     proprietarioBll.alterar(proprietario);
                     consultar();
                     limparCampos();
@@ -562,7 +562,7 @@ public class CadastroProprietario extends javax.swing.JFrame {
                     if (isCNH(txtCnh.getText()) == false) {
                         JOptionPane.showMessageDialog(rootPane, "CNH Invalido!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
                     }
-                    if(!isData(txtDataCnh.getText())){
+                    if (!isData(txtDataCnh.getText())) {
                         JOptionPane.showMessageDialog(rootPane, "DATA INVALIDA!", "Cuidado!", JOptionPane.WARNING_MESSAGE);
                     }
                 }

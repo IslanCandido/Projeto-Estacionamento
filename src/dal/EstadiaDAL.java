@@ -11,11 +11,9 @@ import model.Estadia;
 import model.Funcionario;
 import model.Veiculo;
 import util.Conexao;
-import view.frmEstadia;
 
 public class EstadiaDAL {
     private Connection conexao;
-    frmEstadia view;
 
     public EstadiaDAL() {
         conexao = Conexao.getConexao();
@@ -268,9 +266,7 @@ public class EstadiaDAL {
             "from veiculo v join preco p \n" +
             "on p.pre_id = v.pre_fk \n" +
             "where v.vei_id = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            
-            //ps = c.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE); 
-            
+                        
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             rs.first();
